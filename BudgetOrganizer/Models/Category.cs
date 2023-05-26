@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using BudgetOrganizer.Models.ProfileModel;
 
 namespace BudgetOrganizer.Models
 {
@@ -10,6 +11,6 @@ namespace BudgetOrganizer.Models
         public string Name { get; set; }
         [Required]
         public string Color { get; set; }
-        public ICollection<User> Users { get; set; }
+        public ICollection<Profile> Users { get; set; }
     }
 }

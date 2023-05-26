@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using BudgetOrganizer.Models.ProfileModel;
 
 namespace BudgetOrganizer.Models
 {
@@ -6,14 +8,20 @@ namespace BudgetOrganizer.Models
     {
         [Required]
         public Guid Id { get; set; }
+        [ForeignKey("User")]
+        public Guid UserId { get; set; }
         [Required]
-        public User User { get; set; }
+        public Profile User { get; set; }
+        [ForeignKey("Category")]
+        public Guid CategoryId { get; set; }
         [Required]
         public Category Category { get; set; }
         [Required]
         public decimal Amount { get; set; }
         [Required]
         public DateTime DateTime { get; set; }
+        [ForeignKey("OperationImage")]
+        public Guid ImageId { get; set; }
         public virtual OperationImage Image { get; set; }
 
     }
