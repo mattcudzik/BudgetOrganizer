@@ -15,7 +15,7 @@ namespace BudgetOrganizer.Models
         public DbSet<Category> Categories { get; set; }
         public DbSet<Operation> Operations { get; set; }
         public DbSet<OperationImage> OperationImages { get; set; }
-        public DbSet<Profile> Users { get; set; }
+        public DbSet<Profile> Profiles { get; set; }
         public DbSet<Account> Accounts { get; set; }
     }
 }

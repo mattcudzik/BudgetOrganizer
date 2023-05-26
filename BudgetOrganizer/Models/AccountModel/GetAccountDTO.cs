@@ -3,13 +3,11 @@ using BudgetOrganizer.Models.ProfileModel;
 
 namespace BudgetOrganizer.Models.AccountModel
 {
-    public class Account
+    public class GetAccountDTO
     {
         public Guid Id { get; set; }
         public string Login { get; set; }
-        public string Password { get; set; }
         [EmailAddress]
         public string Email { get; set; }
-        public ICollection<Profile> Profiles { get; } = new List<Profile>();
     }
 }

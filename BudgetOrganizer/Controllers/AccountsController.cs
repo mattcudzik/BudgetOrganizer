@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BudgetOrganizer.Models;
 using BudgetOrganizer.Models.AccountModel;
+using AutoMapper;
 
 namespace BudgetOrganizer.Controllers
 {
@@ -15,36 +16,41 @@ namespace BudgetOrganizer.Controllers
 	public class AccountsController : ControllerBase
 	{
 		private readonly BudgetOrganizerDbContext _context;
+		private readonly IMapper _mapper;
 
-		public AccountsController(BudgetOrganizerDbContext context)
+		public AccountsController(BudgetOrganizerDbContext context, IMapper mapper)
 		{
 			_context = context;
+			_mapper = mapper;
 		}
 
-		//TODO add autenthication
+        //---------------------------------------------------------------------------
+        //TODO: add autenthication
+        //---------------------------------------------------------------------------
 
-
-		// GET: api/Accounts
-		[HttpGet]
-		public async Task<ActionResult<IEnumerable<Account>>> GetAccounts()
+        // GET: api/Accounts
+        [HttpGet]
+		public async Task<ActionResult<IEnumerable<GetAccountDTO>>> GetAccounts()
 		{
 			if (_context.Accounts == null)
 			{
 				return NotFound();
 			}
 
-			return Ok(await _context.Accounts.ToListAsync());
+			var result = await _context.Accounts.ToListAsync();
+			return Ok(_mapper.Map<List<Account>, List<GetAccountDTO>>(result));
 		}
 
 		// GET: api/Accounts/5
 		[HttpGet]
 		[Route("({id:guid})")]
-		public async Task<ActionResult<Account>> GetAccount([FromRoute]Guid id)
+		public async Task<ActionResult<GetAccountDTO>> GetAccount([FromRoute]Guid id)
 		{
 			if (_context.Accounts == null)
 			{
 				return NotFound();
 			}
+
 			var account = await _context.Accounts.FindAsync(id);
 
 			if (account == null)
@@ -52,7 +58,7 @@ namespace BudgetOrganizer.Controllers
 				return NotFound();
 			}
 
-			return Ok(account);
+			return Ok(_mapper.Map<GetAccountDTO>(account));
 		}
 
 		// PUT: api/Accounts/5
@@ -80,47 +86,45 @@ namespace BudgetOrganizer.Controllers
 
 		// POST: api/Accounts
 		[HttpPost]
-		public async Task<ActionResult<Account>> PostAccount(AddAccountDTO addAccountDTO)
+		public async Task<ActionResult<GetAccountDTO>> PostAccount(AddAccountDTO addAccountDTO)
 		{
 			if (_context.Accounts == null)
 			{
 				return Problem("Entity set 'BudgetOrganizerDbContext.Accounts'  is null.");
 			}
 
-			//Checks if addAccountRequest is valid according to annotations ex. [Required]
-			if (!ModelState.IsValid)
-			{
-				return BadRequest();
-			}
+            //---------------------------------------------------------------------------
+            //TODO: Add model validation ex. if email or login is already taken etc.
+            //---------------------------------------------------------------------------
 
+            //Create and add to database new Account object
 
-			//TODO: Add model validation ex. if email is formatted like: example@example.com
+            //We use automapping (AccountMappingProfiles) to write one line of code instead of many:
+            Account account = _mapper.Map<Account>(addAccountDTO);
 
-
-			//Create and add to database new account object
-			Account account = new Account()
-			{
-				Id = Guid.NewGuid(),
-				Login = addAccountDTO.Login,
-				Email = addAccountDTO.Email,
-				Password = addAccountDTO.Password
-			};
+			//Account account = new Account()
+			//{
+			//	Id = Guid.NewGuid(),
+			//	Login = addAccountDTO.Login,
+			//	Email = addAccountDTO.Email,
+			//	Password = addAccountDTO.Password
+			//};
 
 			await _context.AddAsync(account);
 			await _context.SaveChangesAsync();
 
-			//return CreatedAtAction("GetAccount", new { id = account.Id }, account);
-			return Ok(account);
+			return Ok(_mapper.Map<GetAccountDTO>(account));
 		}
 
 		// DELETE: api/Accounts/5
 		[HttpDelete("{id}")]
-		public async Task<IActionResult> DeleteAccount(Guid id)
+		public async Task<IActionResult> DeleteAccount([FromRoute] Guid id)
 		{
 			if (_context.Accounts == null)
 			{
 				return NotFound();
 			}
+
 			var account = await _context.Accounts.FindAsync(id);
 			if (account == null)
 			{
@@ -133,9 +137,10 @@ namespace BudgetOrganizer.Controllers
 			return NoContent();
 		}
 
-		private bool AccountExists(Guid id)
-		{
-			return (_context.Accounts?.Any(e => e.Id == id)).GetValueOrDefault();
-		}
+		//Auto generated code
+		//private bool AccountExists(Guid id)
+		//{
+		//	return (_context.Accounts?.Any(e => e.Id == id)).GetValueOrDefault();
+		//}
 	}
 }

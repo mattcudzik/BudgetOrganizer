@@ -4,9 +4,8 @@ using BudgetOrganizer.Models.AccountModel;
 
 namespace BudgetOrganizer.Models.ProfileModel
 {
-	public class Profile
-	{
-		public Guid Id { get; set; }
+	public class UpdateProfileDTO
+    {
 		public string Name { get; set; }
 		public string? Surname { get; set; }
         public int? PinNumber { get; set; }
@@ -14,16 +13,8 @@ namespace BudgetOrganizer.Models.ProfileModel
         public decimal? SpendingLimit { get; set; }
 
 
-        [ForeignKey("Role")]
-		public Guid RoleId { get; set; }
-		public Role Role { get; set; }
-
-		[ForeignKey("Account")]
-		public Guid AccountId { get; set; }
-		public Account Account { get; set; }
-
-		public ICollection<Operation> Operations { get; } = new List<Operation>();
-		public ICollection<Category> Categories { get; } = new List<Category>();
-
+  //      [ForeignKey("Role")]
+		//public Guid RoleId { get; set; }
+		//public Role Role { get; set; }
 	}
 }
