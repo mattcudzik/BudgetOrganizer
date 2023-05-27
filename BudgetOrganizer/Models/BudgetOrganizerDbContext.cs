@@ -2,10 +2,11 @@
 using BudgetOrganizer.Models.AccountModel;
 using BudgetOrganizer.Models.ProfileModel;
 using BudgetOrganizer.Models.OperationModel;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace BudgetOrganizer.Models
 {
-    public class BudgetOrganizerDbContext : DbContext
+    public class BudgetOrganizerDbContext : IdentityDbContext<Account>
     {
         public BudgetOrganizerDbContext(DbContextOptions options) : base(options)
         {

@@ -8,11 +8,13 @@ using Microsoft.EntityFrameworkCore;
 using BudgetOrganizer.Models;
 using BudgetOrganizer.Models.AccountModel;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BudgetOrganizer.Controllers
 {
     [Route("api/[controller]")]
 	[ApiController]
+	[Authorize]
 	public class AccountsController : ControllerBase
 	{
 		private readonly BudgetOrganizerDbContext _context;
@@ -76,17 +78,17 @@ namespace BudgetOrganizer.Controllers
 			{
 				return NotFound();
 			}
-
+			
 			account.Email = updateAccountDTO.Email;
-			account.Login = updateAccountDTO.Email;
-			account.Password = updateAccountDTO.Password;
+		//	account.Login = updateAccountDTO.Email;
+			//account.Password = updateAccountDTO.Password;
 
 			return NoContent();
 		}
 
 		// POST: api/Accounts
 		[HttpPost]
-		public async Task<ActionResult<GetAccountDTO>> PostAccount(AddAccountDTO addAccountDTO)
+		public async Task<ActionResult<GetAccountDTO>> PostAccount(Account Account)
 		{
 			if (_context.Accounts == null)
 			{
@@ -100,14 +102,14 @@ namespace BudgetOrganizer.Controllers
             //Create and add to database new Account object
 
             //We use automapping (AccountMappingProfiles) to write one line of code instead of many:
-            Account account = _mapper.Map<Account>(addAccountDTO);
+            Account account = _mapper.Map<Account>(Account);
 
 			//Account account = new Account()
 			//{
 			//	Id = Guid.NewGuid(),
-			//	Login = addAccountDTO.Login,
-			//	Email = addAccountDTO.Email,
-			//	Password = addAccountDTO.Password
+			//	Login = Account.Login,
+			//	Email = Account.Email,
+			//	Password = Account.Password
 			//};
 
 			await _context.AddAsync(account);

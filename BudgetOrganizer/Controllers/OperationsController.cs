@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BudgetOrganizer.Models;
 using BudgetOrganizer.Models.OperationModel;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BudgetOrganizer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class OperationsController : ControllerBase
     {
         private readonly BudgetOrganizerDbContext _context;

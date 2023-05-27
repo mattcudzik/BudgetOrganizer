@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using BudgetOrganizer.Models;
+using Microsoft.AspNetCore.Identity;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +13,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //Register DbContext
-builder.Services.AddDbContext<BudgetOrganizerDbContext>(options => options.UseInMemoryDatabase("BudgetOrganizer"));
+//builder.Services.AddDbContext<BudgetOrganizerDbContext>(options => options.UseInMemoryDatabase("BudgetOrganizer"));
+builder.Services.AddDbContext<BudgetOrganizerDbContext>(options => 
+options.UseSqlServer(builder.Configuration.GetConnectionString("ButgetOrganizerCRMnn")));
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<BudgetOrganizerDbContext>();
 
 builder.Services.AddAutoMapper(typeof(Program));
 
@@ -25,6 +31,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseHttpsRedirection();
+app.UseAuthentication();;
+
+app.MapRazorPages();
 
 app.UseAuthorization();
 

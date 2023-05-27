@@ -7,7 +7,7 @@ namespace BudgetOrganizer.Models.AccountModel
     {
         public AccountMappingProfile()
         {
-            CreateMap<Account,AddAccountDTO>().ReverseMap();
+            
             CreateMap<Account,UpdateAccountDTO>().ReverseMap();
             CreateMap<Account,GetAccountDTO>().ReverseMap();
         }

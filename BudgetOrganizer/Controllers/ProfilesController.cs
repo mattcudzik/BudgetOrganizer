@@ -7,12 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BudgetOrganizer.Models;
 using BudgetOrganizer.Models.ProfileModel;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BudgetOrganizer.Controllers
 {
 	[Route("api/Accounts")]
 	[ApiController]
-	public class ProfilesController : ControllerBase
+    [Authorize]
+    public class ProfilesController : ControllerBase
 	{
 		private readonly BudgetOrganizerDbContext _context;
         private readonly AutoMapper.IMapper _mapper;
@@ -25,7 +27,7 @@ namespace BudgetOrganizer.Controllers
 
 		[HttpGet]
 		[Route("{accountId:guid}/[controller]")]
-		public async Task<ActionResult<IEnumerable<GetProfileDTO>>> GetProfiles([FromRoute] Guid accountId)
+		public async Task<ActionResult<IEnumerable<GetProfileDTO>>> GetProfiles([FromRoute] string accountId)
 		{
 			if (_context.Profiles == null)
 			{

@@ -21,7 +21,7 @@ namespace BudgetOrganizer.Models.ProfileModel
 		public Role Role { get; set; }
 
 		[ForeignKey("Account")]
-		public Guid AccountId { get; set; }
+		public string AccountId { get; set; }
 		public Account Account { get; set; }
 
 		public ICollection<Operation> Operations { get; } = new List<Operation>();
