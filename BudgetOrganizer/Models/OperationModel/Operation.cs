@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using BudgetOrganizer.Models.ProfileModel;
 
-namespace BudgetOrganizer.Models
+namespace BudgetOrganizer.Models.OperationModel
 {
     public class Operation
     {
