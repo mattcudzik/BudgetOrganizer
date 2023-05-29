@@ -1,0 +1,46 @@
+﻿<html>
+    <head>
+
+    </head>
+    <script>
+        function getTest() {
+
+            fetch("https://localhost:7057/api/Accounts")
+                .then((response) => response.text())
+                .then((json) => {
+                    console.log(json);
+                    document.getElementById("space").innerHTML = json;
+                });
+
+        }
+
+        function addTest() {
+            const request = new Request("https://localhost:7057/api/Accounts", {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json' 
+                },
+                body: '{"login": "login","password": "password","email": "user@example.com"}'
+            });
+
+            fetch(request)
+                .then((response) => response.text())
+                .then((json) => {
+                    console.log(json);
+                    document.getElementById("space").innerHTML = json;
+                });
+        }
+
+    </script>
+    <body>
+        <h1>Hello!</h1>
+        <button onclick="getTest()">GET</button>
+        <button onclick="addTest()">ADD</button>
+        
+        <div id="space">
+
+        </div>
+    </body>
+
+</html>

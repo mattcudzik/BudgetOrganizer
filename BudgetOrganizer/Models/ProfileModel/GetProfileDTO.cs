@@ -16,9 +16,5 @@ namespace BudgetOrganizer.Models.ProfileModel
         [ForeignKey("Role")]
 		public Guid RoleId { get; set; }
 		public Role Role { get; set; }
-
-		[ForeignKey("Account")]
-		public Guid AccountId { get; set; }
-
-	}
+    }
 }

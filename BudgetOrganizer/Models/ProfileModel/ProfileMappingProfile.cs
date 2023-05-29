@@ -1,4 +1,6 @@
-﻿namespace BudgetOrganizer.Models.ProfileModel
+﻿using BudgetOrganizer.Models.AccountModel;
+
+namespace BudgetOrganizer.Models.ProfileModel
 {
     public class ProfileMappingProfile : AutoMapper.Profile
     {

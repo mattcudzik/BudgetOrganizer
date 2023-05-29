@@ -9,9 +9,9 @@ namespace BudgetOrganizer.Models
     {
         public BudgetOrganizerDbContext(DbContextOptions options) : base(options)
         {
-
+            
         }
-
+        
         public DbSet<Role> Roles { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Operation> Operations { get; set; }

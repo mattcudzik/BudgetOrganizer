@@ -10,7 +10,7 @@ using BudgetOrganizer.Models.ProfileModel;
 
 namespace BudgetOrganizer.Controllers
 {
-	[Route("api/Accounts")]
+	[Route("api/[controller]")]
 	[ApiController]
 	public class ProfilesController : ControllerBase
 	{
@@ -24,8 +24,8 @@ namespace BudgetOrganizer.Controllers
         }
 
 		[HttpGet]
-		[Route("{accountId:guid}/[controller]")]
-		public async Task<ActionResult<IEnumerable<GetProfileDTO>>> GetProfiles([FromRoute] Guid accountId)
+		[Route("{accountId:guid}")]
+		public async Task<ActionResult<IEnumerable<GetProfileDTO>>> GetProfilesByAccountId([FromRoute] Guid accountId)
 		{
 			if (_context.Profiles == null)
 			{
@@ -41,11 +41,15 @@ namespace BudgetOrganizer.Controllers
 
             var profiles = _context.Profiles.Where(p => p.AccountId == accountId).ToList();
             
+            if (profiles.Count == 0)
+            {
+                return NotFound();
+            }
 			return Ok(_mapper.Map<List<Profile>,List<GetProfileDTO>>(profiles));
 		}
 
         [HttpPost]
-        [Route("{accountId:guid}/[controller]")]
+        [Route("{accountId:guid}")]
         public async Task<ActionResult<GetProfileDTO>> PostProfile([FromRoute] Guid accountId, AddProfileDTO addProfile)
         {
             if (_context.Profiles == null)

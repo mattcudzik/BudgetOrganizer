@@ -1,9 +1,9 @@
-﻿using AutoMapper;
+﻿using BudgetOrganizer.Models.ProfileModel;
 
 namespace BudgetOrganizer.Models.AccountModel
 {
     //Describes mapping Entity -> DTO and reverse
-    public class AccountMappingProfile : Profile
+    public class AccountMappingProfile : AutoMapper.Profile
     {
         public AccountMappingProfile()
         {
