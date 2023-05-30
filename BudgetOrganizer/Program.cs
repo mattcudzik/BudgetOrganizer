@@ -5,15 +5,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using BudgetOrganizer.Services;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 //Register DbContext - Changed to SQLDB
 //builder.Services.AddDbContext<BudgetOrganizerDbContext>(options => options.UseInMemoryDatabase("BudgetOrganizer"));
@@ -33,7 +29,7 @@ builder.Services.AddIdentityCore<AccountIdentity>(options =>
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireUppercase = false;
     options.Password.RequireLowercase = false;
-}).AddEntityFrameworkStores<BudgetOrganizerDbContext>();
+}).AddEntityFrameworkStores<BudgetOrganizerDbContext>().AddDefaultTokenProviders();
 
 builder.Services.AddAuthentication(options =>
 {
@@ -57,6 +53,12 @@ builder.Services.AddAuthentication(options =>
  );
 
 builder.Services.AddTransient<IAuthService, AuthService>();
+// Add services to the container.
+
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 builder.Services.AddAutoMapper(typeof(Program));
 
@@ -72,7 +74,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseDefaultFiles();

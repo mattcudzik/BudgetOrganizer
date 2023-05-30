@@ -8,12 +8,14 @@ using Microsoft.EntityFrameworkCore;
 using BudgetOrganizer.Models;
 using BudgetOrganizer.Models.AccountModel;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BudgetOrganizer.Controllers
 {
     [Route("api/[controller]")]
 	[ApiController]
-	public class AccountsController : ControllerBase
+    [Authorize]
+    public class AccountsController : ControllerBase
 	{
 		private readonly BudgetOrganizerDbContext _context;
 		private readonly IMapper _mapper;
