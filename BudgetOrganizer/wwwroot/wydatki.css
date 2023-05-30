@@ -4,3 +4,11 @@
     width: 350px;
     border-radius: 15px;
 }
+
+#wydatki1 {
+    text-align: center;
+    display: inline-block;
+    margin-top: 20px;
+    height: 450px;
+    overflow: auto;
+}
