@@ -1,0 +1,42 @@
+
+#dodaj
+{
+    display: inline-block;
+    padding: 0;
+    border: none;
+    background: none;
+    margin-top: 100px;
+    margin-left: 150px;
+
+}
+#dodaj img
+{
+    width: 70px;
+    height: 70px;
+    margin-bottom: 10px;
+}
+#middle1{
+    margin-left: 250px;
+}
+#powrot
+{
+    display: inline-block;
+    padding: 0;
+    border: none;
+    background: none;
+    margin-left: 250px;
+    margin-top: 580px;
+}
+#powrot img
+{
+    width: 70px;
+    height: 70px;
+    margin-bottom: 10px;
+}
+
+.przychod1 {
+    background-color: #88bfab;
+    text-align: center;
+    width: 350px;
+    border-radius: 15px;
+}
