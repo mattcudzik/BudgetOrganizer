@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using BudgetOrganizer.Models.AccountModel;
 using BudgetOrganizer.Models.ProfileModel;
 
 namespace BudgetOrganizer.Models.OperationModel
@@ -8,8 +9,8 @@ namespace BudgetOrganizer.Models.OperationModel
 	{
 		public Guid Id { get; set; }
 		[ForeignKey("User")]
-		public Guid ProfileId { get; set; }
-		public Profile Profile { get; set; }
+		public Guid AccountId { get; set; }
+		public Account Account { get; set; }
 		[ForeignKey("Category")]
 		public Guid CategoryId { get; set; }
 		public Category Category { get; set; }
