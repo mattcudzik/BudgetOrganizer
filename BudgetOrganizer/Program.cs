@@ -12,7 +12,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //Register DbContext
-builder.Services.AddDbContext<BudgetOrganizerDbContext>(options => options.UseInMemoryDatabase("BudgetOrganizer"));
+//builder.Services.AddDbContext<BudgetOrganizerDbContext>(options => options.UseInMemoryDatabase("BudgetOrganizer"));
+builder.Services.AddDbContext<BudgetOrganizerDbContext>(options => 
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+);
 
 builder.Services.AddAutoMapper(typeof(Program));
 

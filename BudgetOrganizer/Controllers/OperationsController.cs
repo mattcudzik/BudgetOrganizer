@@ -24,22 +24,23 @@ namespace BudgetOrganizer.Controllers
             _mapper = mapper;
         }
 
+        //TODO: get accountId from token
         [HttpGet]
-        [Route("{profileId:guid}")]
-        public async Task<ActionResult<IEnumerable<GetOperationDTO>>> GetOperationsByProfileId([FromRoute] Guid profileId)
+        [Route("{accoundId:guid}")]
+        public async Task<ActionResult<IEnumerable<GetOperationDTO>>> GetOperationsByAccountId([FromRoute] Guid accountId)
         {
             if (_context.Operations == null)
             {
                 return NotFound();
             }
 
-            var profile = await _context.Profiles.FindAsync(profileId);
+            var profile = await _context.Profiles.FindAsync(accountId);
             if (profile == null)
             {
                 return NotFound();
             }
 
-            var operations = _context.Operations.Where(operation => operation.ProfileId == profileId).ToList();
+            var operations = _context.Operations.Where(operation => operation.ProfileId == accountId).ToList();
 
             if(operations.Count == 0) 
             {
@@ -48,8 +49,6 @@ namespace BudgetOrganizer.Controllers
 
             return Ok(_mapper.Map<List<Operation>,List<GetOperationDTO>>(operations));
         }
-
-
     }
 }
 //        // GET: api/Operations/5
