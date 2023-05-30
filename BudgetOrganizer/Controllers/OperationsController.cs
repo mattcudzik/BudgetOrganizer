@@ -34,13 +34,13 @@ namespace BudgetOrganizer.Controllers
                 return NotFound();
             }
 
-            var account = await _context.Profiles.FindAsync(accountId);
+            var account = await _context.Accounts.FindAsync(accountId);
             if (account == null)
             {
                 return NotFound();
             }
 
-            var operations = _context.Operations.Where(operation => operation.ProfileId == accountId).ToList();
+            var operations = _context.Operations.Where(operation => operation.AccountId == accountId).ToList();
 
             if(operations.Count == 0) 
             {
@@ -51,23 +51,23 @@ namespace BudgetOrganizer.Controllers
         }
 
 
-        //        // GET: api/Operations/5
-        //        [HttpGet("{id}")]
-        //        public async Task<ActionResult<Operation>> GetOperation(Guid id)
-        //        {
-        //          if (_context.Operations == null)
-        //          {
-        //              return NotFound();
-        //          }
-        //            var operation = await _context.Operations.FindAsync(id);
+        // GET: api/Operations/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Operation>> GetOperationById(Guid id)
+        {
+            if (_context.Operations == null)
+            {
+                return NotFound();
+            }
+            var operation = await _context.Operations.FindAsync(id);
 
-        //            if (operation == null)
-        //            {
-        //                return NotFound();
-        //            }
+            if (operation == null)
+            {
+                return NotFound();
+            }
 
-        //            return operation;
-        //        }
+            return operation;
+        }
 
         //        // PUT: api/Operations/5
         //        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -103,34 +103,33 @@ namespace BudgetOrganizer.Controllers
         // POST: api/Operations
         [HttpPost]
         [Route("{accoundId:guid}")]
-        public async Task<ActionResult<Operation>> PostOperation(AddOperationDTO operationToAdd, [FromRoute]Guid accountId)
+        public async Task<ActionResult<Operation>> AddOperation(AddOperationDTO operationToAdd, [FromRoute]Guid accountId)
         {
             if (_context.Operations == null)
             {
                 return Problem("Entity set 'BudgetOrganizerDbContext.Operations'  is null.");
             }
 
-            var account = await _context.Profiles.FindAsync(accountId);
+            var account = await _context.Accounts.FindAsync(accountId);
             if (account == null)
             {
-                return NotFound();
+                return NotFound("Account not found.");
             }
 
             var operation = _mapper.Map<Operation>(operationToAdd);
 
             //TODO create mapping
             operation.DateTime = DateTime.UtcNow;
-            operation.Category = await _context.Categories.FindAsync(operation.CategoryId);
+            var category = await _context.Categories.FindAsync(operation.CategoryId);
 
-            if(operation.Category == null)
+            if (category == null)
             {
-                return NotFound("incorrect category");
+                return NotFound("Incorrect category id");
             }
 
-            operation.ProfileId = accountId;
-            operation.Profile = account;
-
-
+            operation.Category = category;
+            operation.AccountId = accountId;
+            operation.Account = account;
 
             _context.Operations.Add(operation);
             await _context.SaveChangesAsync();
@@ -138,25 +137,25 @@ namespace BudgetOrganizer.Controllers
             return Ok(operation);
         }
 
-        //        // DELETE: api/Operations/5
-        //        [HttpDelete("{id}")]
-        //        public async Task<IActionResult> DeleteOperation(Guid id)
-        //        {
-        //            if (_context.Operations == null)
-        //            {
-        //                return NotFound();
-        //            }
-        //            var operation = await _context.Operations.FindAsync(id);
-        //            if (operation == null)
-        //            {
-        //                return NotFound();
-        //            }
+        // DELETE: api/Operations/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteOperation(Guid id)
+        {
+            if (_context.Operations == null)
+            {
+                return NotFound();
+            }
+            var operation = await _context.Operations.FindAsync(id);
+            if (operation == null)
+            {
+                return NotFound();
+            }
 
-        //            _context.Operations.Remove(operation);
-        //            await _context.SaveChangesAsync();
+            _context.Operations.Remove(operation);
+            await _context.SaveChangesAsync();
 
-        //            return NoContent();
-        //        }
+            return NoContent();
+        }
 
         //        private bool OperationExists(Guid id)
         //        {

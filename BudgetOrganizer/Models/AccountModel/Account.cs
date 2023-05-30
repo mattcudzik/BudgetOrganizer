@@ -1,12 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using BudgetOrganizer.Models.CategoriesModel;
 using BudgetOrganizer.Models.OperationModel;
-using BudgetOrganizer.Models.ProfileModel;
+using BudgetOrganizer.Models.RoleModel;
 using Microsoft.AspNetCore.Identity;
 
 namespace BudgetOrganizer.Models.AccountModel
 {
-    public class Account : IdentityUser
+    public class Account : IdentityUser<Guid>
     {
         public decimal Budget { get; set; }
         public decimal? SpendingLimit { get; set; }

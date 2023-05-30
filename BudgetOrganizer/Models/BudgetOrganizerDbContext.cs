@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using BudgetOrganizer.Models.AccountModel;
-using BudgetOrganizer.Models.ProfileModel;
 using BudgetOrganizer.Models.OperationModel;
+using BudgetOrganizer.Models.CategoriesModel;
+using BudgetOrganizer.Models.RoleModel;
 
 namespace BudgetOrganizer.Models
 {
@@ -16,7 +17,6 @@ namespace BudgetOrganizer.Models
         public DbSet<Category> Categories { get; set; }
         public DbSet<Operation> Operations { get; set; }
         public DbSet<OperationImage> OperationImages { get; set; }
-        public DbSet<Profile> Profiles { get; set; }
         public DbSet<Account> Accounts { get; set; }
     }
 }

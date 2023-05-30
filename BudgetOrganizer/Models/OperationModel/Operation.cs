@@ -1,14 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using BudgetOrganizer.Models.AccountModel;
-using BudgetOrganizer.Models.ProfileModel;
+using BudgetOrganizer.Models.CategoriesModel;
 
 namespace BudgetOrganizer.Models.OperationModel
 {
-	public class Operation
+    public class Operation
 	{
 		public Guid Id { get; set; }
-		[ForeignKey("User")]
+		[ForeignKey("Account")]
 		public Guid AccountId { get; set; }
 		public Account Account { get; set; }
 		[ForeignKey("Category")]

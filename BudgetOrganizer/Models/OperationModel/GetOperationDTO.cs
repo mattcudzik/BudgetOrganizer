@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using BudgetOrganizer.Models.ProfileModel;
 
 namespace BudgetOrganizer.Models.OperationModel
 {
     public class GetOperationDTO
     {
+        public Guid Id { get; set; }
         [ForeignKey("Category")]
         public Guid CategoryId { get; set; }
         //public Category Category { get; set; }

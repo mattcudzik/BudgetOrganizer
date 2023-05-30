@@ -61,32 +61,9 @@ namespace BudgetOrganizer.Controllers
 			return Ok(_mapper.Map<GetAccountDTO>(account));
 		}
 
-		// PUT: api/Accounts/5
-		[HttpPut("{id:guid}")]
-		public async Task<IActionResult> PutAccount([FromRoute] Guid id, UpdateAccountDTO updateAccountDTO)
-		{
-			if (!ModelState.IsValid)
-			{
-				return BadRequest();
-			}
-
-			var account = await _context.Accounts.FindAsync(id);
-
-			if(account == null)
-			{
-				return NotFound();
-			}
-
-			account.Email = updateAccountDTO.Email;
-			account.Login = updateAccountDTO.Email;
-			account.Password = updateAccountDTO.Password;
-
-			return NoContent();
-		}
-
 		// POST: api/Accounts
 		[HttpPost]
-		public async Task<ActionResult<GetAccountDTO>> PostAccount(AddAccountDTO addAccountDTO)
+		public async Task<ActionResult<GetAccountDTO>> AddAccount(AddAccountDTO addAccountDTO)
 		{
 			if (_context.Accounts == null)
 			{

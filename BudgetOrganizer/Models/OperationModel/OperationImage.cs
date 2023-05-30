@@ -1,6 +1,4 @@
-﻿using BudgetOrganizer.Models.OperationModel;
-
-namespace BudgetOrganizer.Models
+﻿namespace BudgetOrganizer.Models.OperationModel
 {
     public class OperationImage
     {

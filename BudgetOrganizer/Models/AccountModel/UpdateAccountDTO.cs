@@ -9,5 +9,7 @@ namespace BudgetOrganizer.Models.AccountModel
         public string Password { get; set; }
         [EmailAddress]
         public string Email { get; set; }
+        public decimal Budget { get; set; }
+        public decimal? SpendingLimit { get; set; }
     }
 }

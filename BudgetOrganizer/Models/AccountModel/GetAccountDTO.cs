@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using BudgetOrganizer.Models.ProfileModel;
 
 namespace BudgetOrganizer.Models.AccountModel
 {
@@ -9,5 +8,8 @@ namespace BudgetOrganizer.Models.AccountModel
         public string Login { get; set; }
         [EmailAddress]
         public string Email { get; set; }
+        public Guid RoleId { get; set; }
+        public decimal Budget { get; set; }
+        public decimal? SpendingLimit { get; set; }
     }
 }

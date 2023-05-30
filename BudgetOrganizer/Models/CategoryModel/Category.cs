@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using BudgetOrganizer.Models.AccountModel;
-using BudgetOrganizer.Models.ProfileModel;
 
-namespace BudgetOrganizer.Models
+namespace BudgetOrganizer.Models.CategoriesModel
 {
     public class Category
     {

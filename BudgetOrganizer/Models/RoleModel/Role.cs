@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BudgetOrganizer.Models
+namespace BudgetOrganizer.Models.RoleModel
 {
     public class Role
     {
