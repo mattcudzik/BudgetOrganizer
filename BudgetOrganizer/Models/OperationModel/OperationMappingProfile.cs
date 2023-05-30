@@ -7,6 +7,7 @@ namespace BudgetOrganizer.Models.OperationModel
         public OperationMappingProfile() 
         {
             CreateMap<Operation, GetOperationDTO>().ReverseMap();
+            CreateMap<AddOperationDTO, Operation>().ReverseMap();
         }
     }
 }

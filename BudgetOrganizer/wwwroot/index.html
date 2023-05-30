@@ -18,7 +18,7 @@
     <main>
         <div class="wrapper">
             <div id="left">
-                <div class="row"><button class="pic"><img src="./Pic/stock-up-svgrepo-com.svg" alt="up"></button></div>
+                <div class="row"><button onclick="addTest()" class="pic"><img src="./Pic/stock-up-svgrepo-com.svg" alt="up"></button></div>
                 <div class="row"><button class="pic"><img src="./Pic/stock-down-svgrepo-com.svg" alt="down"></button></div>
                 <div class="row"><button class="pic"><img src="./Pic/person-remove-fill-svgrepo-com.svg" alt="person"></button></div>
             </div>
@@ -69,7 +69,7 @@
                 <div id="stat">
                 </div>
                 <div id="generuj">
-                    <button class="button">Generuj raport</button>
+                    <button class="button" onclick="getTest()">Generuj raport</button>
                 </div>
             </div>
         </div>
@@ -77,5 +77,35 @@
 
 
 </body>
+
+<script>
+        function getTest() {
+
+            fetch("https://localhost:7057/api/Accounts")
+                .then((response) => response.text())
+                .then((json) => {
+                    console.log(json);
+                    document.getElementById("przychody_center").innerHTML += "<div class='przychod'>" + json + "</div>";
+                });
+
+        }
+        function addTest() {
+            const request = new Request("https://localhost:7057/api/Accounts", {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: '{"login": "login","password": "password","email": "user@example.com"}'
+            });
+
+            fetch(request)
+                .then((response) => response.text())
+                .then((json) => {
+                    console.log(json);
+                    document.getElementById("przychody_center").innerHTML += "<div class='przychod'>"+json+"</div>";
+                });
+        }
+</script>
 
 </html>
