@@ -1,0 +1,94 @@
+#container {
+    align-items: start;
+    margin-left: 120px;
+    margin-top: 80px;
+  }
+  
+  #container h2 {
+    font-size: 24px;
+    font-weight: 400;
+  }
+  
+  label {
+    font-size: 16px;
+    display: inline-block;
+    margin-bottom: 5px;
+  }
+  .margin
+  {
+    margin-top: 15px;
+  }
+  
+  input[type="text"] {
+    width: 561px;
+  }
+  
+  input[type="text"],
+  input[type="date"] {
+    height: 36px;
+    border: 1px solid #c0c0c4;
+    border-radius: 4px;
+  }
+  
+  input[type="text"]::placeholder {
+    font-size: 16px;
+    color: #82828c;
+    padding-left: 5px;
+  }
+  
+  input[type="date"]{
+    font-family: "Inter";
+    font-size: 16px;
+    color: #82828c;
+    padding-left: 5px;
+    width: 240px;
+  }
+  
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    display: block;
+    background: "mdi mdi-24px mdi-clock-outline" no-repeat;
+    width: 20px;
+    height: 20px;
+    opacity: 0.5;
+  }
+  
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+  }
+  
+  input[type="date"]::-webkit-datetime-edit {
+    position: relative;
+    left: 30px;
+  }
+  
+  form {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0 250px;
+  }
+  
+  .left-content {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 40px;
+  }
+  
+.categories label {
+    margin-right: 15px;
+  }
+  #creatb
+  {
+    margin-top: 100px;
+  }
+  .create-button
+  {
+    width: 150px;
+    height: 50px;
+    font-size: 16px;
+    background-color: #8fb6d9;
+    border: none;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    text-align: center;
+  }
