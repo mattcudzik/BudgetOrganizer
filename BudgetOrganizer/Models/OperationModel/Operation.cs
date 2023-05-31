@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using BudgetOrganizer.Models.AccountModel;
-using BudgetOrganizer.Models.CategoriesModel;
+using BudgetOrganizer.Models.CategoryModel;
 
 namespace BudgetOrganizer.Models.OperationModel
 {

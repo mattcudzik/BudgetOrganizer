@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using BudgetOrganizer.Models.CategoriesModel;
+using BudgetOrganizer.Models.CategoryModel;
 using BudgetOrganizer.Models.OperationModel;
 using BudgetOrganizer.Models.RoleModel;
 using Microsoft.AspNetCore.Identity;

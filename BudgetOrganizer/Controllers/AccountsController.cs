@@ -79,6 +79,13 @@ namespace BudgetOrganizer.Controllers
             //We use automapping (AccountMappingProfiles) to write one line of code instead of many:
             Account account = _mapper.Map<Account>(addAccountDTO);
 
+			var role = await _context.Roles.FindAsync(addAccountDTO.RoleId);
+			if(role == null)
+			{
+				return NotFound("Incorrect RoleId");
+			}
+
+			account.Role = role;
 			//Account account = new Account()
 			//{
 			//	Id = Guid.NewGuid(),

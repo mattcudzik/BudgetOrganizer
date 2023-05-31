@@ -8,5 +8,6 @@ namespace BudgetOrganizer.Models.OperationModel
 		[ForeignKey("Category")]
 		public Guid CategoryId { get; set; }
 		public decimal Amount { get; set; }
-	}
+        public DateTime? DateTime { get; set; }
+    }
 }

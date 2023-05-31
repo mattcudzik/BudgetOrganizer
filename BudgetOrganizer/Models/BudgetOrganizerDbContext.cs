@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using BudgetOrganizer.Models.AccountModel;
 using BudgetOrganizer.Models.OperationModel;
-using BudgetOrganizer.Models.CategoriesModel;
+using BudgetOrganizer.Models.CategoryModel;
 using BudgetOrganizer.Models.RoleModel;
 
 namespace BudgetOrganizer.Models

@@ -10,5 +10,7 @@ namespace BudgetOrganizer.Models.AccountModel
         [EmailAddress]
         public string Email { get; set; }
         public Guid? RoleId { get; set; }
+        public decimal Budget { get; set; }
+        public decimal? SpendingLimit { get; set; }
     }
 }

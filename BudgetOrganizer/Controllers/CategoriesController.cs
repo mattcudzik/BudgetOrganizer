@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BudgetOrganizer.Models;
-using BudgetOrganizer.Models.CategoriesModel;
+using BudgetOrganizer.Models.CategoryModel;
+using AutoMapper;
 
 namespace BudgetOrganizer.Controllers
 {
@@ -15,26 +16,30 @@ namespace BudgetOrganizer.Controllers
     public class CategoriesController : ControllerBase
     {
         private readonly BudgetOrganizerDbContext _context;
+        private readonly IMapper _mapper;
 
-        public CategoriesController(BudgetOrganizerDbContext context)
+        public CategoriesController(BudgetOrganizerDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Categories
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
+        public async Task<ActionResult<IEnumerable<GetCategoryDTO>>> GetCategories()
         {
           if (_context.Categories == null)
           {
               return NotFound();
           }
-            return Ok(await _context.Categories.ToListAsync());
+          var categories = await _context.Categories.ToListAsync();
+
+           return Ok(_mapper.Map< List < Category > ,List <GetCategoryDTO>>(categories));
         }
 
         // GET: api/Categories/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Category>> GetCategory(Guid id)
+        public async Task<ActionResult<GetCategoryDTO>> GetCategory(Guid id)
         {
           if (_context.Categories == null)
           {
@@ -47,58 +52,21 @@ namespace BudgetOrganizer.Controllers
                 return NotFound();
             }
 
-            return category;
+            return _mapper.Map<GetCategoryDTO>(category);
         }
-
-        // PUT: api/Categories/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutCategory(Guid id, Category category)
-        {
-            if (id != category.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(category).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CategoryExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
         // POST: api/Categories
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Category>> PostCategory(Category category)
+        public async Task<ActionResult<Category>> PostCategory(AddCategoryDTO categoryToAdd)
         {
           if (_context.Categories == null)
           {
               return Problem("Entity set 'BudgetOrganizerDbContext.Categories'  is null.");
           }
+            var category = _mapper.Map<Category>(categoryToAdd);
             _context.Categories.Add(category);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCategory", new { id = category.Id }, category);
-        }
-
-        private bool CategoryExists(Guid id)
-        {
-            return (_context.Categories?.Any(e => e.Id == id)).GetValueOrDefault();
+            return Ok();
         }
     }
 }

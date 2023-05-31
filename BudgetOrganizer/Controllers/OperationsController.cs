@@ -26,8 +26,8 @@ namespace BudgetOrganizer.Controllers
 
         //TODO: get accountId from token
         [HttpGet]
-        [Route("{accoundId:guid}")]
-        public async Task<ActionResult<IEnumerable<GetOperationDTO>>> GetOperationsByAccountId([FromRoute] Guid accountId)
+        [Route("{accountId:guid}")]
+        public async Task<ActionResult<IEnumerable<GetOperationDTO>>> GetOperationsByAccountId([FromRoute] Guid accountId, string? sortOrder)
         {
             if (_context.Operations == null)
             {
@@ -35,19 +35,32 @@ namespace BudgetOrganizer.Controllers
             }
 
             var account = await _context.Accounts.FindAsync(accountId);
+
             if (account == null)
             {
                 return NotFound();
             }
 
-            var operations = _context.Operations.Where(operation => operation.AccountId == accountId).ToList();
+            var operations = _context.Operations
+                .Where(operation => operation.AccountId == accountId);
 
-            if(operations.Count == 0) 
-            {
-                return NotFound();
+
+            switch (sortOrder){
+                case "date_asc":
+                    operations = operations.OrderBy(o => o.DateTime);
+                    break;
+                case "amount_desc":
+                    operations = operations.OrderByDescending(o => o.Account);
+                    break;
+                case "amount_asc":
+                    operations = operations.OrderBy(o => o.Account);
+                    break;
+                default:
+                    operations = operations.OrderByDescending(o => o.DateTime);
+                    break;
             }
 
-            return Ok(_mapper.Map<List<Operation>,List<GetOperationDTO>>(operations));
+            return Ok(_mapper.Map<List<Operation>,List<GetOperationDTO>>(operations.ToList()));
         }
 
 
@@ -102,8 +115,8 @@ namespace BudgetOrganizer.Controllers
 
         // POST: api/Operations
         [HttpPost]
-        [Route("{accoundId:guid}")]
-        public async Task<ActionResult<Operation>> AddOperation(AddOperationDTO operationToAdd, [FromRoute]Guid accountId)
+        [Route("{accountId:guid}")]
+        public async Task<ActionResult<GetOperationDTO>> AddOperation(AddOperationDTO operationToAdd, [FromRoute]Guid accountId)
         {
             if (_context.Operations == null)
             {
@@ -118,8 +131,11 @@ namespace BudgetOrganizer.Controllers
 
             var operation = _mapper.Map<Operation>(operationToAdd);
 
-            //TODO create mapping
-            operation.DateTime = DateTime.UtcNow;
+            if(operationToAdd.DateTime == null)
+            {
+                operation.DateTime = DateTime.UtcNow;
+            }
+
             var category = await _context.Categories.FindAsync(operation.CategoryId);
 
             if (category == null)
@@ -134,7 +150,7 @@ namespace BudgetOrganizer.Controllers
             _context.Operations.Add(operation);
             await _context.SaveChangesAsync();
 
-            return Ok(operation);
+            return Ok(_mapper.Map<GetOperationDTO>(operation));
         }
 
         // DELETE: api/Operations/5
