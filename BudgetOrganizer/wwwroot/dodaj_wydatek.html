@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dodaj wydatek</title>
+    <link rel="stylesheet" href="dodaj_wydatek.css">
+    <link rel="stylesheet" href="profil.css">
+    <link href="https://fonts.googleapis.com/css?family=Inter" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;400&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <button id="logowanie"><img src="./Pic/person-svgrepo-com.svg" alt="log" width="40px" height="40px"></button>
+    </header>
+
+    <main id="container">
+        <h2>Dodaj wydatek</h2>
+        <form>
+            <div class="form">
+                <div class="margin">
+                    <label for="value">Kwota</label><br>
+                    <input type="text" id="value" name="value" placeholder="Kwota">
+                </div>
+                <div class="margin">
+                    <label for="name">Nazwa</label><br>
+                    <input type="text" id="name" name="name" placeholder="Nazwa">
+                </div>
+                <div class="margin">
+                    <label for="start-date">Data</label><br>
+                    <input type="date" id="start-date" name="start-date">
+                </div>
+               <div class="categories">
+                    <p>Kategoria</p>
+                    <input type="radio" id="categories" name="categories" value="jedzenie">
+                    <label for="categories">jedzenie</label>
+                    <input type="radio" id="categories" name="categories" value="chemia">
+                    <label for="categories">chemia</label>
+            </div>
+        </form>
+        <div id="creatb"><input class="create-button" type="submit" value="Dodaj wydatek"></div>
+    </main>
+</body>
+
+</html>

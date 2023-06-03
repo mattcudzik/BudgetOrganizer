@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dodaj przychód</title>
+    <link rel="stylesheet" href="dodaj_przychod.css">
+    <link rel="stylesheet" href="profil.css">
+    <link href="https://fonts.googleapis.com/css?family=Inter" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;400&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <button id="logowanie"><img src="./Pic/person-svgrepo-com.svg" alt="log" width="40px" height="40px"></button>
+    </header>
+
+    <main id="container">
+        <h2>Dodaj przychód</h2>
+        <form>
+            <div class="form">
+                <div class="margin">
+                    <label for="value">Kwota</label><br>
+                    <input type="text" id="value" name="value" placeholder="Kwota">
+                </div>
+                <div class="margin">
+                    <label for="start-date">Data</label><br>
+                    <input type="date" id="start-date" name="start-date">
+                </div>
+               <div class="categories">
+                    <p>Kategoria</p>
+                    <input type="radio" id="categories" name="categories" value="wyplata">
+                    <label for="categories">wypłata</label>
+                    <input type="radio" id="categories" name="categories" value="prezent">
+                    <label for="categories">prezent</label>
+            </div>
+        </form>
+        <div id="creatb"><input class="create-button" type="submit" value="Dodaj przychód"></div>
+    </main>
+</body>
+
+</html>
