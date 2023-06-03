@@ -114,20 +114,25 @@ namespace BudgetOrganizer.Controllers
 		[Route("({id:guid})")]
 		public async Task<ActionResult<GetAccountDTO>> GetAccount([FromRoute]Guid id)
 		{
+			
 			if (_context.Accounts == null)
 			{
 				return NotFound("Account doesn't exists");
 			}
 
-			try
-			{
-                if (!_authService.HasAccessToAccountData(id, HttpContext.User.Claims))
-                    return Unauthorized("You don't have access to that account");
-            }
-			catch (BadHttpRequestException ex)
-			{
-				return BadRequest(ex.Message);
-			}
+			var claim = HttpContext.User.FindFirst("id");
+            if (claim == null || claim.Value != id.ToString())
+                return Unauthorized("You don't have access to that account");
+
+            //try
+            //{
+            //	if (!_authService.HasAccessToAccountData(id, HttpContext.User.Claims))
+            //                 return Unauthorized("You don't have access to that account");
+            //         }
+            //catch (BadHttpRequestException ex)
+            //{
+            //	return BadRequest(ex.Message);
+            //}
 
             var account = await _context.Accounts.FindAsync(id);
 
@@ -148,15 +153,9 @@ namespace BudgetOrganizer.Controllers
 				return NotFound();
 			}
 
-            try
-            {
-                if (!_authService.HasAccessToAccountData(id, HttpContext.User.Claims))
-                    return Unauthorized("You don't have access to that account");
-            }
-            catch (BadHttpRequestException ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var claim = HttpContext.User.FindFirst("id");
+            if (claim == null || claim.Value != id.ToString())
+                return Unauthorized("You don't have access to that account");
 
             var account = await _context.Accounts.FindAsync(id);
 			if (account == null)

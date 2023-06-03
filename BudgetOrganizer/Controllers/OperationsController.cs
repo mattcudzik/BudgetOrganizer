@@ -8,6 +8,10 @@ using Microsoft.EntityFrameworkCore;
 using BudgetOrganizer.Models;
 using BudgetOrganizer.Models.OperationModel;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using BudgetOrganizer.Services;
+using Microsoft.Identity.Client;
+using System.Security.Claims;
 
 namespace BudgetOrganizer.Controllers
 {
@@ -17,17 +21,22 @@ namespace BudgetOrganizer.Controllers
     {
         private readonly BudgetOrganizerDbContext _context;
         private readonly IMapper _mapper;
+        private readonly IReportService _reportService;
+        private readonly IAuthService _authService;
 
-        public OperationsController(BudgetOrganizerDbContext context, IMapper mapper)
+        public OperationsController(BudgetOrganizerDbContext context, IMapper mapper, IReportService reportService, IAuthService authService)
         {
             _context = context;
             _mapper = mapper;
+            _reportService = reportService;
+            _authService = authService;
         }
 
-        //TODO: get accountId from token
+        #region Admin
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("{accountId:guid}")]
-        public async Task<ActionResult<IEnumerable<GetOperationDTO>>> GetOperationsByAccountId([FromRoute] Guid accountId, string? sortOrder)
+        public async Task<ActionResult<IEnumerable<GetOperationDTO>>> GetOperationsByAccountId([FromRoute] Guid accountId, string? sortOrder, [FromQuery] FilterOperationDTO? filterParam)
         {
             if (_context.Operations == null)
             {
@@ -38,40 +47,105 @@ namespace BudgetOrganizer.Controllers
 
             if (account == null)
             {
-                return NotFound();
+                return NotFound("That account doesn't exist");
             }
 
-            var operations = _context.Operations
-                .Where(operation => operation.AccountId == accountId);
+            var operations = _reportService.GetOpertaionsReport(accountId, sortOrder, filterParam);
+            if (operations == null)
+                return NotFound("No operations were found");
 
-
-            switch (sortOrder){
-                case "date_asc":
-                    operations = operations.OrderBy(o => o.DateTime);
-                    break;
-                case "amount_desc":
-                    operations = operations.OrderByDescending(o => o.Account);
-                    break;
-                case "amount_asc":
-                    operations = operations.OrderBy(o => o.Account);
-                    break;
-                default:
-                    operations = operations.OrderByDescending(o => o.DateTime);
-                    break;
-            }
-
-            return Ok(_mapper.Map<List<Operation>,List<GetOperationDTO>>(operations.ToList()));
+            return Ok(_mapper.Map<List<Operation>, List<GetOperationDTO>>(operations.ToList()));
         }
+        #endregion
 
 
-        // GET: api/Operations/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Operation>> GetOperationById(Guid id)
+        #region User
+        [Authorize]
+        [HttpGet]
+        [Route("me")]
+        public async Task<ActionResult<IEnumerable<GetOperationDTO>>> GetOperationsFromToken(string? sortOrder, [FromQuery] FilterOperationDTO? filterParam)
         {
             if (_context.Operations == null)
             {
                 return NotFound();
             }
+
+            //Server Error token doesn't have account id
+            var claim = HttpContext.User.FindFirst("id");
+            if (claim == null)
+                return StatusCode(500);
+
+            var accountId = new Guid(claim.Value);
+            var account = await _context.Accounts.FindAsync(accountId);
+
+            if (account == null)
+            {
+                return NotFound("That account doesn't exist");
+            }
+
+            var operations = _reportService.GetOpertaionsReport(accountId, sortOrder, filterParam);
+            if (operations == null)
+                return NotFound("No operations were found");
+
+            return Ok(_mapper.Map<List<Operation>, List<GetOperationDTO>>(operations.ToList()));
+        }
+
+        // POST: api/Operations
+        [Authorize]
+        [HttpPost]
+        [Route("me")]
+        public async Task<ActionResult<GetOperationDTO>> AddOperation(AddOperationDTO operationToAdd)
+        {
+            if (_context.Operations == null)
+            {
+                return Problem("Entity set 'BudgetOrganizerDbContext.Operations'  is null.");
+            }
+
+            var claim = HttpContext.User.FindFirst("id");
+            if (claim == null)
+                return StatusCode(500);
+
+            var accountId = new Guid(claim.Value);
+
+            var account = await _context.Accounts.FindAsync(accountId);
+            if (account == null)
+            {
+                return NotFound("That account doesn't exist");
+            }
+
+            var operation = _mapper.Map<Operation>(operationToAdd);
+
+            if (operationToAdd.DateTime == null)
+            {
+                operation.DateTime = DateTime.UtcNow;
+            }
+
+            var category = await _context.Categories.FindAsync(operation.CategoryId);
+
+            if (category == null)
+            {
+                return NotFound("Incorrect category id");
+            }
+
+            operation.Category = category;
+            operation.AccountId = accountId;
+            operation.Account = account;
+
+            _context.Operations.Add(operation);
+            await _context.SaveChangesAsync();
+
+            return Ok(_mapper.Map<GetOperationDTO>(operation));
+        }
+
+        // DELETE: api/Operations/5
+        [HttpDelete("me/{id}")]
+        public async Task<IActionResult> DeleteOperation(Guid id)
+        {
+            if (_context.Operations == null)
+            {
+                return NotFound();
+            }
+
             var operation = await _context.Operations.FindAsync(id);
 
             if (operation == null)
@@ -79,8 +153,42 @@ namespace BudgetOrganizer.Controllers
                 return NotFound();
             }
 
-            return operation;
+            var claim = HttpContext.User.FindFirst("id");
+            if (claim == null)
+                return StatusCode(500);
+
+            var accountId = new Guid(claim.Value);
+
+            if (accountId != operation.AccountId)
+                return Unauthorized("This operation belongs to another account");
+
+            _context.Operations.Remove(operation);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
+        #endregion
+
+
+
+
+        //// GET: api/Operations/5
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<Operation>> GetOperationById(Guid id)
+        //{
+        //    if (_context.Operations == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    var operation = await _context.Operations.FindAsync(id);
+
+        //    if (operation == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return operation;
+        //}
 
         //        // PUT: api/Operations/5
         //        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -111,71 +219,6 @@ namespace BudgetOrganizer.Controllers
         //            }
 
         //            return NoContent();
-        //        }
-
-        // POST: api/Operations
-        [HttpPost]
-        [Route("{accountId:guid}")]
-        public async Task<ActionResult<GetOperationDTO>> AddOperation(AddOperationDTO operationToAdd, [FromRoute]Guid accountId)
-        {
-            if (_context.Operations == null)
-            {
-                return Problem("Entity set 'BudgetOrganizerDbContext.Operations'  is null.");
-            }
-
-            var account = await _context.Accounts.FindAsync(accountId);
-            if (account == null)
-            {
-                return NotFound("Account not found.");
-            }
-
-            var operation = _mapper.Map<Operation>(operationToAdd);
-
-            if(operationToAdd.DateTime == null)
-            {
-                operation.DateTime = DateTime.UtcNow;
-            }
-
-            var category = await _context.Categories.FindAsync(operation.CategoryId);
-
-            if (category == null)
-            {
-                return NotFound("Incorrect category id");
-            }
-
-            operation.Category = category;
-            operation.AccountId = accountId;
-            operation.Account = account;
-
-            _context.Operations.Add(operation);
-            await _context.SaveChangesAsync();
-
-            return Ok(_mapper.Map<GetOperationDTO>(operation));
-        }
-
-        // DELETE: api/Operations/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteOperation(Guid id)
-        {
-            if (_context.Operations == null)
-            {
-                return NotFound();
-            }
-            var operation = await _context.Operations.FindAsync(id);
-            if (operation == null)
-            {
-                return NotFound();
-            }
-
-            _context.Operations.Remove(operation);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        //        private bool OperationExists(Guid id)
-        //        {
-        //            return (_context.Operations?.Any(e => e.Id == id)).GetValueOrDefault();
         //        }
     }
 }

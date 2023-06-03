@@ -85,20 +85,20 @@ namespace BudgetOrganizer.Services
             return tokenString;
         }
 
-        public bool HasAccessToAccountData(Guid accountId, IEnumerable<Claim> claims)
-        {
-            var claimId = claims.FirstOrDefault(new Claim("id", accountId.ToString())).Value;
+        //public bool HasAccessToAccountData(Guid accountId, IEnumerable<Claim> claims)
+        //{
+        //    var claimId = claims.FirstOrDefault(new Claim("id", accountId.ToString())).Value;
 
-            if (claimId == null)
-                throw new BadHttpRequestException("Token describes account that doesn't exist");
+        //    if (claimId == null)
+        //        throw new BadHttpRequestException("Token describes account that doesn't exist");
 
-            if (accountId.ToString() != claimId)
-            {
-                return false;
-            }
+        //    if (accountId.ToString() != claimId)
+        //    {
+        //        return false;
+        //    }
 
-            return true;
-        }
+        //    return true;
+        //}
 
     }
 }

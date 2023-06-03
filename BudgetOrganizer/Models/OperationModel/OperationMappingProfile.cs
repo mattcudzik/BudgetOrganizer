@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BudgetOrganizer.Models.CategoryModel;
 
 namespace BudgetOrganizer.Models.OperationModel
 {
@@ -6,6 +7,7 @@ namespace BudgetOrganizer.Models.OperationModel
     {
         public OperationMappingProfile() 
         {
+            CreateMap<Category, GetCategoryDTO>().ReverseMap();
             CreateMap<Operation, GetOperationDTO>().ReverseMap();
             CreateMap<AddOperationDTO, Operation>().ReverseMap();
         }

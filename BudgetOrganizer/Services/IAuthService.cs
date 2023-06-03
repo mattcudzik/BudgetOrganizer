@@ -9,6 +9,6 @@ namespace BudgetOrganizer.Services
         string GenerateTokenString(Account user);
         Task<Account> Login(LoginAccountDTO user);
         Task<IdentityResult> RegisterUser(Account user, string password);
-        bool HasAccessToAccountData(Guid accountId, IEnumerable<Claim> claims);
+        //bool HasAccessToAccountData(Guid accountId, IEnumerable<Claim> claims);
     }
 }

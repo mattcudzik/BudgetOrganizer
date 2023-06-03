@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Text;
 using BudgetOrganizer.Services;
 using Microsoft.OpenApi.Models;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -55,6 +56,7 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddTransient<IAccountCreationService, AccountCreationService>();
+builder.Services.AddTransient<IReportService, ReportService>();
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -101,6 +103,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
+
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
@@ -110,5 +114,7 @@ app.UseDefaultFiles();
 app.UseStaticFiles();
 
 app.MapControllers();
+
+
 
 app.Run();
