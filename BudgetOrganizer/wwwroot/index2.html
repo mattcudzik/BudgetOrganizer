@@ -4,8 +4,19 @@
     </head>
     <script>
         function getTest() {
+            const auth = "Bearer " + localStorage.getItem("jwt");
+            console.log(auth);
+            const request = new Request("https://localhost:7057/api/Accounts/(59EB56BB-9437-4224-BE16-08DB6502F99F)", {
+                method: "GET",
+                headers: {
+                    'Accept': 'application/json',
+                    'Authorization': auth
+                }
+            });
 
-            fetch("https://localhost:7057/api/Accounts")
+
+
+            fetch(request)
                 .then((response) => response.text())
                 .then((json) => {
                     console.log(json);
@@ -13,6 +24,28 @@
                 });
 
         }
+
+        function login() {
+
+            const request = new Request("https://localhost:7057/api/Accounts/Login", {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: '{"userName": "user1","password": "user1234"}'
+            });
+
+            fetch(request)
+                .then((response) => response.text())
+                .then((json) => {
+                    console.log(json.replace(/["]/g, ''));
+                    document.getElementById("space").innerHTML = json.replace(/["]/g, '');
+                    localStorage.setItem("jwt", json.replace(/["]/g, ''));
+                });
+
+        }
+
 
         function addTest() {
             const request = new Request("https://localhost:7057/api/Accounts", {
@@ -30,6 +63,7 @@
                     console.log(json);
                     document.getElementById("space").innerHTML = json;
                 });
+
         }
 
     </script>
@@ -37,6 +71,7 @@
         <h1>Hello!</h1>
         <button onclick="getTest()">GET</button>
         <button onclick="addTest()">ADD</button>
+        <button onclick="login()">LOGIN</button>
         
         <div id="space">
 
