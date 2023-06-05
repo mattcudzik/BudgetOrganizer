@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./Pic/budget-management-svgrepo-com.svg">
     <title>BudgetOrganizer</title>
     <link rel="stylesheet" href="wydatki.css">
     <link rel="stylesheet" href="profil.css">
@@ -14,7 +15,9 @@
 </head>
 <body>
     <header>
-        <button id="logowanie"><img src="./Pic/person-svgrepo-com.svg" alt="log" width="40px" height="40px"></button>
+        <div class="pow"><a href="./profil.html"><button id="powrot"><img src="./Pic/arrow-left-svgrepo-com.svg" alt="back" width="40px" height="40px"></button></a></div>
+        
+        <div class="log"><button id="logowanie"><img src="./Pic/person-svgrepo-com.svg" alt="log" width="40px" height="40px"></button></div>
     </header>
     <main>
         <div class="wrapper">
@@ -25,7 +28,7 @@
                 <div id="wydatki">
                     <div id="wydatki_center">
                         <h2>Wydatki</h2>
-
+                            <div id ="scroll" style="overflow-y: scroll;">
                         <div class="wydatek1">
                             <h3>Wydatek 1</h3>
                         </div>
@@ -34,11 +37,14 @@
                             <p>-100,00PLN</p>
                         </div>
                     </div>
-
+                    </div>
                 </div>
             </div>
             <div id="right">
-                <a href="./profil.html"><button id="powrot"><img src="./Pic/arrow-right-svgrepo-com.svg" alt="back"></button></a>
+                <div class="row"><button class="pic">rrrr</button></div>
+                <div class="row"><button class="pic">rrrr</button></div>
+                <div class="row"><button class="pic">rrrr</button></div>
+                <div class="row"><button class="pic">rrrr</button></div>
             </div>
         </div>
     </main>

@@ -122,3 +122,26 @@ body {
     padding: 10px 0;
     border-radius: 0 0 4px 4px;
   }
+  header{
+    display: grid;
+    grid-template-columns: 40fr 40fr;
+}
+.log{
+    text-align: right;
+}
+
+  .pow{
+    text-align: left;
+    margin-left: 20px;
+}
+
+.logowanie
+{
+    display: inline-block;
+    padding: 0;
+    border: none;
+    background: none;
+    margin-right: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

@@ -8,12 +8,15 @@
     <title>BudgetOrganizer</title>
     <link rel="stylesheet" href="przychod.css">
     <link rel="stylesheet" href="profil.css">
+    <link rel="shortcut icon" href="./Pic/budget-management-svgrepo-com.svg">
     <link href="https://fonts.googleapis.com/css?family=Inter" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;400&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-<button id="logowanie"><img src="./Pic/person-svgrepo-com.svg" alt="log" width="40px" height="40px"></button>
+        <div class="pow"><a href="./profil.html"><button id="powrot"><img src="./Pic/arrow-left-svgrepo-com.svg" alt="back" width="40px" height="40px"></button></a></div>
+        
+        <div class="log"><button id="logowanie"><img src="./Pic/person-svgrepo-com.svg" alt="log" width="40px" height="40px"></button></div>
     </header>
     <main>
         <div class="wrapper">
@@ -24,7 +27,7 @@
                 <div id="przychody">
                     <div id="przychody_center">
                         <h2>Przychody</h2>
-
+                    <div id ="scroll" style="overflow-y: scroll;">
                         <div class="przychod1">
                             <h3>Przychod 1</h3>
                         </div>
@@ -33,6 +36,7 @@
                             <p>100,00PLN</p>
                         </div>
                     </div>
+                    </div>
                 </div>
             </div>
             <div id="right">
@@ -40,7 +44,6 @@
                 <div class="row"><button class="pic">rrrr</button></div>
                 <div class="row"><button class="pic">rrrr</button></div>
                 <div class="row"><button class="pic">rrrr</button></div>
-                <a href="./profil.html"><button id="powrot"><img src="./Pic/arrow-right-svgrepo-com.svg" alt="back"></button></a>
             </div>
         </div>
     </main>
