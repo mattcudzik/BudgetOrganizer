@@ -26,13 +26,15 @@ namespace BudgetOrganizer.Controllers
 
         // GET: api/Roles
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Role>>> GetRoles()
+        public async Task<ActionResult<IEnumerable<RoleDTO>>> GetRoles()
         {
-          if (_context.Roles == null)
-          {
-              return NotFound();
-          }
-            return await _context.Roles.ToListAsync();
+            if (_context.Roles == null)
+            {
+                return NotFound();
+            }
+            var result = await _context.Roles.ToListAsync();
+
+            return Ok(_mapper.Map<List<Role>,List<RoleDTO>>(result));
         }
 
         // GET: api/Roles/5

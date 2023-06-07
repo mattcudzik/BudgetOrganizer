@@ -27,18 +27,21 @@ namespace BudgetOrganizer.Services
 			//We use automapping (AccountMappingProfiles) to write one line of code instead of many:
 			Account account = _mapper.Map<Account>(addAccountDTO);
 
-			//Default role is adult
+			
 			if (addAccountDTO.RoleId == null)
 			{
-				var role = await _context.Roles.Where(o => o.Name == "adult").FirstOrDefaultAsync();
 
-				//If there is no adult role create one 
-				if (role == null)
-				{
-					role = new Role() { Id = Guid.NewGuid(), Name = "adult" };
-					await _context.Roles.AddAsync(role);
-					await _context.SaveChangesAsync();
-				}
+
+                //Default role is adult
+                var role = await _context.Roles.Where(o => o.Name == "adult").FirstOrDefaultAsync();
+
+                //If there is no adult role create one 
+                if (role == null)
+                {
+                    role = new Role() { Id = Guid.NewGuid(), Name = "adult" };
+                    await _context.Roles.AddAsync(role);
+                    await _context.SaveChangesAsync();
+                }
 
 				account.RoleId = role.Id;
 				account.Role = role;

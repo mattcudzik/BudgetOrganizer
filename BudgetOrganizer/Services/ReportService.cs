@@ -67,16 +67,16 @@ namespace BudgetOrganizer.Services
             switch (sortOrder)
             {
                 case "date_asc":
-                    operations = operations.OrderBy(o => o.DateTime);
+                    operations = operations.OrderBy(o => o.DateTime).ThenBy(o => o.CategoryId);
                     break;
                 case "amount_desc":
-                    operations = operations.OrderByDescending(o => o.Account);
+                    operations = operations.OrderByDescending(o => o.Account).ThenBy(o => o.CategoryId);
                     break;
                 case "amount_asc":
-                    operations = operations.OrderBy(o => o.Account);
+                    operations = operations.OrderBy(o => o.Account).ThenBy(o => o.CategoryId);
                     break;
                 default:
-                    operations = operations.OrderByDescending(o => o.DateTime);
+                    operations = operations.OrderByDescending(o => o.DateTime).ThenBy(o => o.CategoryId);
                     break;
             }
 
@@ -88,23 +88,24 @@ namespace BudgetOrganizer.Services
             if (_context.Operations == null)
                 throw new Exception("Database error");
 
-            var operations = _context.Operations.Where(operation => operation.AccountId == accountId);
-
-            var query = operations.GroupBy(p => p.CategoryId).
-                Select(p => new { CategoryId = p.Key, Sum = p.Count() });
-
-            var account = await _context.Accounts.FindAsync(accountId);
-
+            var account = await _context.Accounts.Where(o => o.Id == accountId).Include(o => o.Operations).Include(o => o.Categories).FirstOrDefaultAsync();
             if (account == null)
                 throw new Exception("Account doesn't exist");
 
+            //account operations grouped by category and counted
+            var operations = account.Operations.GroupBy(p => p.CategoryId).
+                Select(p => new { CategoryId = p.Key, Sum = p.Count() });
+
+            //get categories assigned to that account
             var categories = account.Categories;
+            if (categories.First() == null)
+                throw new Exception("Account doesn't have any categories");
 
             var result = new List<OperationByCategoryReportDTO>();
 
-            foreach(Category category in categories)
+            foreach (Category category in categories)
             {
-                var operationSum = query.First(o => o.CategoryId == category.Id);
+                var operationSum = operations.Where(o => o.CategoryId == category.Id).FirstOrDefault();//operations.First(o => o.CategoryId == category.Id);
 
                 if (operationSum != null)
                     result.Add(new OperationByCategoryReportDTO()
@@ -114,14 +115,13 @@ namespace BudgetOrganizer.Services
                     });
                 //If sum wasn't found then it's 0
                 else
-                    result.Add(new OperationByCategoryReportDTO() { 
-                        Category = _mapper.Map<GetCategoryDTO>(category) 
+                    result.Add(new OperationByCategoryReportDTO()
+                    {
+                        Category = _mapper.Map<GetCategoryDTO>(category)
                     });
             }
 
             return result;
         }
-
-
     }
 }

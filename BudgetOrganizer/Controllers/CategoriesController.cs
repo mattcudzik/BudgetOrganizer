@@ -38,6 +38,28 @@ namespace BudgetOrganizer.Controllers
            return Ok(_mapper.Map< List < Category > ,List <GetCategoryDTO>>(categories));
         }
 
+        
+        [HttpGet]
+        [Route("me")]
+        public async Task<ActionResult<IEnumerable<GetCategoryDTO>>> GetCurrentAccountCategories()
+        {
+            if (_context.Categories == null)
+            {
+                return NotFound();
+            }
+            var claim = HttpContext.User.FindFirst("id");
+            if (claim == null)
+                return StatusCode(500);
+
+            var accountId = new Guid(claim.Value);
+            var account = await _context.Accounts.Where(e => e.Id == accountId).Include(o => o.Categories).FirstOrDefaultAsync();
+
+            if (account == null)
+                return Problem("Account doesn't exist");
+
+            return Ok(_mapper.Map<List<Category>, List<GetCategoryDTO>>(account.Categories.ToList()));
+        }
+
         // GET: api/Categories/5
         [HttpGet("{id}")]
         public async Task<ActionResult<GetCategoryDTO>> GetCategory(Guid id)

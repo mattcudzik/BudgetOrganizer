@@ -9,9 +9,9 @@ namespace BudgetOrganizer.Models.AccountModel
         public string Password { get; set; }
         [EmailAddress]
         public string Email { get; set; }
-        public Guid? RoleId { get; set; }
         public decimal Budget { get; set; }
         public decimal? SpendingLimit { get; set; }
         public Guid? GroupId { get; set; }
+        public Guid? RoleId { get; set; }
     }
 }

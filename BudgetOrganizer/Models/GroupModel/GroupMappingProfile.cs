@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BudgetOrganizer.Models.AccountModel;
+using BudgetOrganizer.Models.RoleModel;
 
 namespace BudgetOrganizer.Models.GroupModel
 {
@@ -7,9 +8,11 @@ namespace BudgetOrganizer.Models.GroupModel
     {
         public GroupMappingProfile()
         {
-            CreateMap<Account, GetAccountDTO>().ReverseMap();
+            CreateMap<Account, GetGroupAccountDTO>().ReverseMap();
+            CreateMap<Role, RoleDTO>().ReverseMap();
 
             CreateMap<Group, GroupDTO>().ReverseMap();
+
         }
     }
 }

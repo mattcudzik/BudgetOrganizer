@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using NuGet.Common;
+using Microsoft.Identity.Client;
 
 namespace BudgetOrganizer.Controllers
 {
@@ -78,10 +79,6 @@ namespace BudgetOrganizer.Controllers
 		[HttpPost("Login")]
 		public async Task<IActionResult> Login(LoginAccountDTO loginAccountDTO)
 		{
-			if (!ModelState.IsValid)
-            {
-                return BadRequest();
-			}
 			try
 			{
 				var account = await _authService.Login(loginAccountDTO);
@@ -105,7 +102,7 @@ namespace BudgetOrganizer.Controllers
 				return NotFound();
 			}
 
-			var result = await _context.Accounts.ToListAsync();
+			var result = await _context.Accounts.Include(o => o.Role).ToListAsync();
 			return Ok(_mapper.Map<List<Account>, List<GetAccountDTO>>(result));
 		}
 
@@ -113,7 +110,7 @@ namespace BudgetOrganizer.Controllers
 		[Authorize]
 		[HttpGet]
 		[Route("({id:guid})")]
-		public async Task<ActionResult<GetAccountDTO>> GetAccount([FromRoute]Guid id)
+		public async Task<ActionResult<GetAccountDTO>> GetAccount([FromRoute]Guid accountId)
 		{
 			if (_context.Accounts == null)
 			{
@@ -122,14 +119,15 @@ namespace BudgetOrganizer.Controllers
 
 			var claim = HttpContext.User.FindFirst("id");
 
-            if (claim == null || claim.Value != id.ToString())
+            if (claim == null || claim.Value != accountId.ToString())
                 return Unauthorized("You don't have access to that account");
 
-            var account = await _context.Accounts.FindAsync(id);
+			var account = await _context.Accounts.Where(e => e.Id == accountId).Include(c => c.Role).FirstOrDefaultAsync();
 
-			if (account == null)
+
+            if (account == null)
 			{
-				return NotFound();
+				return NotFound("Account not found");
 			}
 
 			return Ok(_mapper.Map<GetAccountDTO>(account));

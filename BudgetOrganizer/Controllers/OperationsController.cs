@@ -14,6 +14,7 @@ using Microsoft.Identity.Client;
 using System.Security.Claims;
 using BudgetOrganizer.Models.AccountModel;
 using Microsoft.Data.SqlClient;
+using System.Web.Http.Results;
 
 namespace BudgetOrganizer.Controllers
 {
@@ -24,14 +25,12 @@ namespace BudgetOrganizer.Controllers
         private readonly BudgetOrganizerDbContext _context;
         private readonly IMapper _mapper;
         private readonly IReportService _reportService;
-        private readonly IAuthService _authService;
 
-        public OperationsController(BudgetOrganizerDbContext context, IMapper mapper, IReportService reportService, IAuthService authService)
+        public OperationsController(BudgetOrganizerDbContext context, IMapper mapper, IReportService reportService)
         {
             _context = context;
             _mapper = mapper;
             _reportService = reportService;
-            _authService = authService;
         }
 
         #region Admin
@@ -45,7 +44,8 @@ namespace BudgetOrganizer.Controllers
                 return NotFound();
             }
 
-            var account = await _context.Accounts.FindAsync(accountId);
+
+            var account = await _context.Accounts.FindAsync(accountId); 
 
             if (account == null)
             {
@@ -56,6 +56,8 @@ namespace BudgetOrganizer.Controllers
             try
             {
                 var operations = _reportService.GetOpertaionsReport(accountId, sortOrder, filterParam);
+                if (operations == null)
+                    return Problem("Server error - operations cant be null");
                 return Ok(_mapper.Map<List<Operation>, List<GetOperationDTO>>(operations.ToList()));
             }
             catch (Exception ex)
@@ -70,7 +72,8 @@ namespace BudgetOrganizer.Controllers
         [Authorize]
         [HttpGet]
         [Route("me")]
-        public async Task<ActionResult<IEnumerable<GetOperationDTO>>> GetOperationsFromToken(string? sortOrder, [FromQuery] FilterOperationDTO? filterParam)
+        public async Task<ActionResult<IEnumerable<GetOperationDTO>>> GetOperationsFromToken
+            (string? sortOrder, [FromQuery] FilterOperationDTO? filterParam)
         {
             if (_context.Operations == null)
             {
@@ -119,7 +122,7 @@ namespace BudgetOrganizer.Controllers
 
             try
             {
-                var operations = _reportService.GetOpertaionsCategoryReport(accountId);
+                var operations = await _reportService.GetOpertaionsCategoryReport(accountId);
                 if (operations == null)
                     return Problem("Server error");
                 return Ok(operations);
@@ -180,7 +183,7 @@ namespace BudgetOrganizer.Controllers
             var result = _mapper.Map<GetOperationDTO>(operation);
             result.CurrentBudget = account.Budget;
 
-            return Ok();
+            return Ok(result);
         }
 
         // DELETE: api/Operations/5

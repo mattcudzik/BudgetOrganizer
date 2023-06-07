@@ -5,6 +5,6 @@ namespace BudgetOrganizer.Models.GroupModel
     public class GroupDTO
     {
         public Guid Id { get; set; }
-        public List<GetAccountDTO> Accounts { get; }
+        public List<GetGroupAccountDTO> Accounts { get; set; }
     }
 }
