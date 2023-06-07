@@ -10,5 +10,6 @@ namespace BudgetOrganizer.Models.OperationModel
         public decimal? AmountFrom { get; set; }
         public decimal? AmountTo { get;set; }
         public Guid[]? CategoriesId { get; set; }
+        public bool? OnlyPositive { get; set; }
     }
 }

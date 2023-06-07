@@ -14,6 +14,7 @@ namespace BudgetOrganizer.Models.OperationModel
         public DateTime DateTime { get; set; }
         [ForeignKey("OperationImage")]
         public Guid? ImageId { get; set; }
+        public decimal? CurrentBudget { get; set; }
         //public virtual OperationImage? Image { get; set; }
 
     }

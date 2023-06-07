@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Authorization;
 using BudgetOrganizer.Services;
 using Microsoft.Identity.Client;
 using System.Security.Claims;
+using BudgetOrganizer.Models.AccountModel;
+using Microsoft.Data.SqlClient;
 
 namespace BudgetOrganizer.Controllers
 {
@@ -50,11 +52,16 @@ namespace BudgetOrganizer.Controllers
                 return NotFound("That account doesn't exist");
             }
 
-            var operations = _reportService.GetOpertaionsReport(accountId, sortOrder, filterParam);
-            if (operations == null)
-                return NotFound("No operations were found");
-
-            return Ok(_mapper.Map<List<Operation>, List<GetOperationDTO>>(operations.ToList()));
+            
+            try
+            {
+                var operations = _reportService.GetOpertaionsReport(accountId, sortOrder, filterParam);
+                return Ok(_mapper.Map<List<Operation>, List<GetOperationDTO>>(operations.ToList()));
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
         }
         #endregion
 
@@ -67,7 +74,7 @@ namespace BudgetOrganizer.Controllers
         {
             if (_context.Operations == null)
             {
-                return NotFound();
+                return NotFound("Database error");
             }
 
             //Server Error token doesn't have account id
@@ -82,12 +89,45 @@ namespace BudgetOrganizer.Controllers
             {
                 return NotFound("That account doesn't exist");
             }
+            try
+            {
+                var operations = _reportService.GetOpertaionsReport(accountId, sortOrder, filterParam);
+                if (operations == null)
+                    return Problem("Server error");
+                return Ok(_mapper.Map<List<Operation>, List<GetOperationDTO>>(operations.ToList()));
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+        }
 
-            var operations = _reportService.GetOpertaionsReport(accountId, sortOrder, filterParam);
-            if (operations == null)
-                return NotFound("No operations were found");
+        [Authorize]
+        [HttpGet]
+        [Route("me/category-report")]
+        public async Task<ActionResult<IEnumerable<OperationByCategoryReportDTO>>> GetOperationByCategoryReport()
+        {
+            if (_context.Operations == null)
+                return Problem("Database Error");
 
-            return Ok(_mapper.Map<List<Operation>, List<GetOperationDTO>>(operations.ToList()));
+            //Server Error token doesn't have account id
+            var claim = HttpContext.User.FindFirst("id");
+            if (claim == null)
+                return Problem("Server error token doesn't have account id");
+
+            var accountId = new Guid(claim.Value);
+
+            try
+            {
+                var operations = _reportService.GetOpertaionsCategoryReport(accountId);
+                if (operations == null)
+                    return Problem("Server error");
+                return Ok(operations);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
         }
 
         // POST: api/Operations
@@ -127,6 +167,9 @@ namespace BudgetOrganizer.Controllers
                 return NotFound("Incorrect category id");
             }
 
+
+            account.Budget += operation.Amount;
+
             operation.Category = category;
             operation.AccountId = accountId;
             operation.Account = account;
@@ -134,7 +177,10 @@ namespace BudgetOrganizer.Controllers
             _context.Operations.Add(operation);
             await _context.SaveChangesAsync();
 
-            return Ok(_mapper.Map<GetOperationDTO>(operation));
+            var result = _mapper.Map<GetOperationDTO>(operation);
+            result.CurrentBudget = account.Budget;
+
+            return Ok();
         }
 
         // DELETE: api/Operations/5
@@ -143,14 +189,14 @@ namespace BudgetOrganizer.Controllers
         {
             if (_context.Operations == null)
             {
-                return NotFound();
+                return NotFound("Database error");
             }
 
             var operation = await _context.Operations.FindAsync(id);
 
             if (operation == null)
             {
-                return NotFound();
+                return NotFound("Operation not found");
             }
 
             var claim = HttpContext.User.FindFirst("id");
