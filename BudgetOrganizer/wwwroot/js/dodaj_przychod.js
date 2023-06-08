@@ -1,10 +1,10 @@
 ﻿// Add 'load' event handler
 window.addEventListener("load", () => {
 
-        function getMyData() {
+    function getMyData() {
         // Preparing request to get my data
         const auth = "Bearer " + localStorage.getItem("token");
-        const request = new Request("https://localhost:7057/api/Accounts/me", {
+        const request = new Request("https://localhost:7057/api/Categories/me", {
             method: "GET",
             headers: {
                 'Accept': 'application/json',
@@ -13,7 +13,7 @@ window.addEventListener("load", () => {
             }
         });
 
-        
+        let out;
         // Send request to get my data and asign my group id
         try {
             fetch(request)
@@ -28,39 +28,57 @@ window.addEventListener("load", () => {
                 })
                 .then((json) => {
                     console.log(json);
-                    myGroupID = json["groupId"];
-                    console.log(myGroupID);
+                    out = json;
+
+                    for (let i = 0; i < out.length; i++) {
+                        let obj = out[i];
+
+                        console.log(obj.id);
+                        console.log(obj.name);
+                        console.log(obj.color);
+
+                        var newElement = document.createElement("option");
+                        newElement.setAttribute("value",obj.id);
+                        newElement.setAttribute("style", "background-color:#" + obj.color + ';');
+                        newElement.innerHTML = obj.name;
+                        document.getElementById("category").appendChild(newElement); 
+
+              
+                    }
+
                 });
         }
-            catch (error) {
-        console.error(error);
+        catch (error) {
+            console.error(error);
         }
+        
+ 
 
 
 
 
     }
+
+
     async function sendData() {
 
-
-        //TODO USTAWIENIE ROLI DZIECKA
         const FD = new FormData(form);
-        var bodyPost = '{"userName": "' + FD.get("username")
-            + '","password": "' + FD.get("password")
-            + '","email": "' + FD.get("email")
-            + '","budget": "' + FD.get("quantity")
-            + '","spendingLimit": "' + FD.get("limit")
-            + '","groupId": "' + myGroupID
+        var bodyPost = '{"categoryId": "' + FD.get("category")
+            + '","amount": "' + FD.get("value")
+            //+ '","dateTime": "' + FD.get("start-date")
             + '"}';
 
-        //console.log(bodyPost);
-        
+        console.log(bodyPost);
+
+        const auth = "Bearer " + localStorage.getItem("token");
         // Prepare request
-        const request = new Request("https://localhost:7057/api/Accounts/Register", {
+
+        const request = new Request("https://localhost:7057/api/Operations/me", {
             method: "POST",
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': auth
             },
             body: bodyPost
         });
@@ -80,11 +98,11 @@ window.addEventListener("load", () => {
         } catch (error) {
             console.error(error);
         }
-        
+       
     }
+    
 
     const form = document.getElementById("login-form");
-    var myGroupID = null;
     getMyData();
 
     // Add 'submit' event handler
