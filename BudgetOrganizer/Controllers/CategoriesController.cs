@@ -89,7 +89,7 @@ namespace BudgetOrganizer.Controllers
             _context.Categories.Add(category);
             await _context.SaveChangesAsync();
 
-            return Ok();
+            return Ok("Successfuly done");
         }
 
         [Authorize]
