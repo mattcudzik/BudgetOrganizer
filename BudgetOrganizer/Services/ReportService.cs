@@ -23,7 +23,7 @@ namespace BudgetOrganizer.Services
             if (_context.Operations == null)
                 throw new Exception("Database error");
 
-            var operations = _context.Operations.Where(operation => operation.AccountId == accountId);
+            var operations = _context.Operations.Where(operation => operation.AccountId == accountId).Include(o=>o.Category).AsQueryable();
 
             //filtering retrived data
             if (filterParam != null)

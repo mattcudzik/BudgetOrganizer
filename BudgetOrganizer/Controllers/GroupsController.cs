@@ -69,7 +69,7 @@ namespace BudgetOrganizer.Controllers
                 return StatusCode(500);
 
             var accountId = new Guid(claim.Value);
-            var account = await _context.Accounts.Where(e => e.Id == accountId).Include(c => c.Group).ThenInclude(o => o.Accounts).FirstOrDefaultAsync();
+            var account = await _context.Accounts.Where(e => e.Id == accountId).Include(c => c.Group).ThenInclude(o => o.Accounts).Include(o=>o.Role).FirstOrDefaultAsync();
 
             if (account == null)
                 return StatusCode(500);

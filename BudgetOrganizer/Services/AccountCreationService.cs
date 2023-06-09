@@ -13,7 +13,7 @@ namespace BudgetOrganizer.Services
 	{
 		private readonly BudgetOrganizerDbContext _context;
 		private readonly IMapper _mapper;
-		private readonly String[] defaultCategories = { "Zakupy", "Rachunki", "Transport", "Rozrywka i wypoczynek", "Zdrowie", "Edukacja", "Dzieci", "Inne", "Kieszonkowe", "Emerytura", "Sprzedaż", "Wynagrodzenie" };
+		
 
 		public AccountCreationService(BudgetOrganizerDbContext context, IMapper mapper)
 		{
@@ -82,56 +82,70 @@ namespace BudgetOrganizer.Services
             return account;
 		}
 
-		private async Task AddDefultCategories(Account account)
-		{
-			int i = 0;
-			foreach(var categoryName in defaultCategories)
-			{
-				var category = await _context.Categories.SingleOrDefaultAsync(o=>o.Name==categoryName);
-				if(category == null)
-				{
-					var color = ColorFromHSV(i * (double)360 / defaultCategories.Length, 0.9, 0.9);
-					category = new Category()
-					{
-						Name = categoryName,
-						Id = new Guid(),
-						Color = color
-					};
+        private async Task AddDefultCategories(Account account)
+        {
+            var defaultCategories = _context.defaultCategories;
 
-					await _context.Categories.AddAsync(category);
-					await _context.SaveChangesAsync();
-				}
+            foreach(var categoryName in defaultCategories)
+            {
+                var category = await _context.Categories.SingleOrDefaultAsync(o => o.Name == categoryName);
+                if(category != null)
+                {
+                    account.Categories.Add(category);
+                }
+            }
+        }
 
-				account.Categories.Add(category);
-				i++;
-			}
-		}
+        //private async Task AddDefultCategories(Account account)
+        //{
+        //	int i = 0;
+        //	foreach(var categoryName in defaultCategories)
+        //	{
+        //		var category = await _context.Categories.SingleOrDefaultAsync(o=>o.Name==categoryName);
+        //		if(category == null)
+        //		{
+        //			var color = ColorFromHSV(i * (double)360 / defaultCategories.Length, 0.9, 0.9);
+        //			category = new Category()
+        //			{
+        //				Name = categoryName,
+        //				Id = new Guid(),
+        //				Color = color
+        //			};
 
-		//hue 0-360 
-		private string ColorFromHSV(double hue, double saturation, double value)
-		{
-			int hi = Convert.ToInt32(Math.Floor(hue / 60)) % 6;
-			double f = hue / 60 - Math.Floor(hue / 60);
+        //			await _context.Categories.AddAsync(category);
+        //			await _context.SaveChangesAsync();
+        //		}
 
-			value = value * 255;
-			int v = Convert.ToInt32(value);
-			int p = Convert.ToInt32(value * (1 - saturation));
-			int q = Convert.ToInt32(value * (1 - f * saturation));
-			int t = Convert.ToInt32(value * (1 - (1 - f) * saturation));
+        //		account.Categories.Add(category);
+        //		i++;
+        //	}
+        //}
 
-			if (hi == 0)
-				return v.ToString("X2") + t.ToString("X2") + p.ToString("X2");
-			else if (hi == 1)
-				return q.ToString("X2") + v.ToString("X2") + p.ToString("X2");
-			else if (hi == 2)	  
-				return p.ToString("X2") + v.ToString("X2") + t.ToString("X2");
-			else if (hi == 3)	  
-				return p.ToString("X2") + q.ToString("X2") + v.ToString("X2");
-			else if (hi == 4)	  
-				return t.ToString("X2") + p.ToString("X2") + v.ToString("X2");
-			else				  
-				return v.ToString("X2") + p.ToString("X2") + q.ToString("X2");
-		}
+        ////hue 0-360 
+        //private string ColorFromHSV(double hue, double saturation, double value)
+        //{
+        //	int hi = Convert.ToInt32(Math.Floor(hue / 60)) % 6;
+        //	double f = hue / 60 - Math.Floor(hue / 60);
 
-	}
+        //	value = value * 255;
+        //	int v = Convert.ToInt32(value);
+        //	int p = Convert.ToInt32(value * (1 - saturation));
+        //	int q = Convert.ToInt32(value * (1 - f * saturation));
+        //	int t = Convert.ToInt32(value * (1 - (1 - f) * saturation));
+
+        //	if (hi == 0)
+        //		return "#"+v.ToString("X2") + t.ToString("X2") + p.ToString("X2");
+        //	else if (hi == 1)
+        //		return "#" + q.ToString("X2") + v.ToString("X2") + p.ToString("X2");
+        //	else if (hi == 2)	  
+        //		return "#" + p.ToString("X2") + v.ToString("X2") + t.ToString("X2");
+        //	else if (hi == 3)	  
+        //		return "#" + p.ToString("X2") + q.ToString("X2") + v.ToString("X2");
+        //	else if (hi == 4)	  
+        //		return "#" + t.ToString("X2") + p.ToString("X2") + v.ToString("X2");
+        //	else				  
+        //		return "#" + v.ToString("X2") + p.ToString("X2") + q.ToString("X2");
+        //}
+
+    }
 }
