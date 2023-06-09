@@ -21,7 +21,7 @@ window.addEventListener("load", () => {
                     if (!response.ok) {
                         // get error message from body and default to response status
 
-                        const error = JSON.stringify(response.json());
+                        const error = response.status;//JSON.stringify(response.json());
                         throw new Error(error);
                     }
                     return response.json()
@@ -39,7 +39,7 @@ window.addEventListener("load", () => {
 
                         var newElement = document.createElement("option");
                         newElement.setAttribute("value",obj.id);
-                        newElement.setAttribute("style", "background-color:#" + obj.color + ';');
+                        newElement.setAttribute("style", "background-color:" + obj.color + ';');
                         newElement.innerHTML = obj.name;
                         document.getElementById("category").appendChild(newElement); 
 

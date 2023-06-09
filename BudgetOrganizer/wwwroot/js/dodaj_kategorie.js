@@ -6,7 +6,7 @@ window.addEventListener("load", () => {
 
         const FD = new FormData(form);
         var bodyPost = '{"name": "' + FD.get("name")
-            + '","color": "' + FD.get("color").substring(1,7)
+            + '","color": "' + FD.get("color")
             + '"}';
 
         console.log(bodyPost);
