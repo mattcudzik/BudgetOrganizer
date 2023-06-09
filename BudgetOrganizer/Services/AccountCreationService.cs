@@ -28,7 +28,7 @@ namespace BudgetOrganizer.Services
 			Account account = _mapper.Map<Account>(addAccountDTO);
 
 			
-			if (addAccountDTO.RoleId == null)
+			if (addAccountDTO.RoleName == null)
 			{
 
 
@@ -48,7 +48,7 @@ namespace BudgetOrganizer.Services
 			}
 			else
 			{
-				var role = await _context.Roles.FindAsync(addAccountDTO.RoleId);
+				var role = await _context.Roles.Where(o=>o.Name == addAccountDTO.RoleName).FirstOrDefaultAsync();
 
 				if (role == null)
 				{
