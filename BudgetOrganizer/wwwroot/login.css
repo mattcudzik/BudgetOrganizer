@@ -5,6 +5,27 @@ body {
   color: #2b3e51;
 
 }
+header{
+  display: grid;
+  grid-template-columns: 40fr 40fr;
+}
+.log{
+  text-align: right;
+}
+.pow{
+  text-align: left;
+}
+
+#logowanie
+{
+    display: inline-block;
+    padding: 0;
+    border: none;
+    background: none;
+    margin-right: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
 
 h2 {
   font-weight: 300;
@@ -19,7 +40,7 @@ p {
   background-color: #d6d0b0;
   width: 35%;
 
-  margin: 250px auto;
+  margin: 150px auto;
   text-align: center;
   padding: 20px 0 0 0;
   border-radius: 4px;

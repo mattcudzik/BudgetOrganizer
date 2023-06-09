@@ -13,9 +13,16 @@
     font-size:20px;
     
 }
+p{
+    margin-top: 30px;
+    font-size: 20px;
+}
 header{
     display: grid;
     grid-template-columns: 40fr 40fr;
+}
+#scroll{
+    width: 400px;
 }
 #dodaj:hover{
     display: inline-block;
@@ -68,8 +75,7 @@ margin: 5px;
     flex: 1;
     margin-bottom: 10px;
 }
-#right
-{
-    margin-top: 70px;
-    margin-right: 20px;
+
+.sortowanie{
+    margin-top: 60px;
 }

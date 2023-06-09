@@ -5,8 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dodaj wydatek</title>
-    <link rel="stylesheet" href="dodaj_wydatek.css">
-    <link rel="stylesheet" href="profil.css">
+    <link rel="stylesheet" href="dodaj_przychod.css">
     <link rel="shortcut icon" href="./Pic/budget-management-svgrepo-com.svg">
     <link href="https://fonts.googleapis.com/css?family=Inter" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;400&display=swap" rel="stylesheet">
@@ -18,17 +17,15 @@
         
         <div class="log"><button class="logowanie1"><img src="./Pic/person-svgrepo-com.svg" alt="log" width="40px" height="40px"></button></div>
     </header>
+
     <main id="container">
+        <div id="login-form-wrap">
         <h2>Dodaj wydatek</h2>
-        <form>
+        <form id="login-form">
             <div class="form">
                 <div class="margin">
                     <label for="value">Kwota</label><br>
                     <input type="text" id="value" name="value" placeholder="Kwota">
-                </div>
-                <div class="margin">
-                    <label for="name">Nazwa</label><br>
-                    <input type="text" id="name" name="name" placeholder="Nazwa">
                 </div>
                 <div class="margin">
                     <label for="start-date">Data</label><br>
@@ -36,15 +33,14 @@
                 </div>
                <div class="categories">
                     <p>Kategoria</p>
-                    <select>
-                        <option>Opcja 1</option>
-                        <option>Opcja 2</option>
-                        <option>Opcja 3</option>
-                      </select>
+                    <select id="category" name="category">
+                    </select>
             </div>
         </form>
         <div id="creatb"><input class="create-button" type="submit" value="Dodaj wydatek"></div>
+    </div>
     </main>
 </body>
+
 
 </html>
