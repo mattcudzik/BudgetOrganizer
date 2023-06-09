@@ -12,6 +12,6 @@ namespace BudgetOrganizer.Models.AccountModel
         public decimal Budget { get; set; }
         public decimal? SpendingLimit { get; set; }
         public Guid? GroupId { get; set; }
-        public Guid? RoleId { get; set; }
+        public string? RoleName { get; set; }
     }
 }
