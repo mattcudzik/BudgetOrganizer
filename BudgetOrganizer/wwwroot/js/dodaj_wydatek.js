@@ -1,0 +1,85 @@
+﻿window.addEventListener("load", ()=>{
+    
+    function getMyData(){
+        const auth = 'Bearer ' + localStorage.getItem('token');
+        const request = new Request("https://localhost:7057/api/Categories/me",{
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': auth
+            }
+        });
+        
+        try{
+            fetch(request)
+                .then((response)=>{
+                    if(!response.ok){
+                    //     TODO obsługa komunikatu niepoprawnego response
+                        const error = response.status;
+                        throw new Error(error)
+                    }
+                    return response.json()
+                })
+                .then((json) => {
+                    const categoryBody = document.getElementById("category")
+                    for (let i = 0; i<json.length;i++){
+                        let obj = json[i];
+                        
+                        var newElement = document.createElement("option");
+                        newElement.setAttribute("value", obj.id)
+                        newElement.innerHTML = obj.name;
+                        categoryBody.appendChild(newElement);
+                    }
+                });
+        }
+        catch (error){
+            console.error(error);
+        }
+    }
+    
+    function sendData(){
+        const FD = new FormData(form)
+        var bodyPost = '{"categoryId": "' + FD.get("category")
+            + '","amount": "-' + FD.get("value")
+            + '","dateTime": "' + FD.get("start-date")
+            + '"}';
+
+        const auth = "Bearer " + localStorage.getItem("token");
+        
+        const request = new Request("https://localhost:7057/api/Operations/me", {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': auth
+            },
+            body: bodyPost
+            });
+        
+        try {
+            fetch(request)
+                .then((response)=>{
+                    if(!response.ok){
+                        
+                        const error = response.status;
+                        throw new Error(error)
+                    }
+                    return response.json()
+                })
+                .then((json)=>{
+                    console.log(json);
+                })
+        }
+        catch (error){
+            console.error(error);
+        }
+    }
+    
+    const form = document.getElementById("login-form")
+    getMyData();
+    form.addEventListener("submit", (event)=>{
+        event.preventDefault();
+        sendData();
+    })
+})

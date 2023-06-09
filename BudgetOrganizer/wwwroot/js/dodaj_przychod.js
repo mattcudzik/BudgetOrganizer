@@ -13,13 +13,14 @@ window.addEventListener("load", () => {
             }
         });
 
-        let out;
+        // let out;
         // Send request to get my data and asign my group id
         try {
             fetch(request)
                 .then((response) => {
                     if (!response.ok) {
                         // get error message from body and default to response status
+                        //     TODO obsługa komunikatu niepoprawnego response
 
                         const error = response.status;//JSON.stringify(response.json());
                         throw new Error(error);
@@ -27,36 +28,25 @@ window.addEventListener("load", () => {
                     return response.json()
                 })
                 .then((json) => {
-                    console.log(json);
-                    out = json;
-
-                    for (let i = 0; i < out.length; i++) {
-                        let obj = out[i];
-
-                        console.log(obj.id);
-                        console.log(obj.name);
-                        console.log(obj.color);
-
+                    // console.log(json);
+                    // out = json;
+                    const categoryBody = document.getElementById("category")
+                    for (let i = 0; i < json.length; i++) {
+                        let obj = json[i];
+                        // console.log(obj.id);
+                        // console.log(obj.name);
+                        // console.log(obj.color);
                         var newElement = document.createElement("option");
                         newElement.setAttribute("value",obj.id);
-                        newElement.setAttribute("style", "background-color:" + obj.color + ';');
+                        // newElement.setAttribute("style", "background-color:" + obj.color + ';');
                         newElement.innerHTML = obj.name;
-                        document.getElementById("category").appendChild(newElement); 
-
-              
+                        categoryBody.appendChild(newElement); 
                     }
-
                 });
         }
         catch (error) {
             console.error(error);
         }
-        
- 
-
-
-
-
     }
 
 
@@ -65,10 +55,10 @@ window.addEventListener("load", () => {
         const FD = new FormData(form);
         var bodyPost = '{"categoryId": "' + FD.get("category")
             + '","amount": "' + FD.get("value")
-            //+ '","dateTime": "' + FD.get("start-date")
+            + '","dateTime": "' + FD.get("start-date")
             + '"}';
 
-        console.log(bodyPost);
+        // console.log(bodyPost);
 
         const auth = "Bearer " + localStorage.getItem("token");
         // Prepare request
@@ -85,16 +75,18 @@ window.addEventListener("load", () => {
 
         // Send request
         try {
+            fetch(request)
+                .then((response)=>{
+                    if(!response.ok){
 
-            const response = await fetch(request);
-            const json = await response.json();
-            if (!response.ok) {
-                // get error message from body and default to response status
-
-                const error = JSON.stringify(json);
-                throw new Error(error);
-            }
-            console.log(json);
+                        const error = response.status;
+                        throw new Error(error)
+                    }
+                    return response.json()
+                })
+                .then((json)=>{
+                    console.log(json);
+                })
         } catch (error) {
             console.error(error);
         }
