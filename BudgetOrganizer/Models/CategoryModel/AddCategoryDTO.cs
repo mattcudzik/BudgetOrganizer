@@ -6,7 +6,7 @@ namespace BudgetOrganizer.Models.CategoryModel
     public class AddCategoryDTO
     {
         public string Name { get; set; }
-        [StringLength(6,MinimumLength = 6)]
+        [StringLength(7,MinimumLength = 7)]
         public string Color { get; set; }
     }
 }

@@ -38,7 +38,7 @@ namespace BudgetOrganizer.Controllers
            return Ok(_mapper.Map< List < Category > ,List <GetCategoryDTO>>(categories));
         }
 
-        
+        [Authorize]
         [HttpGet]
         [Route("me")]
         public async Task<ActionResult<IEnumerable<GetCategoryDTO>>> GetCurrentAccountCategories()
@@ -77,6 +77,7 @@ namespace BudgetOrganizer.Controllers
 
             return _mapper.Map<GetCategoryDTO>(category);
         }
+
         // POST: api/Categories
         [HttpPost]
         public async Task<ActionResult<Category>> PostCategory(AddCategoryDTO categoryToAdd)
