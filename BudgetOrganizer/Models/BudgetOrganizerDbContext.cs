@@ -22,12 +22,12 @@ namespace BudgetOrganizer.Models
             builder.Entity<Role>().HasData(
                 new Role 
                 { 
-                    Id = new Guid("key for generating child role guid "),
+                    Id = Guid.NewGuid(),
                     Name = "child"
                 }, 
                 new Role
                 {
-                    Id = new Guid("key for generating adult role guid "),
+                    Id = Guid.NewGuid(),
                     Name = "adult"
                 });
 
@@ -52,7 +52,7 @@ namespace BudgetOrganizer.Models
                 var category = new Category()
                 {
                     Name = categoryName,
-                    Id = new Guid("key for generating category guid " + i.ToString()),
+                    Id = Guid.NewGuid(),
                     Color = color
                 };
 
