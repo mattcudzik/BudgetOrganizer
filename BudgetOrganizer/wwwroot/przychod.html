@@ -29,34 +29,59 @@
                         <h2>Przychody</h2>
                     <div id ="scroll" style="overflow-y: scroll;">
                         <div class="przychod1">
-                            <h3>Przychod 1</h3>
+                            <div class="color">w</div>
+                            <div class="all">     
+                             <h3>Przychod 2</h3>
+                             <p>100,00PLN</p></div>
                         </div>
                         <div class="przychod1">
+                           <div class="color">w</div>
+                           <div class="all">     
                             <h3>Przychod 2</h3>
-                            <p>100,00PLN</p>
+                            <p>100,00PLN</p></div>
                         </div>
                     </div>
                     </div>
                 </div>
             </div>
             <div id="right">
-                <h2>Sortowanie</h2>
+                <div class="up">
                 <div class="sortowanie">
-                    <p>Data:</p>
+                    <h2>Sortowanie</h2>
                     <div class="sort">
+                        <p>Data:</p>
                         <input type="radio" id="data" name="data" value="Malejąco">
                         <label for="data">Malejąco</label>
                         <input type="radio" id="data" name="data" value="Rosnąco">
                         <label for="data">Rosnąco</label>
                     </div>
-                    <p>Kwota:</p>
                     <div class="sort">
+                        <p>Kwota:</p>
                         <input type="radio" id="kwota" name="kwota" value="Malejąco">
                         <label for="kwota">Malejąco</label>
                         <input type="radio" id="kwota" name="kwota" value="Rosnąco">
                         <label for="kwota">Rosnąco</label>
+                    </div>
+                </div>               
                 </div>
-                </div>
+                <div class="down">
+                    <h2>Filtrowanie:</h2>
+                    <div class="filtr_data">
+                        <p>Data:</p>
+                        <div class="filtr">
+                        <p><input type="text" id="data_od" name="data_od" placeholder="Data od"></p>
+                        <p><input type="text" id="data_do" name="data_do" placeholder="Data do"></p>
+                    </div>
+                    </div>
+                    <div class="filtr_kwota">
+                        <p>Kwota:</p>
+                        <div class="filtr">
+                            <p><input type="text" id="kwota_od" name="kwota_od" placeholder="Kwota od"></p>
+                            <p><input type="text" id="kwota_do" name="kwota_do" placeholder="Kwota do"></p>
+                        </div>
+                        <button>Zrobię</button>  
+                    </div>
+                </div>             
             </div>
         </div>
     </main>

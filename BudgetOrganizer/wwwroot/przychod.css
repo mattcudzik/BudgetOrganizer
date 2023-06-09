@@ -70,6 +70,9 @@ margin: 5px;
     width: 350px;
     border-radius: 15px;
     margin-right: 10px;
+    margin-bottom: 5px;
+    display:grid;
+    grid-template-columns: 1fr 15fr;
 }
 .row{
     flex: 1;
@@ -77,5 +80,45 @@ margin: 5px;
 }
 
 .sortowanie{
-    margin-top: 60px;
+    margin-top: 30px;
 }
+.filtr_data{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
+
+.filtr_kwota{
+    display: grid;
+    grid-template-rows: 1fr 5fr;
+}
+.filtr{
+    display: grid;
+    grid-template-columns: 5fr 5fr;
+}
+  
+  input[type="text"] {
+    width: 150px;
+    color: #8a8b8e;
+    border: 1px solid #c2c0ca;
+    font-style: normal;
+    font-size: 16px;
+    position: relative;
+    display: inline-block;
+    background: #fff;
+    display: block;
+    box-sizing: border-box;
+    outline: none;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 30px;
+  }
+  
+  .color{
+    background:black;
+    width:30px;
+    height:30px;
+    margin-top:45px;
+    margin-left:15px;
+  }
+
+  
