@@ -29,28 +29,28 @@ body {
     #transfer-form {
       padding: 0 60px;
     }
-    
-    input {
-      display: block;
-      box-sizing: border-box;
-      width: 100%;
-      outline: none;
-      height: 60px;
-      line-height: 60px;
-      border-radius: 30px;
-    }
-  
-    input[type="text"] {
+
+input, select {
+    display: block;
+    box-sizing: border-box;
     width: 100%;
-    padding: 0 0 0 10px;
-    color: #8a8b8e;
-    border: 1px solid #c2c0ca;
-    font-style: normal;
-    font-size: 16px;
-    position: relative;
-    display: inline-block;
-    background: #fff;
-  }
+    outline: none;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 30px;
+}
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 0 0 0 10px;
+            color: #8a8b8e;
+            border: 1px solid #c2c0ca;
+            font-style: normal;
+            font-size: 16px;
+            position: relative;
+            display: inline-block;
+            background: #fff;
+        }
   
   input[type="text"]:focus {
     border-color: #8fb6d9;
