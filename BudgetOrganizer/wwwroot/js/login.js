@@ -34,7 +34,7 @@ window.addEventListener("load", () => {
                 // Store JWT in localStorage
                 localStorage.setItem("token", json.replace(/["]/g, ''));
                 console.log(json);
-                location.href = 'profil.html'
+                location.href = 'profil.html';
             }).catch((error) => {
                 console.error(error);
             }
