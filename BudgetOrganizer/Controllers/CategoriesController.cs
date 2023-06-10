@@ -123,32 +123,5 @@ namespace BudgetOrganizer.Controllers
 
             return Ok();
         }
-
-        [Authorize]
-        [HttpPost]
-        [Route("me")]
-        public async Task<ActionResult> AddNewCategoryToCurrentUser(AddCategoryDTO categoryToAdd)
-        {
-            if (_context.Users == null || _context.Categories == null)
-                return Problem("Database error");
-
-            var claim = HttpContext.User.FindFirst("id");
-            if (claim == null)
-                return StatusCode(500);
-
-            var accountId = new Guid(claim.Value);
-            var account = await _context.Accounts.FindAsync(accountId);
-            if (account == null)
-                return Problem("Account doesn't exsist");
-
-            var category = _mapper.Map<Category>(categoryToAdd);
-
-            await _context.Categories.AddAsync(category);
-            account.Categories.Add(category);
-
-            await _context.SaveChangesAsync();
-
-            return Ok();
-        }
     }
 }
