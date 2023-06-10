@@ -7,7 +7,7 @@
         const auth = "Bearer " + localStorage.getItem("token");
 
         const getUrl = new URL("https://localhost:7057/api/Operations/me");
-        getUrl.searchParams.set('OnlyPositive', 'true');
+        getUrl.searchParams.set('OnlyPositive', 'false');
         getUrl.searchParams.set('sortOrder', FD.get("sort"));
 
 
@@ -51,7 +51,7 @@
                     let obj = json[i];
                     console.log(obj);
                     var newElement = document.createElement("div");
-                    newElement.setAttribute("class", "przychod1");
+                    newElement.setAttribute("class", "wydatek1");
                     newElement.setAttribute("style", "border-style:dashed; border-width: 4px;border-color:" + obj.category.color + ';');
 
                     var colorDiv = document.createElement("div");
