@@ -43,7 +43,7 @@
         var startDate = (FD.get("start-date") != '') ? '","dateTime": "' + FD.get("start-date") : '';
 
         var bodyPost = '{"categoryId": "' + FD.get("category")
-            + '","amount": "' + FD.get("value")
+            + '","amount": "-' + FD.get("value")
             + startDate
             + '"}';
 
