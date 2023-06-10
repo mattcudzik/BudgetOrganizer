@@ -10,7 +10,7 @@ namespace BudgetOrganizer.Models
 {
     public class BudgetOrganizerDbContext : IdentityDbContext<Account, BudgetOrganizerRole, Guid>
     {
-        public readonly String[] defaultCategories = { "Zakupy", "Rachunki", "Transport", "Rozrywka i wypoczynek", "Zdrowie", "Edukacja", "Dzieci", "Inne", "Kieszonkowe", "Emerytura", "Sprzedaż", "Wynagrodzenie" };
+        public readonly String[] defaultCategories = { "Zakupy", "Rachunki", "Transport", "Rozrywka i wypoczynek", "Zdrowie", "Edukacja", "Dzieci", "Inne", "Kieszonkowe", "Emerytura", "Sprzedaż", "Wynagrodzenie", "Przelew" };
         public BudgetOrganizerDbContext(DbContextOptions options) : base(options)
         {
             
@@ -47,7 +47,7 @@ namespace BudgetOrganizer.Models
             int i = 0;
             foreach (var categoryName in defaultCategories)
             {
-                var color = ColorFromHSV(i * (double)360 / defaultCategories.Length, 0.9, 0.9);
+                var color = ColorFromHSV(i * (double)360 / defaultCategories.Length, 0.7, 0.7);
 
                 var category = new Category()
                 {
