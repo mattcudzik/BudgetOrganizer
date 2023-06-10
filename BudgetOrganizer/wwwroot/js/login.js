@@ -1,7 +1,7 @@
 ﻿// Add 'load' event handler
 window.addEventListener("load", () => {
 
-    async function sendData() {
+    function sendData() {
 
     const FD = new FormData(form);
     var bodyPost = '{"userName": "' + FD.get("username") + '","password": "' + FD.get("password") + '"}';
@@ -16,25 +16,29 @@ window.addEventListener("load", () => {
     body: bodyPost
     });
 
+
     // Send request
     try {
+        fetch(request)
+            .then((response) => {
+                if (!response.ok) {
 
-        const response = await fetch(request);
-        const json = await response.json();
-        if (!response.ok) {
-            // get error message from body and default to response status
-            const error = response.status+': '+ json;
-            throw new Error(error);
-        }
-
-
-        //console.log(json.replace(/["]/g, ''));
-        // Store JWT in localStorage
-        localStorage.setItem("token", json.replace(/["]/g, ''));
-
+                    const error = response.status + ': ' + json;
+                    throw new Error(error)
+                }
+                return response.json()
+            })
+            .then((json) => {
+                // Store JWT in localStorage
+                localStorage.setItem("token", json.replace(/["]/g, ''));
+                //console.log(json);
+            })
     } catch (error) {
         console.error(error);
     }
+
+
+
 
 }
 
