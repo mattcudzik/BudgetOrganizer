@@ -186,6 +186,69 @@ namespace BudgetOrganizer.Controllers
             return Ok(result);
         }
 
+        [Authorize]
+        [HttpPost]
+        [Route("me/transfer")]
+        public async Task<IActionResult> MakeTransfer(TransferOperationDTO transferOperationDTO)
+        {
+            if (_context.Operations == null)
+            {
+                return Problem("Entity set 'BudgetOrganizerDbContext.Operations'  is null.");
+            }
+
+            var claim = HttpContext.User.FindFirst("id");
+            if (claim == null)
+                return StatusCode(500);
+
+            var accountId = new Guid(claim.Value);
+
+            var account = await _context.Accounts.FindAsync(accountId);
+            if (account == null)
+            {
+                return NotFound("That account doesn't exist");
+            }
+
+            var destinationAccount =  await _context.Accounts.FindAsync(transferOperationDTO.DestinationAccount);
+            if(destinationAccount == null)
+            {
+                return NotFound("Destination account doesn't exsits");
+            }
+
+            
+            //create operation for both accounts
+            var category = await _context.Categories.Where(o => o.Name == "Przelew").FirstOrDefaultAsync();
+            if (category == null)
+            {
+                category = new Models.CategoryModel.Category()
+                {
+                    Color = "#ffffff",
+                    Name = "Przelew",
+                    Id = Guid.NewGuid()
+                };
+                _context.Categories.Add(category);
+            }
+                
+
+            //deduct from one account
+            account.Budget -= transferOperationDTO.Amount;
+            var operation = new Operation()
+            {
+                Account = account,
+                Category = category,
+                Amount = -transferOperationDTO.Amount,
+                DateTime = DateTime.UtcNow
+            };
+            account.Operations.Add(operation);
+
+            //add to another account
+            destinationAccount.Budget += transferOperationDTO.Amount;
+            operation.Amount = transferOperationDTO.Amount;
+            destinationAccount.Operations.Add(operation);
+
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+
         // DELETE: api/Operations/5
         [HttpDelete("me/{id}")]
         public async Task<IActionResult> DeleteOperation(Guid id)

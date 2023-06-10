@@ -16,7 +16,7 @@
 <body>
     <header>
         <div class="pow"><a href="./profil.html"><button id="powrot"><img src="./Pic/arrow-left-svgrepo-com.svg" alt="back" width="40px" height="40px"></button></a></div>
-        
+
         <div class="log"><button id="logowanie"><img src="./Pic/person-svgrepo-com.svg" alt="log" width="40px" height="40px"></button></div>
     </header>
     <main>
@@ -28,20 +28,9 @@
                 <div id="przychody">
                     <div id="przychody_center">
                         <h2>Przychody</h2>
-                    <div id ="scroll" style="overflow-y: scroll;">
-                        <div class="przychod1">
-                            <div class="color">w</div>
-                            <div class="all">     
-                             <h3>Przychod 2</h3>
-                             <p>100,00PLN</p></div>
+                        <div id="scroll" style="overflow-y: scroll;">
+
                         </div>
-                        <div class="przychod1">
-                           <div class="color">w</div>
-                           <div class="all">     
-                            <h3>Przychod 2</h3>
-                            <p>100,00PLN</p></div>
-                        </div>
-                    </div>
                     </div>
                 </div>
             </div>
@@ -50,16 +39,16 @@
                     <h2>Sortowanie</h2>
                     <div class="sort">
                         <p>Data:</p>
-                        <input type="radio" id="data" name="data" value="Malejąco">
+                        <input type="radio" id="sort" name="sort" value="date_desc">
                         <label for="data">Malejąco</label>
-                        <input type="radio" id="data" name="data" value="Rosnąco">
+                        <input type="radio" id="sort" name="sort" value="date_asc">
                         <label for="data">Rosnąco</label>
                     </div>
                     <div class="sort">
                         <p>Kwota:</p>
-                        <input type="radio" id="kwota" name="kwota" value="Malejąco">
+                        <input type="radio" id="sort" name="sort" value="amount_desc">
                         <label for="kwota">Malejąco</label>
-                        <input type="radio" id="kwota" name="kwota" value="Rosnąco">
+                        <input type="radio" id="sort" name="sort" value="amount_asc">
                         <label for="kwota">Rosnąco</label>
                     </div>
                 </div>
@@ -67,8 +56,8 @@
                     <h2>Filtrowanie:</h2>
                     <p>Data:</p>
                     <div class="filtr">
-                        <p><input type="text" id="data_od" name="data_od" placeholder=" Data od"></p>
-                        <p><input type="text" id="data_do" name="data_do" placeholder=" Data do"></p>
+                        <p><input type="date" id="data_od" name="data_od" placeholder=" Data od"></p>
+                        <p><input type="date" id="data_do" name="data_do" placeholder=" Data do"></p>
                     </div>
                     <p>Kwota:</p>
                     <div class="filtr">
