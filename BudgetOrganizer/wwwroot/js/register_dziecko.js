@@ -15,26 +15,27 @@ window.addEventListener("load", () => {
 
         
         // Send request to get my data and asign my group id
-        try {
-            fetch(request)
-                .then((response) => {
-                    if (!response.ok) {
-                        // get error message from body and default to response status
+        
+        fetch(request)
+            .then((response) => {
+                if (!response.ok) {
+                    // get error message from body and default to response status
 
-                        const error = JSON.stringify(response.json());
-                        throw new Error(error);
-                    }
-                    return response.json()
-                })
-                .then((json) => {
-                    console.log(json);
-                    myGroupID = json["groupId"];
-                    console.log(myGroupID);
-                });
-        }
-            catch (error) {
-        console.error(error);
-        }
+                    return response.text().then((text) => {
+                        const error = response.status + ' ' + text;
+                        throw new Error(error)
+                    })
+                }
+                return response.json()
+            })
+            .then((json) => {
+                // console.log(json);
+                myGroupID = json["groupId"];
+                // console.log(myGroupID);
+            }).catch((error) => {
+            console.error(error);
+        });
+
 
 
 
@@ -51,7 +52,7 @@ window.addEventListener("load", () => {
             + '","budget": "' + FD.get("quantity")
             + '","spendingLimit": "' + FD.get("limit")
             + '","groupId": "' + myGroupID
-            + '"}';
+            + '","roleName": "child"}';
 
         //console.log(bodyPost);
         
