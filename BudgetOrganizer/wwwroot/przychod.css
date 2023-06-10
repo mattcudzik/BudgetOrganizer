@@ -13,8 +13,12 @@
     font-size:20px;
     
 }
+h2{
+    margin-top: 5px;
+    margin-bottom:25px;
+}
 p{
-    margin-top: 30px;
+    margin-top: 5px;
     font-size: 20px;
 }
 header{
@@ -78,23 +82,6 @@ margin: 5px;
     flex: 1;
     margin-bottom: 10px;
 }
-
-.sortowanie{
-    margin-top: 30px;
-}
-.filtr_data{
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-}
-
-.filtr_kwota{
-    display: grid;
-    grid-template-rows: 1fr 5fr;
-}
-.filtr{
-    display: grid;
-    grid-template-columns: 5fr 5fr;
-}
   
   input[type="text"] {
     width: 150px;
@@ -121,4 +108,39 @@ margin: 5px;
     margin-left:15px;
   }
 
+#right1{
+    display:grid;
+    grid-template-rows: 60fr 60fr 15fr;
+}
+
+.sort{
+    margin-bottom: 15px;
+    font-size: 19px;
+}
+
+.filtr{
+    display: grid;
+    grid-template-columns: 5fr 5fr;
+}
+
+.sortfiltr
+{
+    background-color: #8fb6d9;
+    width: 200px;
+    height: 50px;
+    font-size: 16px;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-weight: bold;
+    margin-top: 30px;
+    margin-left: 95px;
+}
+
+.sortfiltr:hover
+{
+  cursor: pointer;
+  background: #d6d0b0;
+  border: 1px solid #3c3a31;
+}
   

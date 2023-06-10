@@ -9,6 +9,7 @@ header{
   display: grid;
   grid-template-columns: 40fr 40fr;
 }
+
 .log{
   text-align: right;
 }
@@ -40,7 +41,7 @@ p {
   background-color: #d6d0b0;
   width: 35%;
   
-  margin: 250px auto;
+  margin: 100px auto;
   text-align: center;
   padding: 20px 0 0 0;
   border-radius: 4px;
