@@ -50,7 +50,7 @@ namespace BudgetOrganizer.Services
 
                 if (filterParam.CategoriesId != null)
                 {
-                    operations = operations.Where(operation => !filterParam.CategoriesId.Contains(operation.CategoryId));
+                    operations = operations.Where(operation => filterParam.CategoriesId.Contains(operation.CategoryId));
                 }
 
                 if (filterParam.OnlyPositive != null)
