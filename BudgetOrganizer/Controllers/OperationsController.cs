@@ -188,7 +188,7 @@ namespace BudgetOrganizer.Controllers
 
         [Authorize]
         [HttpPost]
-        [Route("me")]
+        [Route("me/transfer")]
         public async Task<IActionResult> MakeTransfer(TransferOperationDTO transferOperationDTO)
         {
             if (_context.Operations == null)

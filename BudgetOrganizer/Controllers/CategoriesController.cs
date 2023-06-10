@@ -93,36 +93,36 @@ namespace BudgetOrganizer.Controllers
             return Ok("Successfuly done");
         }
 
-        [Authorize]
-        [HttpPost]
-        [Route("me")]
-        public async Task<ActionResult> AddCategoryToCurrentUser(Guid categoryId)
-        {
-            if (_context.Users == null || _context.Categories == null)
-                return Problem("Database error");
+        //[Authorize]
+        //[HttpPost]
+        //[Route("me")]
+        //public async Task<ActionResult> AddCategoryToCurrentUser(Guid categoryId)
+        //{
+        //    if (_context.Users == null || _context.Categories == null)
+        //        return Problem("Database error");
 
-            var claim = HttpContext.User.FindFirst("id");
-            if (claim == null)
-                return StatusCode(500);
+        //    var claim = HttpContext.User.FindFirst("id");
+        //    if (claim == null)
+        //        return StatusCode(500);
 
-            var accountId = new Guid(claim.Value);
-            var account = await _context.Accounts.FindAsync(accountId);
-            if (account == null)
-                return Problem("Account doesn't exsist");
+        //    var accountId = new Guid(claim.Value);
+        //    var account = await _context.Accounts.FindAsync(accountId);
+        //    if (account == null)
+        //        return Problem("Account doesn't exsist");
 
-            var category = await _context.Categories.FindAsync(categoryId);
-            if (category == null)
-                return Problem("Category doesn't exist");
+        //    var category = await _context.Categories.FindAsync(categoryId);
+        //    if (category == null)
+        //        return Problem("Category doesn't exist");
 
-            category.Accounts.Add(account);
-            account.Categories.Add(category);
+        //    category.Accounts.Add(account);
+        //    account.Categories.Add(category);
 
-            _context.Accounts.Update(account);
-            _context.Categories.Update(category);
-            await _context.SaveChangesAsync();
+        //    _context.Accounts.Update(account);
+        //    _context.Categories.Update(category);
+        //    await _context.SaveChangesAsync();
 
-            return Ok();
-        }
+        //    return Ok();
+        //}
 
         [Authorize]
         [HttpPost]

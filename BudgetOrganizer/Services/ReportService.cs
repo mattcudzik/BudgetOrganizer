@@ -70,10 +70,10 @@ namespace BudgetOrganizer.Services
                     operations = operations.OrderBy(o => o.DateTime).ThenBy(o => o.CategoryId);
                     break;
                 case "amount_desc":
-                    operations = operations.OrderByDescending(o => o.Account).ThenBy(o => o.CategoryId);
+                    operations = operations.OrderByDescending(o => o.Amount).ThenBy(o => o.CategoryId);
                     break;
                 case "amount_asc":
-                    operations = operations.OrderBy(o => o.Account).ThenBy(o => o.CategoryId);
+                    operations = operations.OrderBy(o => o.Amount).ThenBy(o => o.CategoryId);
                     break;
                 default:
                     operations = operations.OrderByDescending(o => o.DateTime).ThenBy(o => o.CategoryId);
