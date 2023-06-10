@@ -83,7 +83,7 @@ namespace BudgetOrganizer.Services
             return operations;
         }
 
-        public async Task<List<OperationByCategoryReportDTO>> GetOpertaionsCategoryReport(Guid accountId)
+        public async Task<List<OperationByCategoryReportDTO>> GetOpertaionsCategoryReport(Guid accountId, bool positive)
         {
             if (_context.Operations == null)
                 throw new Exception("Database error");
@@ -93,8 +93,15 @@ namespace BudgetOrganizer.Services
                 throw new Exception("Account doesn't exist");
 
             //account operations grouped by category and counted
-            var operations = account.Operations.GroupBy(p => p.CategoryId).
-                Select(p => new { CategoryId = p.Key, Sum = p.Count() });
+            var operations = account.Operations.Where(o => 
+            {
+                if (positive)
+                    return o.Amount > 0;
+                else 
+                    return o.Amount < 0;
+
+            }).GroupBy(p => p.CategoryId).
+                Select(p => new { CategoryId = p.Key, Sum = p.Sum(x => x.Amount) });
 
             //get categories assigned to that account
             var categories = account.Categories;

@@ -108,7 +108,7 @@ namespace BudgetOrganizer.Controllers
         [Authorize]
         [HttpGet]
         [Route("me/category-report")]
-        public async Task<ActionResult<IEnumerable<OperationByCategoryReportDTO>>> GetOperationByCategoryReport()
+        public async Task<ActionResult<IEnumerable<OperationByCategoryReportDTO>>> GetOperationByCategoryReport(bool positive)
         {
             if (_context.Operations == null)
                 return Problem("Database Error");
@@ -122,7 +122,7 @@ namespace BudgetOrganizer.Controllers
 
             try
             {
-                var operations = await _reportService.GetOpertaionsCategoryReport(accountId);
+                var operations = await _reportService.GetOpertaionsCategoryReport(accountId, positive);
                 if (operations == null)
                     return Problem("Server error");
                 return Ok(operations);
