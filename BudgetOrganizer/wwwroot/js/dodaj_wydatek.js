@@ -57,23 +57,22 @@
             body: bodyPost
             });
         
-        try {
-            fetch(request)
-                .then((response)=>{
-                    if(!response.ok){
-                        
-                        const error = response.status;
+        fetch(request)
+            .then((response) => {
+                if (!response.ok) {
+
+                    return response.text().then((text) => {
+                        const error = response.status + ' ' + text;
                         throw new Error(error)
-                    }
-                    return response.json()
-                })
-                .then((json)=>{
-                    console.log(json);
-                })
-        }
-        catch (error){
-            console.error(error);
-        }
+                    })
+                }
+                return response.json()
+            })
+            .then((json) => {
+                console.log(json);
+            }).catch((error) => {
+                console.error(error);
+            });
     }
     
     const form = document.getElementById("login-form")

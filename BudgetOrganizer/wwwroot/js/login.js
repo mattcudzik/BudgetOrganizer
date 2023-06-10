@@ -18,24 +18,28 @@ window.addEventListener("load", () => {
 
 
     // Send request
-    try {
+
         fetch(request)
             .then((response) => {
                 if (!response.ok) {
 
-                    const error = response.status + ': ' + json;
-                    throw new Error(error)
+                    return response.text().then((text) => {
+                        const error = response.status + ' ' + text;
+                        throw new Error(error)
+                    })
                 }
                 return response.json()
             })
             .then((json) => {
                 // Store JWT in localStorage
                 localStorage.setItem("token", json.replace(/["]/g, ''));
-                //console.log(json);
-            })
-    } catch (error) {
-        console.error(error);
-    }
+                console.log(json);
+                location.href = 'profil.html'
+            }).catch((error) => {
+                console.error(error);
+            }
+       );
+    
 
 
 
