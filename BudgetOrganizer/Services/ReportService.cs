@@ -92,7 +92,7 @@ namespace BudgetOrganizer.Services
             if (account == null)
                 throw new Exception("Account doesn't exist");
 
-            //account operations grouped by category and counted
+            //account operations grouped by category and sumed
             var operations = account.Operations.Where(o => 
             {
                 if (positive)

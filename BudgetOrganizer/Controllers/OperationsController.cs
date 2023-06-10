@@ -133,7 +133,7 @@ namespace BudgetOrganizer.Controllers
             }
         }
 
-        // POST: api/Operations
+        // POST: api/Operations/me
         [Authorize]
         [HttpPost]
         [Route("me")]
@@ -150,18 +150,29 @@ namespace BudgetOrganizer.Controllers
 
             var accountId = new Guid(claim.Value);
 
-            var account = await _context.Accounts.FindAsync(accountId);
+            var account = await _context.Accounts.Include(o => o.Role).Include(o=>o.Operations).Where(o=>o.Id==accountId).FirstOrDefaultAsync();
             if (account == null)
             {
                 return NotFound("That account doesn't exist");
             }
 
-            
-
             if (operationToAdd.DateTime == null)
             {
                 operationToAdd.DateTime = DateTime.UtcNow;
             }
+
+            //check if child and calculate that months spending amount
+            if (account.Role.Name == "child" && account.SpendingLimit != null)
+            {
+                var sum = account.Operations
+                    .Where(o => o.DateTime.Date.Month == operationToAdd.DateTime.Value.Month)
+                    .Where(o => o.Amount < 0).Sum(o => o.Amount);
+
+                sum += operationToAdd.Amount;
+                if (Math.Abs(sum) >= account.SpendingLimit)
+                    return Problem("Spending limit for this month has been reached. Operation wasn't added");
+            }
+
             var operation = _mapper.Map<Operation>(operationToAdd);
             var category = await _context.Categories.FindAsync(operation.CategoryId);
 
