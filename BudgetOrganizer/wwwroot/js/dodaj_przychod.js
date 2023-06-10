@@ -12,7 +12,7 @@ window.addEventListener("load", () => {
                 'Authorization': auth
             }
         });
-        console.log("HEJ");
+        
         // let out;
         // Send request to get my data and asign my group id
         
