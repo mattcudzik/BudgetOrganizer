@@ -1,7 +1,7 @@
 ﻿// Add 'load' event handler
 window.addEventListener("load", () => {
 
-        function getMyData() {
+    function getMyData() {
         // Preparing request to get my data
         const auth = "Bearer " + localStorage.getItem("token");
         const request = new Request("https://localhost:7057/api/Accounts/me", {
@@ -35,17 +35,17 @@ window.addEventListener("load", () => {
     }
     
     function sendData() {
-        //TODO USTAWIENIE ROLI DZIECKA
+        
         const FD = new FormData(form);
         var bodyPost = '{"userName": "' + FD.get("username")
             + '","password": "' + FD.get("password")
             + '","email": "' + FD.get("email")
             + '","budget": "' + FD.get("quantity")
-            + '","spendingLimit": "' + FD.get("limit")
             + '","groupId": "' + myGroupID
-            + '","roleName": "child"}';
-        //console.log(bodyPost);
-        
+            + '"}';
+
+        // console.log(bodyPost);
+
         // Prepare request
         const request = new Request("https://localhost:7057/api/Accounts/Register", {
             method: "POST",
@@ -71,9 +71,9 @@ window.addEventListener("load", () => {
             .then((json) => {
                 console.log(json);
             }).catch((error) => {
-                console.error(error);
-            });
-        
+            console.error(error);
+        });
+
     }
 
     const form = document.getElementById("login-form");
