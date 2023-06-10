@@ -156,12 +156,14 @@ namespace BudgetOrganizer.Controllers
                 return NotFound("That account doesn't exist");
             }
 
-            var operation = _mapper.Map<Operation>(operationToAdd);
 
             if (operationToAdd.DateTime == null)
             {
-                operation.DateTime = DateTime.UtcNow;
+                operationToAdd.DateTime = DateTime.UtcNow;
             }
+            
+            var operation = _mapper.Map<Operation>(operationToAdd);
+
 
             var category = await _context.Categories.FindAsync(operation.CategoryId);
 

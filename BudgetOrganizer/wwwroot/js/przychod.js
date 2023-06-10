@@ -62,7 +62,7 @@
 
                     var allDiv = document.createElement("div");
                     allDiv.setAttribute("class", "all");
-                    allDiv.innerHTML = '<h3>' + date.toDateString() + '</h3>' + '<p>' + obj.amount + '</p>'
+                    allDiv.innerHTML = '<h3>' + date.toDateString() + '</h3>' + '<p>' + obj.amount + 'PLN' + '</p>'
 
                     newElement.appendChild(colorDiv);
                     newElement.appendChild(allDiv);
