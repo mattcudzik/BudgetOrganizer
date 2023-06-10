@@ -12,7 +12,7 @@ window.addEventListener("load", () => {
                 'Authorization': auth
             }
         });
-
+        
         // let out;
         // Send request to get my data and asign my group id
         
@@ -53,12 +53,15 @@ window.addEventListener("load", () => {
     function sendData() {
 
         const FD = new FormData(form);
+
+        var startDate = (FD.get("start-date") != '') ? '","dateTime": "' + FD.get("start-date") : '';
+
         var bodyPost = '{"categoryId": "' + FD.get("category")
             + '","amount": "' + FD.get("value")
-            + '","dateTime": "' + FD.get("start-date")
+            +   startDate
             + '"}';
 
-        // console.log(bodyPost);
+       
 
         const auth = "Bearer " + localStorage.getItem("token");
         // Prepare request
