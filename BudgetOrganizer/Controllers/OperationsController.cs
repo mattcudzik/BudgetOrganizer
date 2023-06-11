@@ -236,25 +236,37 @@ namespace BudgetOrganizer.Controllers
                     Name = "Przelew",
                     Id = Guid.NewGuid()
                 };
+                account.Categories.Add(category);
+                destinationAccount.Categories.Add(category);
                 _context.Categories.Add(category);
-            }
-                
+
+            } 
 
             //deduct from one account
             account.Budget -= transferOperationDTO.Amount;
             var operation = new Operation()
             {
+                Id = Guid.NewGuid(),
                 Account = account,
                 Category = category,
                 Amount = -transferOperationDTO.Amount,
                 DateTime = DateTime.UtcNow
             };
-            account.Operations.Add(operation);
 
+            await _context.Operations.AddAsync(operation);
+
+            var operationTmp = new Operation()
+            {
+                Id = Guid.NewGuid(),
+                Account = destinationAccount,
+                Category = category,
+                Amount = transferOperationDTO.Amount,
+                DateTime = DateTime.UtcNow
+            };
             //add to another account
             destinationAccount.Budget += transferOperationDTO.Amount;
-            operation.Amount = transferOperationDTO.Amount;
-            destinationAccount.Operations.Add(operation);
+
+            await _context.Operations.AddAsync(operationTmp);
 
             await _context.SaveChangesAsync();
             return Ok();
