@@ -1,11 +1,13 @@
 
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="przelew.css" /> 
+    <link rel="stylesheet" type="text/css" href="przelew.css" />
     <link href="https://fonts.googleapis.com/css?family=Inter" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;400&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="./Pic/budget-management-svgrepo-com.svg">
-    </head>
+    <script src="js/przelew.js"></script>
+    <script src="js/checkLogged.js"></script>
+</head>
     <header>
         <div class="pow"><a href="./profil.html"><button class="logowanie"><img src="./Pic/arrow-left-svgrepo-com.svg" alt="back" width="40px" height="40px"></button></a></div>
         
@@ -19,7 +21,10 @@
             <input type="text" id="amount" name="amount" placeholder="Kwota" required><i class="validation"><span></span></i>
         </p>
         <p>
-            <input type="text" id="person" name="person" placeholder="Osoba" required><i class="validation"><span></span></i>
+            Osoba
+            <select id="person" name="person" required>
+                <option value="" disabled selected hidden>Wybierz Osobe</option>
+            </select>
         </p>
         <p>
             <input type="submit" id="transfer" value="Wyślij">

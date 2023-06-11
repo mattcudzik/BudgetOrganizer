@@ -13,6 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Inter" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;400&display=swap" rel="stylesheet">
     <script src="js/wydatki.js"></script>
+    <script src="js/checkLogged.js"></script>
 </head>
 <body>
     <header>
@@ -74,8 +75,10 @@
                             <p><input type="text" id="kwota_do" name="kwota_do" placeholder=" Kwota do"></p>
                         </div>
                         <p>Kategoria:</p>
-                    <select id="category" name="category">   
-                    </select>
+                        <select id="category" name="category">
+
+                            <option value="null">Wszystkie</option>
+                        </select>
                 </div>
                 <input class="sortfiltr" type="submit" value="Zastosuj">          
             </form>

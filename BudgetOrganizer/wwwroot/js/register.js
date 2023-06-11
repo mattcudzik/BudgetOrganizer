@@ -35,7 +35,7 @@ window.addEventListener("load", () => {
             })
             .then((json) => {
                 console.log(json);
-                location.href = 'login.html';
+                window.location.replace('login.html');
             }).catch((error) => {
                 console.error(error);
             });

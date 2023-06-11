@@ -10,9 +10,13 @@
     <link href="https://fonts.googleapis.com/css?family=Inter" rel="stylesheet">
     <link rel="shortcut icon" href="./Pic/budget-management-svgrepo-com.svg">
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;400&display=swap" rel="stylesheet">
+    <script src="js/profil.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/checkLogged.js"></script>
 </head>
 
 <body>
+
     <header>
         <button id="logowanie"><img src="./Pic/person-svgrepo-com.svg" alt="log" width="40px" height="40px"></button>
     </header>
@@ -26,33 +30,32 @@
                 <div class="row"><a href="./dodaj_kategorie.html"><button class="pic pic_cat" title="Dodaj kategorię"><img src="./Pic/categories-svgrepo-com.svg" alt="categories"></button></a></div>
             </div>
             <div id="middle">
-
                 <div id="przychody">
                     <div id="przychody_center">
                         <h2>Przychody</h2>
 
-                        <div class="przychod">
-                            <h3>Przychod 1</h3>
-                            <p>100,00PLN</p>
-                        </div>
-                        <div class="przychod">
-                            <h3>Przychod 2</h3>
-                            <p>100,00PLN</p>
-                        </div>
+<!--                        <div class="przychod">-->
+<!--                            <h3>Przychod 1</h3>-->
+<!--                            <p>100,00PLN</p>-->
+<!--                        </div>-->
+<!--                        <div class="przychod">-->
+<!--                            <h3>Przychod 2</h3>-->
+<!--                            <p>100,00PLN</p>-->
+<!--                        </div>-->
                     </div>
                 </div>
                 <div id="wydatki">
                     <div id="wydatki_center">
                         <h2>Wydatki</h2>
 
-                        <div class="wydatek">
-                            <h3>Wydatek 1</h3>
-                            <p>-100,00PLN</p>
-                        </div>
-                        <div class="wydatek">
-                            <h3>Wydatek 2</h3>
-                            <p>-100,00PLN</p>
-                        </div>
+<!--                        <div class="wydatek">-->
+<!--                            <h3>Wydatek 1</h3>-->
+<!--                            <p>-100,00PLN</p>-->
+<!--                        </div>-->
+<!--                        <div class="wydatek">-->
+<!--                            <h3>Wydatek 2</h3>-->
+<!--                            <p>-100,00PLN</p>-->
+<!--                        </div>-->
                     </div>
 
                 </div>
@@ -73,17 +76,16 @@
                 </div>
                 <div id="stat">
                     
-                   <!-- <div class="pieContainer">
-                        <div class="pieBackground"></div>
-                        <div id="pieSlice1" class="hold"><div class="pie"></div></div>
-                        <div id="pieSlice2" class="hold"><div class="pie"></div></div>
-                        <div id="pieSlice3" class="hold"><div class="pie"></div></div>
-                        <div id="pieSlice4" class="hold"><div class="pie"></div></div>
-                        <div id="pieSlice5" class="hold"><div class="pie"></div></div>
-                        <div id="pieSlice6" class="hold"><div class="pie"></div></div>
-                        <div class="innerCircle"><div class="content"><b>Data</b><br>from 16<sup>th</sup> April, 2014</div></div>
-                      </div>
-                    -->
+                    <div class="pieContainer">
+                        <div>
+                            <canvas id="negativeYeast"></canvas>
+                            <!--TODO poprawcie ten div prosze-->
+                        </div>
+                        <div>
+                            <canvas id="positiveYeast"></canvas> 
+                            <!--TODO poprawcie ten div prosze-->
+                        </div>
+                    </div>
                 </div>
                 <div id="button_gen_przelew">
                     <div id="generuj">
