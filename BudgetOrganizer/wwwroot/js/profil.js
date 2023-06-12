@@ -50,7 +50,7 @@ window.addEventListener("load", () => {
                     incomeValue += obj.amount;
                 }
                 const podsumowanie_p = document.getElementById("podsumowanie_p")
-                podsumowanie_p.innerHTML = '<p>' + incomeValue + '</p>'
+                podsumowanie_p.innerHTML = '<p>' + incomeValue + '</p>' + '<canvas id="positiveYeast"></canvas> '
                 
             }).catch((error) => {
             console.error(error);
@@ -106,7 +106,7 @@ window.addEventListener("load", () => {
                     outcomeValue += obj.amount;
                 }
                 const podsumowanie_w = document.getElementById("podsumowanie_w")
-                podsumowanie_w.innerHTML = '<p>' + outcomeValue + '</p>'
+                podsumowanie_w.innerHTML = '<p>' + outcomeValue + '</p>' +'<canvas id="negativeYeast"></canvas>'
 
             }).catch((error) => {
             console.error(error);
