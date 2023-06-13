@@ -322,8 +322,45 @@ window.addEventListener("load", () => {
             console.error(error);
         });
     }
-    
 
+    // https://localhost:7057/api/Accounts/me
+    function checkChildProtection() {
+        // Preparing operationsRequest to get my data
+        const auth = "Bearer " + localStorage.getItem("token");
+        const operationsRequest = new Request("https://localhost:7057/api/Accounts/me", {
+            method: "GET",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': auth
+            }
+        });
+
+        fetch(operationsRequest)
+            .then((response) => {
+                if (!response.ok) {
+
+                    return response.text().then((text) => {
+                        const error = response.status + ' ' + text;
+                        throw new Error(error)
+                    })
+                }
+                return response.json()
+            })
+            .then((json) => {
+                console.log("duoa");
+                console.log(json);
+                if(json.role.name == 'child'){
+                    const childProtection = document.getElementById("childProtection");
+                    const livingAlone = document.getElementById("livingAlone");
+                    childProtection.style.display = 'none';
+                    livingAlone.style.display = 'none';
+                }
+            }).catch((error) => {
+            console.error(error);
+        });
+    }
+    
     const form = document.getElementById("login-form");
     
     getIncomeOperationsData();
@@ -331,6 +368,6 @@ window.addEventListener("load", () => {
     getMyAccountData();
     getPositiveFlourData()
     getNegativeFlourData()
-
+    checkChildProtection()
 });
 
