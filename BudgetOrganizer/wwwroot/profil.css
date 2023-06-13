@@ -88,8 +88,7 @@ margin-left: 30px;
 .button
 {
     background-color: #8fb6d9;
-    
-    width: 95%;
+    width: 50%;
     height: 50px;
     font-size: 16px;
     border: none;
@@ -181,8 +180,7 @@ margin-left: 30px;
 }
 
 #button_gen_przelew {
-    display: grid;
-    grid-template-columns: 10fr 10fr;
+text-align: center;
 
 }
 
