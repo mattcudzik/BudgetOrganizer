@@ -1,0 +1,31 @@
+\babel@toc {polish}{}\relax 
+\babel@toc {polish}{}\relax 
+\contentsline {section}{\numberline {1}Wstęp}{2}{}%
+\contentsline {section}{\numberline {2}Określenie wymagań}{2}{}%
+\contentsline {subsection}{\numberline {2.1}Wymagania funkcjonalne}{2}{}%
+\contentsline {subsection}{\numberline {2.2}Wymagania niefunkcjonalne}{2}{}%
+\contentsline {section}{\numberline {3}Analiza MoSCoW}{3}{}%
+\contentsline {subsection}{\numberline {3.1}Must}{3}{}%
+\contentsline {subsection}{\numberline {3.2}Should}{3}{}%
+\contentsline {subsection}{\numberline {3.3}Could}{3}{}%
+\contentsline {subsection}{\numberline {3.4}Won't}{4}{}%
+\contentsline {section}{\numberline {4}Scenariusze przypadków użycia}{4}{}%
+\contentsline {subsection}{\numberline {4.1}Logowanie}{4}{}%
+\contentsline {subsubsection}{\numberline {4.1.1}Scenariusz główny logowania}{4}{}%
+\contentsline {subsubsection}{\numberline {4.1.2}Scenariusze poboczne logowania}{4}{}%
+\contentsline {paragraph}{Konto nie istnieje}{4}{}%
+\contentsline {paragraph}{Wybrany profil jest chroniony}{4}{}%
+\contentsline {paragraph}{Wybrany profil jest profilem dziecka}{5}{}%
+\contentsline {subsection}{\numberline {4.2}Dodawanie przychodów/wydatków}{5}{}%
+\contentsline {subsubsection}{\numberline {4.2.1}Scenariusz główny dodawania przychodów/wydatków}{5}{}%
+\contentsline {subsubsection}{\numberline {4.2.2}Scenariusze poboczne dodawania przychodów/wydatków}{5}{}%
+\contentsline {paragraph}{Użytkownik dodaje własną kategorię}{5}{}%
+\contentsline {paragraph}{Użytkownik dodaje wydatek przekraczający saldo}{5}{}%
+\contentsline {section}{\numberline {5}Diagram UML}{6}{}%
+\contentsline {section}{\numberline {6}Schemat bazy danych}{7}{}%
+\contentsline {section}{\numberline {7}Specyfikacja zewnętrzna}{8}{}%
+\contentsline {section}{\numberline {8}Specyfikacja wewnętrzna}{8}{}%
+\contentsline {section}{\numberline {9}Testowanie i uruchamianie}{8}{}%
+\contentsline {section}{\numberline {10}Weryfikacja osiągniętych efektów względem założeń}{8}{}%
+\contentsline {subsection}{\numberline {10.1}Schemat zaimplementowanej bazy danych}{8}{}%
+\contentsline {section}{\numberline {11}Uwagi i wnioski}{9}{}%
