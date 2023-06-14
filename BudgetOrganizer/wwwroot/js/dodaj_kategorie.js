@@ -14,7 +14,7 @@ window.addEventListener("load", () => {
         const auth = "Bearer " + localStorage.getItem("token");
         // Prepare request
         // TODO API do zmiany na Categoriers/me - po poprawieniu inputu przez Cudzika
-        const request = new Request("https://localhost:7057/api/Categories", {
+        const request = new Request("https://localhost:7057/api/Categories/me", {
             method: "POST",
             headers: {
                 'Accept': 'application/json',
