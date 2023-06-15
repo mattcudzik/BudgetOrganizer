@@ -116,13 +116,6 @@ input[type="date"] {
     border-radius: 30px;
   }
   
-  .color{
-    background:black;
-    width:30px;
-    height:30px;
-    margin-top:45px;
-    margin-left:15px;
-  }
 
 #right1{
     display:grid;
