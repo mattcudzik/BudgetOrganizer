@@ -9,7 +9,7 @@
 \usepackage{graphicx}
 \usepackage{float}
 \setlist{nolistsep}
-\pagestyle{fancy}
+% \pagestyle{fancy}
 \selectlanguage{polish}
 \setlength{\headheight}{15pt}
 
@@ -19,28 +19,28 @@
 % \setlength{\parindent}{0.5cm} \setlength{\footskip}{2cm}
 \linespread{1.2} % odstęp pomiędzy wierszami
 
-%%%% ŻYWA PAGINA %%%%%%%%%%%
-\newcommand{\tl}[1]{\textbf{#1}} 
-\pagestyle{fancy}
-\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
-\fancyhf{} % usuwanie bieżących ustawień
-\fancyhead[LE,RO]{\small\bfseries\thepage}
-\fancyhead[LO]{\small\bfseries\rightmark}
-\fancyhead[RE]{\small\bfseries\leftmark}
-\renewcommand{\headrulewidth}{0.5pt}
-\renewcommand{\footrulewidth}{0pt}
-% \addtolength{\headheight}{0.5pt} % pionowy odstęp na kreskę
-\fancypagestyle{plain}{%
-\fancyhead{} % usuń p. górne na stronach pozbawionych numeracji
-\renewcommand{\headrulewidth}{0pt} % pozioma kreska
-}
+% %%%% ŻYWA PAGINA %%%%%%%%%%%
+% \newcommand{\tl}[1]{\textbf{#1}} 
+% \pagestyle{fancy}
+% \renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+% \fancyhf{} % usuwanie bieżących ustawień
+% \fancyhead[LE,RO]{\small\bfseries\thepage}
+% \fancyhead[LO]{\small\bfseries\rightmark}
+% \fancyhead[RE]{\small\bfseries\leftmark}
+% \renewcommand{\headrulewidth}{0.5pt}
+% \renewcommand{\footrulewidth}{0pt}
+% % \addtolength{\headheight}{0.5pt} % pionowy odstęp na kreskę
+% \fancypagestyle{plain}{%
+% \fancyhead{} % usuń p. górne na stronach pozbawionych numeracji
+% \renewcommand{\headrulewidth}{0pt} % pozioma kreska
+% }
 
 \begin{document}
 {
 \begin{titlepage}
     \fancyhf{}
-    \headheight=0pt
-    \headsep=0pt
+    \headheight = 0pt
+    \headsep =0pt
     \begin{center}
         \frenchspacing
         \thispagestyle{empty}
@@ -254,17 +254,21 @@ rejestracyjny pozwala założyć konto. Celem założenia konta użytkownik musi
     \item hasło
     \item kwotę początkową.
 \end{itemize}
-Naciśnięcie przycisku "DODAJ KONTO" skutkuje dodaniem konta do bazy danych.
+Naciśnięcie przycisku ,,DODAJ KONTO'' skutkuje dodaniem konta do bazy danych.
 %napisać co jak konto istnieje i co się dzieje z bazą danych
 
 \subsection{Logowanie}
 %insert image here
 Strona logowania zawiera formularz, w którym należy wprowadzić Login użytkownika
-oraz hasło. Po wprowadzeniu poprawnych danych oraz naciśnięciu przycisku "LOGIN"
-użytkownik zostaje przeniesiony do ekranu głównego aplikacji.
+oraz hasło. Po wprowadzeniu poprawnych danych oraz naciśnięciu przycisku
+,,LOGIN'' użytkownik zostaje przeniesiony do ekranu głównego aplikacji.
 %napisać co jak dane są niepoprawne
 Jeżeli użytkownik nie posiada konta, może w prosty sposób przejść do formularza
-rejestracji, klikając w odnośnik "Nie mam jeszcze konta".
+rejestracji, klikając w odnośnik ,,Nie mam jeszcze konta''.
+
+\subsection{Ekran główny}
+Poprawne logowanie skutkuje przeniesieniem użytkownika do ekranu głównego 
+aplikacji. Prezentowany jest układ 
 
 \section{Specyfikacja wewnętrzna}
 
