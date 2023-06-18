@@ -17,9 +17,9 @@
 % \setlength{\topmargin}{-1cm} \setlength{\textheight}{24.5cm}
 % \setlength{\textwidth}{17cm} \addtolength{\hoffset}{-1.5cm}
 % \setlength{\parindent}{0.5cm} \setlength{\footskip}{2cm}
-\linespread{1.2} % odstep pomiedzy wierszami
+\linespread{1.2} % odstęp pomiędzy wierszami
 
-%%%% ZYWA PAGINA %%%%%%%%%%%
+%%%% ŻYWA PAGINA %%%%%%%%%%%
 \newcommand{\tl}[1]{\textbf{#1}} 
 \pagestyle{fancy}
 \renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
@@ -48,7 +48,7 @@
         \setlength\@fptop{0\p@ \@plus 1fil}
         \begin{figure}
             \centering
-            \includegraphics[width=0.4\textwidth,keepaspectratio]{politechnika_sl_logo_pion_pl_rgb.png}
+            \includegraphics[width=0.4\textwidth,keepaspectratio]{images/politechnika_sl_logo_pion_pl_rgb.png}
         \end{figure}
         \makeatother
         {\large
@@ -66,12 +66,12 @@
 
         {\small
             \begin{itemize}
-                \item[] Mateusz Cudzik\\
-                \item[] Jakub Ferens\\
-                \item[] Mateusz Górecki\\
-                \item[] Szymon Maciąg\\
-                \item[] Kajetan Sommer\\
-                \item[] Julia Wojciuch
+                \item Mateusz Cudzik\\
+                \item Jakub Ferens\\
+                \item Mateusz Górecki\\
+                \item Szymon Maciąg\\
+                \item Kajetan Sommer\\
+                \item Julia Wojciuch
             \end{itemize}
             \vspace*{1\baselineskip}
             % \vspace{0pt plus 0.5fill}
@@ -97,12 +97,11 @@ oraz kategoryzowanie przychodów i wydatków z różnych kont.
 \section{Określenie wymagań}
 \subsection{Wymagania funkcjonalne}
 \begin{itemize}
-    % \setlength\itemsep{0.3em}
     \item Obsługa logowania
     \item Kategorie wydatków/przychodów
     \item Kategorie kont
     \item Transakcje między profilami
-    \item Generowanie raportów - analiza finansowa
+    \item Generowanie raportów — analiza finansowa
     \item Przechowywanie skanów paragonów/faktur
     \item Przechowywanie dłużników
     \item Informacje przechowywane w bazie danych
@@ -114,128 +113,116 @@ oraz kategoryzowanie przychodów i wydatków z różnych kont.
 
 \subsection{Wymagania niefunkcjonalne}
 \begin{itemize}
-    % \setlength\itemsep{0.3em}
-    \item Bezpieczeństwo – okresowe tworzenie kopi zapasowych danych
-    \item Zabezpieczenie profili użytkowników hasłem
-    \item Hierarchia użytkowników – różne poziomy uprawnień/dostępu,
-          ograniczenia dla profilów młodszych użytkowników
-    \item Użyteczność – aplikacja z przystępnym i łatwym w obsłudze interfejsem
-          zarówno dla starszych jak i młodszych użytkowników
-    \item Wieloplatformowość – przypadku aplikacji webowej dostępność z różnych
-          urządzeń przy pomocy dowolnego systemu posiadającego przeglądarkę
+    \item Bezpieczeństwo — okresowe tworzenie kopii zapasowych danych,
+    \item Zabezpieczenie profili użytkowników hasłem,
+    \item Hierarchia użytkowników — różne poziomy uprawnień/dostępu,
+          ograniczenia dla profilów młodszych użytkowników,
+    \item Użyteczność — aplikacja z przystępnym i łatwym w obsłudze interfejsem
+          zarówno dla starszych, jak i młodszych użytkowników,
+    \item Wieloplatformowość — przypadku aplikacji webowej dostępność z różnych
+          urządzeń przy pomocy dowolnego systemu posiadającego przeglądarkę,
     \item System/Aplikacja przystosowana do łatwego rozwoju, rozbudowy i
-          aktualizacji
-    \item Responsywność – odpowiedź aplikacji na działania użytkownika w
-          określonym czasie (przykładowo do trzech sekund)
+          aktualizacji,
+    \item Responsywność — odpowiedź aplikacji na działania użytkownika w
+          określonym czasie (przykładowo do trzech sekund).
 \end{itemize}
 
 \section{Analiza MoSCoW}
 \subsection{Must}
 \begin{itemize}
-    % \setlength\itemsep{0.3em}
-    \item Przechowywanie informacji w bazie danych
-    \item Dodawanie wydatków i przychodów
-    \item Generowanie raportów
-    \item Założenie konta i przypisania do niego danych
-    \item Informowanie użytkownika o aktualnym stanie konta, który jest
-          zmieniany wraz z kolejnymi wpisami o przychodach/wydatkach
+    \item Przechowywanie informacji w bazie danych,
+    \item dodawanie wydatków i przychodów,
+    \item generowanie raportów,
+    \item założenie konta i przypisania do niego danych,
+    \item informowanie użytkownika o aktualnym stanie konta, który jest
+          zmieniany wraz z kolejnymi wpisami o przychodach/wydatkach.
 \end{itemize}
 
 \subsection{Should}
 \begin{itemize}
-    % \setlength\itemsep{0.3em}
-    \item Przypomnienie hasła
-    \item Formularz rejestracji dostępny dla użytkownika
-    \item Dzielenie wydatków i przychodów na kategorie
-    \item Generowanie raportów z podziałem wydatków/przychodów na kategorie
-    \item Operacje zarządzania profilami (dodawanie, usuwanie itd.)
+    \item Przypomnienie hasła,
+    \item formularz rejestracji dostępny dla użytkownika,
+    \item dzielenie wydatków i przychodów na kategorie,
+    \item generowanie raportów z podziałem wydatków/przychodów na kategorie,
+    \item operacje zarządzania profilami (dodawanie, usuwanie itd.).
 \end{itemize}
 
 \subsection{Could}
 \begin{itemize}
-    % \setlength\itemsep{0.3em}
-    \item Potwierdzenie rejestracji mailem
-    \item Edycja informacji o koncie (nazwy użytkownika, hasła, itd.)
-    \item Ustawianie cyklicznych/stałych wydatków/przychodów
-    \item Transakcje między profilami
-    \item Przechowywanie skanów paragonów/faktur
-    \item Definiowanie własnych, niestandardowych kategorii
+    \item Potwierdzenie rejestracji mailem,
+    \item edycja informacji o koncie (nazwy użytkownika, hasła itd.)
+    \item ustawianie cyklicznych/stałych wydatków/przychodów
+    \item transakcje między profilami
+    \item przechowywanie skanów paragonów/faktur
+    \item definiowanie własnych, niestandardowych kategorii.
 \end{itemize}
 
 \subsection{Won't}
 \begin{itemize}
-    % \setlength\itemsep{0.3em}
-    \item Weryfikacja Captcha
-    \item Przechowywanie informacji o dłużnikach
-    \item Powiadomienia o przekroczonym budżecie
+    \item Weryfikacja Captcha,
+    \item przechowywanie informacji o dłużnikach,
+    \item powiadomienia o przekroczonym budżecie.
 \end{itemize}
 
 \section{Scenariusze przypadków użycia}
 \subsection{Logowanie}
 \subsubsection{Scenariusz główny logowania}
 \begin{itemize}
-    % \setlength\itemsep{0.3em}
     \item Przypadek rozpoczyna się, gdy niezalogowany użytkownik wejdzie
-          na stronę
-    \item Użytkownik wpisuje swój login oraz hasło
-    \item System sprawdza poprawność danych
-    \item Użytkownik zostaje przeniesiony do panelu wyboru profilu
+          na stronę.
+    \item Użytkownik wpisuje swój login oraz hasło.
+    \item System sprawdza poprawność danych.
+    \item Użytkownik zostaje przeniesiony do panelu wyboru profilu.
     \item Użytkownik wybiera profil.
-    \item Wyświetlony zostaje panel sterowania budżetem
-    \item Użytkownik zostaje zalogowany
+    \item Wyświetlony zostaje panel sterowania budżetem.
+    \item Użytkownik zostaje zalogowany.
 \end{itemize}
 
 \subsubsection{Scenariusze poboczne logowania}
 \paragraph{Konto nie istnieje}
 \begin{itemize}
-    % \setlength\itemsep{0.3em}
-    \item Użytkownik zostaje przeniesiony do formularza rejestracji
-    \item Użytkownik wprowadza swoje dane
-    \item System sprawdza poprawność danych
-    \item Konto zostaje utworzone
+    \item Użytkownik zostaje przeniesiony do formularza rejestracji.
+    \item Użytkownik wprowadza swoje dane.
+    \item System sprawdza poprawność danych.
+    \item Konto zostaje utworzone.
 \end{itemize}
 
 \paragraph{Wybrany profil jest chroniony}
 \begin{itemize}
-    % \setlength\itemsep{0.3em}
-    \item Użytkownik wpisuje PIN
-    \item System sprawdza poprawność danych
+    \item Użytkownik wpisuje PIN.
+    \item System sprawdza poprawność danych.
     \item W przypadku wprowadzenia poprawnego kodu pin scenariusz się kończy,
           w przeciwnym razie użytkownik jest informowany o błędnym kodzie PIN,
-          po kilku błędnych próbach nakładana jest czasowa blokada
+          po kilku błędnych próbach nakładana jest czasowa blokada.
 \end{itemize}
 
 \paragraph{Wybrany profil jest profilem dziecka}
 \begin{itemize}
-    % \setlength\itemsep{0.3em}
-    \item Użytkownikowi wyświetlone zostaje uproszczone GUI
+    \item Użytkownikowi wyświetlone zostaje uproszczone GUI.
 \end{itemize}
 
 \subsection{Dodawanie przychodów/wydatków}
 \subsubsection{Scenariusz główny dodawania przychodów/wydatków}
 \begin{itemize}
-    % \setlength\itemsep{0.3em}
     \item Zalogowany użytkownik decyduje się dodać przychód/wydatek na panelu
-          sterowania budżetem
+          sterowania budżetem.
     \item Użytkownik wpisuje kwotę, nazwę własną operacji oraz wybiera jej
-          kategorię
-    \item Operacja zostaje uwzględniona w budżecie
+          kategorię.
+    \item Operacja zostaje uwzględniona w budżecie.
 \end{itemize}
 
 \subsubsection{Scenariusze poboczne dodawania przychodów/wydatków}
 \paragraph{Użytkownik dodaje własną kategorię}
 \begin{itemize}
-    % \setlength\itemsep{0.3em}
-    \item Użytkownik podaje nazwę i wybiera kolor
-    \item Kategoria zostaje dodana do listy wszystkich kategorii
+    \item Użytkownik podaje nazwę i wybiera kolor.
+    \item Kategoria zostaje dodana do listy wszystkich kategorii.
 \end{itemize}
 
 \paragraph{Użytkownik dodaje wydatek przekraczający saldo}
 \begin{itemize}
-    % \setlength\itemsep{0.3em}
     \item Użytkownik zostaje ostrzeżony za pomocą powiadomienia przed wykonaniem
-          operacji
-    \item Użytkownik anuluje albo potwierdza wykonanie transakcji
+          operacji.
+    \item Użytkownik anuluje lub potwierdza wykonanie transakcji.
 \end{itemize}
 
 \section{Diagram UML}
@@ -244,7 +231,7 @@ oraz kategoryzowanie przychodów i wydatków z różnych kont.
         \begin{minipage}{\textheight}
             \thispagestyle{empty}
             \centering
-            \includegraphics[width=\hsize,keepaspectratio]{UML1.png}
+            \includegraphics[width=\hsize,keepaspectratio]{images/UML1.png}
             \caption{Diagram UML}
         \end{minipage}}
 \end{figure}
@@ -252,11 +239,32 @@ oraz kategoryzowanie przychodów i wydatków z różnych kont.
 \section{Schemat bazy danych}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\hsize,keepaspectratio]{DB1.png}
+    \includegraphics[width=\hsize,keepaspectratio]{images/DB1.png}
     \caption{Prototypowy schemat bazy danych}
 \end{figure}
 
 \section{Specyfikacja zewnętrzna}
+\subsection{Rejestracja}
+%insert image here
+Użytkownik, chcąc skorzystać z aplikacji, musi posiadać własny profil. Formularz
+rejestracyjny pozwala założyć konto. Celem założenia konta użytkownik musi podać:
+\begin{itemize}
+    \item nazwę użytkownika
+    \item adres e-mail
+    \item hasło
+    \item kwotę początkową.
+\end{itemize}
+Naciśnięcie przycisku "DODAJ KONTO" skutkuje dodaniem konta do bazy danych.
+%napisać co jak konto istnieje i co się dzieje z bazą danych
+
+\subsection{Logowanie}
+%insert image here
+Strona logowania zawiera formularz, w którym należy wprowadzić Login użytkownika
+oraz hasło. Po wprowadzeniu poprawnych danych oraz naciśnięciu przycisku "LOGIN"
+użytkownik zostaje przeniesiony do ekranu głównego aplikacji.
+%napisać co jak dane są niepoprawne
+Jeżeli użytkownik nie posiada konta, może w prosty sposób przejść do formularza
+rejestracji, klikając w odnośnik "Nie mam jeszcze konta".
 
 \section{Specyfikacja wewnętrzna}
 
@@ -266,7 +274,7 @@ oraz kategoryzowanie przychodów i wydatków z różnych kont.
 \subsection{Schemat zaimplementowanej bazy danych}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\hsize,keepaspectratio]{DB2.png}
+    \includegraphics[width=\hsize,keepaspectratio]{images/DB2.png}
     \caption{Wykorzystany schemat bazy danych}
 \end{figure}
 
