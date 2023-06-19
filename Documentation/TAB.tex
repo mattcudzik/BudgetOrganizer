@@ -9,31 +9,31 @@
 \usepackage{graphicx}
 \usepackage{float}
 \setlist{nolistsep}
-% \pagestyle{fancy}
+\pagestyle{fancy}
 \selectlanguage{polish}
 \setlength{\headheight}{15pt}
 
-% rozszerzenie nieco strony
+% % rozszerzenie nieco strony
 % \setlength{\topmargin}{-1cm} \setlength{\textheight}{24.5cm}
 % \setlength{\textwidth}{17cm} \addtolength{\hoffset}{-1.5cm}
 % \setlength{\parindent}{0.5cm} \setlength{\footskip}{2cm}
 \linespread{1.2} % odstęp pomiędzy wierszami
 
-% %%%% ŻYWA PAGINA %%%%%%%%%%%
-% \newcommand{\tl}[1]{\textbf{#1}} 
-% \pagestyle{fancy}
-% \renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
-% \fancyhf{} % usuwanie bieżących ustawień
-% \fancyhead[LE,RO]{\small\bfseries\thepage}
-% \fancyhead[LO]{\small\bfseries\rightmark}
-% \fancyhead[RE]{\small\bfseries\leftmark}
-% \renewcommand{\headrulewidth}{0.5pt}
-% \renewcommand{\footrulewidth}{0pt}
-% % \addtolength{\headheight}{0.5pt} % pionowy odstęp na kreskę
-% \fancypagestyle{plain}{%
-% \fancyhead{} % usuń p. górne na stronach pozbawionych numeracji
-% \renewcommand{\headrulewidth}{0pt} % pozioma kreska
-% }
+%%%% ŻYWA PAGINA %%%%%%%%%%%
+\newcommand{\tl}[1]{\textbf{#1}} 
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\fancyhf{} % usuwanie bieżących ustawień
+\fancyhead[LE,RO]{\small\bfseries\thepage}
+\fancyhead[LO]{\small\bfseries\rightmark}
+\fancyhead[RE]{\small\bfseries\leftmark}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+\addtolength{\headheight}{0.5pt} % pionowy odstęp na kreskę
+\fancypagestyle{plain}{%
+\fancyhead{} % usuń p. górne na stronach pozbawionych numeracji
+\renewcommand{\headrulewidth}{0pt} % pozioma kreska
+}
 
 \begin{document}
 {
@@ -232,7 +232,7 @@ oraz kategoryzowanie przychodów i wydatków z różnych kont.
             \thispagestyle{empty}
             \centering
             \includegraphics[width=\hsize,keepaspectratio]{images/UML1.png}
-            \caption{Diagram UML}
+            \caption{Diagram UML.}
         \end{minipage}}
 \end{figure}
 
@@ -259,12 +259,12 @@ rejestracyjny pozwala założyć konto. Celem założenia konta użytkownik musi
     \item hasło
     \item kwotę początkową.
 \end{itemize}
-Naciśnięcie przycisku ,,DODAJ KONTO'' skutkuje dodaniem konta do bazy danych.
+Naciśnięcie przycisku \textbf{DODAJ KONTO} skutkuje dodaniem konta do bazy danych.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\hsize,keepaspectratio]{images/register_account_exists.png}
-    \caption{Zrzut ekranu rejestracji zakończonej niepowodzeniem}
+    \caption{Zrzut ekranu rejestracji zakończonej niepowodzeniem.}
 \end{figure}
 Jeżeli w bazie danych istnieje konto o takich samych danych, system informuje
 użytkownika o niemożności jego założenia stosownym komunikatem.
@@ -273,7 +273,7 @@ użytkownika o niemożności jego założenia stosownym komunikatem.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\hsize,keepaspectratio]{images/register_childs_profile.png}
-    \caption{Zrzut ekranu rejestracji profilu dziecka}
+    \caption{Zrzut ekranu rejestracji profilu dziecka.}
 \end{figure}
 Użytkownik dorosły może założyć konto o ograniczonym dostępie dedykowanie
 dzieciom. Zasadniczą różnicą jest możliwość nadania limitu wydatków przypisanego
@@ -283,7 +283,7 @@ do tego typu profilu.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\hsize,keepaspectratio]{images/login.png}
-    \caption{Zrzut ekranu logowania}
+    \caption{Zrzut ekranu logowania.}
 \end{figure}
 Strona logowania zawiera formularz, w którym należy wprowadzić Login użytkownika
 oraz hasło. Po wprowadzeniu poprawnych danych oraz naciśnięciu przycisku
@@ -294,7 +294,7 @@ rejestracji, klikając w odnośnik \textbf{Nie mam jeszcze konta}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\hsize,keepaspectratio]{images/login_failed.png}
-    \caption{Zrzut ekranu błędnego logowania}
+    \caption{Zrzut ekranu błędnego logowania.}
 \end{figure}
 W przypadku podania niepoprawnych danych użytkownik jest informowany o fakcie
 stosownym komunikatem.
@@ -303,7 +303,7 @@ stosownym komunikatem.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\hsize,keepaspectratio]{images/profile.png}
-    \caption{Zrzut ekranu głównego aplikacji}
+    \caption{Zrzut ekranu głównego aplikacji.}
 \end{figure}
 Poprawne logowanie skutkuje przeniesieniem użytkownika do ekranu głównego 
 aplikacji. Zakładka \textbf{moje finanse} informuje korzystającego z systemu o
@@ -318,34 +318,37 @@ są wykresy kołowe, które prezentują podział operacji na kategorie i ich udz
 całkowitej sumie operacji. Poniżej podsumowania znajduje się przycisk
 \textbf{Przelew}, który pozwala na przetransferowanie kwoty wewnątrz konta
 pomiędzy profilami. Zostaną wtedy utworzone stosowne rekordy na profilu źródłowym
-oraz docelowym.
-%OPISAĆ PRZYBORNIK PO LEWEJ STRONIE
+oraz docelowym. Ikony znajdującej się przy lewej krawędzi strony odpowiadają za
+przejście do karty wydatków lub przychodów, dodanie profilu dziecka, kategorii
+%ORAZ CZEGOŚ JESZCZE NAPISAĆ CZEGO
 
 \subsection{Profil dziecka}
 \begin{figure}[H]
     \centering
     \includegraphics[width=\hsize,keepaspectratio]{images/childs_profile.png}
-    \caption{Zrzut ekranu głównego dziecka}
+    \caption{Zrzut ekranu głównego dziecka.}
 \end{figure}
-Ekran główny dziecka zawiera mniej opcji niż panel dorosłego.
+Ekran główny dziecka zawiera mniej opcji niż panel dorosłego. Profil może
+jedynie wykonać przelew wewnętrzny, wyświetlić kartę wydatków oraz przychodów,
+dodawać je oraz utworzyć niestandardową kategorię.
 
 \subsection{Przychody}
 \begin{figure}[H]
     \centering
     \includegraphics[width=\hsize,keepaspectratio]{images/incomes_card.png}
-    \caption{Zrzut ekranu szczegółowego przychodów}
+    \caption{Zrzut ekranu szczegółowego przychodów.}
 \end{figure}
 Po otworzeniu panelu \textbf{Przychody} użytkownikowi prezentowane są wszystkie
 wykonane operacje, wraz z ich kwotą, datą wykonania oraz kategorią. Korzystający
 z aplikacji ma możliwość sortowania oraz filtrowania względem daty, kwoty lub
-kategorii. Aby przejść do ekranu dodawania operacji należy nacisnąć przycisk
+kategorii. Aby przejść do ekranu dodawania operacji, należy nacisnąć przycisk
 \textbf{+}.
 
 \subsection{Wydatki}
 \begin{figure}[H]
     \centering
     \includegraphics[width=\hsize,keepaspectratio]{images/expenses_card.png}
-    \caption{Zrzut ekranu szczegółowego wydatków}
+    \caption{Zrzut ekranu szczegółowego wydatków.}
 \end{figure}
 W przypadku wydatków ekran posiada analogiczne funkcje do ekranu dodawania
 przychodów.
@@ -354,7 +357,7 @@ przychodów.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\hsize,keepaspectratio]{images/add_category.png}
-    \caption{Zrzut ekranu dodawania kategorii}
+    \caption{Zrzut ekranu dodawania kategorii.}
 \end{figure}
 Ekran dodawania kategorii pozwala wprowadzić jej nazwę oraz nadać kolor.
 
@@ -363,7 +366,7 @@ Ekran dodawania kategorii pozwala wprowadzić jej nazwę oraz nadać kolor.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\hsize,keepaspectratio]{images/add_income.png}
-    \caption{Zrzut ekranu dodawania przychodu}
+    \caption{Zrzut ekranu dodawania przychodu.}
 \end{figure}
 Ekran dodawania kategorii umożliwia wprowadzenie kwoty operacji, daty wykonania
 oraz kategorii, do jakiej ów operacja należy.
@@ -372,7 +375,7 @@ oraz kategorii, do jakiej ów operacja należy.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\hsize,keepaspectratio]{images/add_expense.png}
-    \caption{Zrzut ekranu dodawania wydatku}
+    \caption{Zrzut ekranu dodawania wydatku.}
 \end{figure}
 W przypadku dodawania wydatku sytuacja jest analogiczna do dodawania przychodu.
 
@@ -380,7 +383,7 @@ W przypadku dodawania wydatku sytuacja jest analogiczna do dodawania przychodu.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\hsize,keepaspectratio]{images/make_transfer.png}
-    \caption{Zrzut ekranu wykonywania przelewu}
+    \caption{Zrzut ekranu wykonywania przelewu.}
 \end{figure}
 Korzystający z aplikacji może wykonać przelew wewnętrzny pomiędzy profilami.
 Aby to zrobić, należy podać kwotę oraz wybrać profil docelowy.
@@ -394,7 +397,7 @@ Aby to zrobić, należy podać kwotę oraz wybrać profil docelowy.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\hsize,keepaspectratio]{images/DB2.png}
-    \caption{Wykorzystany schemat bazy danych}
+    \caption{Wykorzystany schemat bazy danych.}
 \end{figure}
 
 \section{Uwagi i wnioski}
