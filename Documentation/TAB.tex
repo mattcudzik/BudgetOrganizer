@@ -245,7 +245,12 @@ oraz kategoryzowanie przychodów i wydatków z różnych kont.
 
 \section{Specyfikacja zewnętrzna}
 \subsection{Rejestracja}
-%insert image here
+\subsubsection{Rejestracja konta użytkownika}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\hsize,keepaspectratio]{images/register.png}
+    \caption{Zrzut ekranu rejestracji}
+\end{figure}
 Użytkownik, chcąc skorzystać z aplikacji, musi posiadać własny profil. Formularz
 rejestracyjny pozwala założyć konto. Celem założenia konta użytkownik musi podać:
 \begin{itemize}
@@ -255,20 +260,130 @@ rejestracyjny pozwala założyć konto. Celem założenia konta użytkownik musi
     \item kwotę początkową.
 \end{itemize}
 Naciśnięcie przycisku ,,DODAJ KONTO'' skutkuje dodaniem konta do bazy danych.
-%napisać co jak konto istnieje i co się dzieje z bazą danych
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\hsize,keepaspectratio]{images/register_account_exists.png}
+    \caption{Zrzut ekranu rejestracji zakończonej niepowodzeniem}
+\end{figure}
+Jeżeli w bazie danych istnieje konto o takich samych danych, system informuje
+użytkownika o niemożności jego założenia stosownym komunikatem.
+
+\subsubsection{Rejestracja profilu dziecka}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\hsize,keepaspectratio]{images/register_childs_profile.png}
+    \caption{Zrzut ekranu rejestracji profilu dziecka}
+\end{figure}
+Użytkownik dorosły może założyć konto o ograniczonym dostępie dedykowanie
+dzieciom. Zasadniczą różnicą jest możliwość nadania limitu wydatków przypisanego
+do tego typu profilu.
 
 \subsection{Logowanie}
-%insert image here
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\hsize,keepaspectratio]{images/login.png}
+    \caption{Zrzut ekranu logowania}
+\end{figure}
 Strona logowania zawiera formularz, w którym należy wprowadzić Login użytkownika
 oraz hasło. Po wprowadzeniu poprawnych danych oraz naciśnięciu przycisku
-,,LOGIN'' użytkownik zostaje przeniesiony do ekranu głównego aplikacji.
-%napisać co jak dane są niepoprawne
+\textbf{LOGIN} użytkownik zostaje przeniesiony do ekranu głównego aplikacji.
 Jeżeli użytkownik nie posiada konta, może w prosty sposób przejść do formularza
-rejestracji, klikając w odnośnik ,,Nie mam jeszcze konta''.
+rejestracji, klikając w odnośnik \textbf{Nie mam jeszcze konta}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\hsize,keepaspectratio]{images/login_failed.png}
+    \caption{Zrzut ekranu błędnego logowania}
+\end{figure}
+W przypadku podania niepoprawnych danych użytkownik jest informowany o fakcie
+stosownym komunikatem.
 
 \subsection{Ekran główny}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\hsize,keepaspectratio]{images/profile.png}
+    \caption{Zrzut ekranu głównego aplikacji}
+\end{figure}
 Poprawne logowanie skutkuje przeniesieniem użytkownika do ekranu głównego 
-aplikacji. Prezentowany jest układ 
+aplikacji. Zakładka \textbf{moje finanse} informuje korzystającego z systemu o
+aktualnym stanie konta. Wyświetlana po lewej stronie lista \textbf{przychodów} 
+oraz \textbf{wydatków} wyświetla ostatnio dodane operacje. Lista ta zawiera 
+cztery ostatnie dodane rekordy, wraz z nazwą kategorii, do jakiej operacja 
+została przypisana, datą wykonania oraz kwotą. Co więcej, ów lista zawiera 
+kolorową ramkę w kolorze przypisanym do danej kategorii, by pomóc korzystającemu
+z aplikacji rozróżnić kategorie operacji. Sekcja \textbf{podsumowanie}
+prezentuje zsumowane kwoty wydatków i przychodów, a pod wartościami wyświetlone
+są wykresy kołowe, które prezentują podział operacji na kategorie i ich udział w
+całkowitej sumie operacji. Poniżej podsumowania znajduje się przycisk
+\textbf{Przelew}, który pozwala na przetransferowanie kwoty wewnątrz konta
+pomiędzy profilami. Zostaną wtedy utworzone stosowne rekordy na profilu źródłowym
+oraz docelowym.
+%OPISAĆ PRZYBORNIK PO LEWEJ STRONIE
+
+\subsection{Profil dziecka}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\hsize,keepaspectratio]{images/childs_profile.png}
+    \caption{Zrzut ekranu głównego dziecka}
+\end{figure}
+Ekran główny dziecka zawiera mniej opcji niż panel dorosłego.
+
+\subsection{Przychody}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\hsize,keepaspectratio]{images/incomes_card.png}
+    \caption{Zrzut ekranu szczegółowego przychodów}
+\end{figure}
+Po otworzeniu panelu \textbf{Przychody} użytkownikowi prezentowane są wszystkie
+wykonane operacje, wraz z ich kwotą, datą wykonania oraz kategorią. Korzystający
+z aplikacji ma możliwość sortowania oraz filtrowania względem daty, kwoty lub
+kategorii. Aby przejść do ekranu dodawania operacji należy nacisnąć przycisk
+\textbf{+}.
+
+\subsection{Wydatki}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\hsize,keepaspectratio]{images/expenses_card.png}
+    \caption{Zrzut ekranu szczegółowego wydatków}
+\end{figure}
+W przypadku wydatków ekran posiada analogiczne funkcje do ekranu dodawania
+przychodów.
+
+\subsection{Dodaj kategorię}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\hsize,keepaspectratio]{images/add_category.png}
+    \caption{Zrzut ekranu dodawania kategorii}
+\end{figure}
+Ekran dodawania kategorii pozwala wprowadzić jej nazwę oraz nadać kolor.
+
+\subsection{Dodawanie przychodów i wydatków}
+\subsubsection{Dodaj przychód}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\hsize,keepaspectratio]{images/add_income.png}
+    \caption{Zrzut ekranu dodawania przychodu}
+\end{figure}
+Ekran dodawania kategorii umożliwia wprowadzenie kwoty operacji, daty wykonania
+oraz kategorii, do jakiej ów operacja należy.
+
+\subsubsection{Dodaj wydatek}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\hsize,keepaspectratio]{images/add_expense.png}
+    \caption{Zrzut ekranu dodawania wydatku}
+\end{figure}
+W przypadku dodawania wydatku sytuacja jest analogiczna do dodawania przychodu.
+
+\subsection{Wykonaj przelew}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\hsize,keepaspectratio]{images/make_transfer.png}
+    \caption{Zrzut ekranu wykonywania przelewu}
+\end{figure}
+Korzystający z aplikacji może wykonać przelew wewnętrzny pomiędzy profilami.
+Aby to zrobić, należy podać kwotę oraz wybrać profil docelowy.
 
 \section{Specyfikacja wewnętrzna}
 
