@@ -15,6 +15,7 @@ using System.Security.Claims;
 using BudgetOrganizer.Models.AccountModel;
 using Microsoft.Data.SqlClient;
 using System.Web.Http.Results;
+using System.Text;
 
 namespace BudgetOrganizer.Controllers
 {
@@ -304,56 +305,62 @@ namespace BudgetOrganizer.Controllers
         }
         #endregion
 
+        [HttpGet]
+        [Route("me/download")]
+        public async Task<FileResult> Download(string? sortOrder, [FromQuery] FilterOperationDTO? filterParam)
+        {
 
+            if (_context.Operations == null)
+            {
+                return null;// NotFound("Database error");
+            }
 
+            //Server Error token doesn't have account id
+            var claim = HttpContext.User.FindFirst("id");
+            if (claim == null)
+                return null;//StatusCode(500);
 
-        //// GET: api/Operations/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Operation>> GetOperationById(Guid id)
-        //{
-        //    if (_context.Operations == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    var operation = await _context.Operations.FindAsync(id);
+            var accountId = new Guid(claim.Value);
+            var account = await _context.Accounts.FindAsync(accountId);
 
-        //    if (operation == null)
-        //    {
-        //        return NotFound();
-        //    }
+            if (account == null)
+            {
+                return null;//NotFound("That account doesn't exist");
+            }
+            try
+            {
+                var operations = _mapper.Map<List<Operation>, List<GetOperationDTO>>
+                    (_reportService.GetOpertaionsReport(accountId, sortOrder, filterParam).ToList());
+                if (operations == null)
+                    return null;// Problem("Server error");
 
-        //    return operation;
-        //}
+                StringBuilder sb = new StringBuilder();
+                sb.Append("Category;Amount;Date;Id");
+                sb.Append("\r\n");
 
-        //        // PUT: api/Operations/5
-        //        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //        [HttpPut("{id}")]
-        //        public async Task<IActionResult> PutOperation(Guid id, Operation operation)
-        //        {
-        //            if (id != operation.Id)
-        //            {
-        //                return BadRequest();
-        //            }
+                for (int i = 0; i < operations.Count; i++)
+                {
+                    
+                    sb.Append(operations[i].Category.Name + ';');
+                    sb.Append(operations[i].Amount.ToString() + ';');
+                    sb.Append(operations[i].DateTime.ToString() + ';');
+                    sb.Append(operations[i].Id.ToString() + ';');
 
-        //            _context.Entry(operation).State = EntityState.Modified;
+                    //Append new line character.
+                    sb.Append("\r\n");
 
-        //            try
-        //            {
-        //                await _context.SaveChangesAsync();
-        //            }
-        //            catch (DbUpdateConcurrencyException)
-        //            {
-        //                if (!OperationExists(id))
-        //                {
-        //                    return NotFound();
-        //                }
-        //                else
-        //                {
-        //                    throw;
-        //                }
-        //            }
+                }
 
-        //            return NoContent();
-        //        }
+                string fileName = "report.csv";
+
+                return File(Encoding.UTF8.GetBytes(sb.ToString()), "text/csv", fileName); // this is the key!
+
+            }
+            catch (Exception ex)
+            {
+                return null;// Problem(ex.Message);
+            }
+
+        }
     }
 }
