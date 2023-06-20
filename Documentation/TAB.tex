@@ -20,7 +20,7 @@
 \linespread{1.2} % odstęp pomiędzy wierszami
 
 %%%% ŻYWA PAGINA %%%%%%%%%%%
-\newcommand{\tl}[1]{\textbf{#1}} 
+\newcommand{\tl}[1]{\textbf{#1}}
 \pagestyle{fancy}
 \renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
 \fancyhf{} % usuwanie bieżących ustawień
@@ -97,18 +97,18 @@ oraz kategoryzowanie przychodów i wydatków z różnych kont.
 \section{Określenie wymagań}
 \subsection{Wymagania funkcjonalne}
 \begin{itemize}
-    \item Obsługa logowania
-    \item Kategorie wydatków/przychodów
-    \item Kategorie kont
-    \item Transakcje między profilami
-    \item Generowanie raportów — analiza finansowa
-    \item Przechowywanie skanów paragonów/faktur
-    \item Przechowywanie dłużników
-    \item Informacje przechowywane w bazie danych
+    \item Obsługa logowania,
+    \item Kategorie wydatków/przychodów,
+    \item Kategorie kont,
+    \item Transakcje między profilami,
+    \item Generowanie raportów — analiza finansowa,
+    \item Przechowywanie skanów paragonów/faktur,
+    \item Przechowywanie dłużników,
+    \item Informacje przechowywane w bazie danych,
     \item Dodawanie profilów członków rodziny do konta (profil dziecka, rodzica
-          itd.)
-    \item Dodanie konta bankowego i operacji na nim
-    \item Obsługa wydatków i przychodów
+          itd.),
+    \item Dodanie konta bankowego i operacji na nim,
+    \item Obsługa wydatków i przychodów.
 \end{itemize}
 
 \subsection{Wymagania niefunkcjonalne}
@@ -150,10 +150,10 @@ oraz kategoryzowanie przychodów i wydatków z różnych kont.
 \subsection{Could}
 \begin{itemize}
     \item Potwierdzenie rejestracji mailem,
-    \item edycja informacji o koncie (nazwy użytkownika, hasła itd.)
-    \item ustawianie cyklicznych/stałych wydatków/przychodów
-    \item transakcje między profilami
-    \item przechowywanie skanów paragonów/faktur
+    \item edycja informacji o koncie (nazwy użytkownika, hasła itd.),
+    \item ustawianie cyklicznych/stałych wydatków/przychodów,
+    \item transakcje między profilami,
+    \item przechowywanie skanów paragonów/faktur,
     \item definiowanie własnych, niestandardowych kategorii.
 \end{itemize}
 
@@ -269,11 +269,11 @@ Naciśnięcie przycisku \textbf{DODAJ KONTO} skutkuje dodaniem konta do bazy dan
 Jeżeli w bazie danych istnieje konto o takich samych danych, system informuje
 użytkownika o niemożności jego założenia stosownym komunikatem.
 
-\subsubsection{Rejestracja profilu dziecka}
+\subsubsection{Rejestracja konta dziecka}
 \begin{figure}[H]
     \centering
     \includegraphics[width=\hsize,keepaspectratio]{images/register_childs_profile.png}
-    \caption{Zrzut ekranu rejestracji profilu dziecka.}
+    \caption{Zrzut ekranu rejestracji konta dziecka.}
 \end{figure}
 Użytkownik dorosły może założyć konto o ograniczonym dostępie dedykowanie
 dzieciom. Zasadniczą różnicą jest możliwość nadania limitu wydatków przypisanego
@@ -285,7 +285,7 @@ do tego typu profilu.
     \includegraphics[width=\hsize,keepaspectratio]{images/login.png}
     \caption{Zrzut ekranu logowania.}
 \end{figure}
-Strona logowania zawiera formularz, w którym należy wprowadzić Login użytkownika
+Strona logowania zawiera formularz, w którym należy wprowadzić login użytkownika
 oraz hasło. Po wprowadzeniu poprawnych danych oraz naciśnięciu przycisku
 \textbf{LOGIN} użytkownik zostaje przeniesiony do ekranu głównego aplikacji.
 Jeżeli użytkownik nie posiada konta, może w prosty sposób przejść do formularza
@@ -305,22 +305,23 @@ stosownym komunikatem.
     \includegraphics[width=\hsize,keepaspectratio]{images/profile.png}
     \caption{Zrzut ekranu głównego aplikacji.}
 \end{figure}
-Poprawne logowanie skutkuje przeniesieniem użytkownika do ekranu głównego 
+Poprawne logowanie skutkuje przeniesieniem użytkownika do ekranu głównego
 aplikacji. Zakładka \textbf{moje finanse} informuje korzystającego z systemu o
-aktualnym stanie konta. Wyświetlana po lewej stronie lista \textbf{przychodów} 
-oraz \textbf{wydatków} wyświetla ostatnio dodane operacje. Lista ta zawiera 
-cztery ostatnie dodane rekordy, wraz z nazwą kategorii, do jakiej operacja 
-została przypisana, datą wykonania oraz kwotą. Co więcej, ów lista zawiera 
+aktualnym stanie konta. Wyświetlana po lewej stronie lista \textbf{przychodów}
+oraz \textbf{wydatków} wyświetla ostatnio dodane operacje. Lista ta zawiera
+cztery ostatnie dodane rekordy, wraz z nazwą kategorii, do jakiej operacja
+została przypisana, datą wykonania oraz kwotą. Co więcej, ów lista zawiera
 kolorową ramkę w kolorze przypisanym do danej kategorii, by pomóc korzystającemu
 z aplikacji rozróżnić kategorie operacji. Sekcja \textbf{podsumowanie}
 prezentuje zsumowane kwoty wydatków i przychodów, a pod wartościami wyświetlone
-są wykresy kołowe, które prezentują podział operacji na kategorie i ich udział w
+są wykresy kołowe operacji wykonanych w ostatnim miesiącu,
+które prezentują podział operacji na kategorie i ich udział w
 całkowitej sumie operacji. Poniżej podsumowania znajduje się przycisk
 \textbf{Przelew}, który pozwala na przetransferowanie kwoty wewnątrz konta
 pomiędzy profilami. Zostaną wtedy utworzone stosowne rekordy na profilu źródłowym
 oraz docelowym. Ikony znajdującej się przy lewej krawędzi strony odpowiadają za
-przejście do karty wydatków lub przychodów, dodanie profilu dziecka, kategorii
-%ORAZ CZEGOŚ JESZCZE NAPISAĆ CZEGO
+przejście do karty wydatków lub przychodów, dodanie konta dziecka, konta 
+z pełnymi uprawnieniami oraz kategorii.
 
 \subsection{Profil dziecka}
 \begin{figure}[H]
@@ -385,12 +386,18 @@ W przypadku dodawania wydatku sytuacja jest analogiczna do dodawania przychodu.
     \includegraphics[width=\hsize,keepaspectratio]{images/make_transfer.png}
     \caption{Zrzut ekranu wykonywania przelewu.}
 \end{figure}
-Korzystający z aplikacji może wykonać przelew wewnętrzny pomiędzy profilami.
-Aby to zrobić, należy podać kwotę oraz wybrać profil docelowy.
+Korzystający z aplikacji może wykonać przelew wewnętrzny pomiędzy kontami
+należącymi do tej samej grupy. Aby to zrobić, należy podać kwotę oraz wybrać
+profil docelowy.
 
 \section{Specyfikacja wewnętrzna}
+\subsection{Wykorzystane technologie}
 
-\section{Testowanie i uruchamianie}
+\subsection{Budowa systemu}
+
+\subsection{Warstwy systemu}
+
+\subsection{Moduły systemu}
 
 \section{Weryfikacja osiągniętych efektów względem założeń}
 \subsection{Schemat zaimplementowanej bazy danych}
@@ -399,6 +406,12 @@ Aby to zrobić, należy podać kwotę oraz wybrać profil docelowy.
     \includegraphics[width=\hsize,keepaspectratio]{images/DB2.png}
     \caption{Wykorzystany schemat bazy danych.}
 \end{figure}
+
+\subsection{Analiza wymagań i ich zmian względem założeń}
+
+%co się zmieniło i dlaczego się zmieniło.
+
+\section{Testowanie i uruchamianie}
 
 \section{Uwagi i wnioski}
 
