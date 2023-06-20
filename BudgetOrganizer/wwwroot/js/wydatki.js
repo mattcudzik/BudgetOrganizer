@@ -75,6 +75,67 @@
             });
     }
 
+    function getMyRaport() {
+        // Preparing request to get my data
+        const FD = new FormData(form)
+
+        const auth = "Bearer " + localStorage.getItem("token");
+
+        const getUrl = new URL("https://localhost:7057/api/Operations/me/download");
+        getUrl.searchParams.set('OnlyPositive', 'false');
+        getUrl.searchParams.set('sortOrder', FD.get("sort"));
+
+
+        //console.log(FD.get("sort"))
+        // Setting filtering and sorting params
+        if (FD.get("data_od") != '') getUrl.searchParams.set('DateFrom', FD.get("data_od"));
+        if (FD.get("data_do") != '') getUrl.searchParams.set('DateTo', FD.get("data_do"));
+        if (FD.get("kwota_od") != '') getUrl.searchParams.set('AmountFrom', FD.get("kwota_od"));
+        if (FD.get("kwota_do") != '') getUrl.searchParams.set('AmountTo', FD.get("kwota_do"));
+        if (FD.get("category") != "null") getUrl.searchParams.set('CategoriesId', FD.get("category"));
+
+        //console.log(getUrl)
+        const request = new Request(getUrl, {
+            method: "GET",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': auth,
+            },
+
+        });
+
+        // let out;
+        // Send request to get my data and asign my group id
+
+        fetch(request)
+            .then((response) => {
+                if (!response.ok) {
+                    // get error message from body and default to response status
+                    return response.text().then((text) => {
+                        const error = response.status + ' ' + text;
+                        throw new Error(error)
+                    })
+                }
+                return response.blob(); // Pobierz odpowiedź jako blob
+            })
+            .then((blob) => {
+                // Twórz link do pobrania pliku
+                const url = window.URL.createObjectURL(new Blob([blob]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'raport.csv');
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
+            })
+            .then((data) => {
+                console.log(data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });}
+    
     function getMyDataCategory() {
         const auth = 'Bearer ' + localStorage.getItem('token');
         const request = new Request("https://localhost:7057/api/Categories/me", {
@@ -116,6 +177,8 @@
 
 
     const form = document.getElementById("right1");
+    const generateButton = document.getElementById("generate");
+    
     getMyDataCategory();
     getMyData();
 
@@ -123,5 +186,8 @@
     form.addEventListener("submit", (event) => {
         event.preventDefault();
         getMyData();
+    });
+    generateButton.addEventListener("click", function() {
+        getMyRaport();
     });
 });

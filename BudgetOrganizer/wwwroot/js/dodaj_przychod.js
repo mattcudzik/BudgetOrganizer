@@ -90,7 +90,9 @@ window.addEventListener("load", () => {
                 return response.json()
             })
             .then((json) => {
-                console.log(json);
+                //console.log(json);
+                alert("Dodano przychód");
+                form.reset();
             }).catch((error) => {
                 console.error(error);
             });

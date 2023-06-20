@@ -61,8 +61,11 @@ window.addEventListener("load", () => {
             .then((response) => {
                 if (!response.ok) {
 
-                    return response.text().then((text) => {
-                        const error = response.status + ' ' + text;
+                    return response.json().then((text) => {
+                        let error = "";
+                        for (let i = 0; i < text.length; i++) {
+                            error += text[i].description + '</br>'
+                        }
                         throw new Error(error)
                     })
                 }
@@ -71,12 +74,15 @@ window.addEventListener("load", () => {
             .then((json) => {
                 console.log(json);
             }).catch((error) => {
-                console.error(error);
+                let text = error.message;
+                let result = text.fontcolor("red")
+                errorP.innerHTML = result;
             });
         
     }
 
     const form = document.getElementById("login-form");
+    const errorP = document.getElementById("error");
     var myGroupID = null;
     getMyData();
 

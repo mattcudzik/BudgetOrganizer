@@ -318,9 +318,11 @@ są wykresy kołowe operacji wykonanych w ostatnim miesiącu,
 które prezentują podział operacji na kategorie i ich udział w
 całkowitej sumie operacji. Poniżej podsumowania znajduje się przycisk
 \textbf{Przelew}, który pozwala na przetransferowanie kwoty wewnątrz konta
-pomiędzy profilami. Zostaną wtedy utworzone stosowne rekordy na profilu źródłowym
-oraz docelowym. Ikony znajdującej się przy lewej krawędzi strony odpowiadają za
-przejście do karty wydatków lub przychodów, dodanie konta dziecka, konta 
+pomiędzy profilami.Zostaną wtedy utworzone stosowne rekordy na profilu źródłowym
+oraz docelowym. Obok niego znajduje się przycisk \textbf{Generuj raport}
+pozwalający na wygenerowanie raportu z wykonanych operacji na koncie.
+Ikony znajdujące się przy lewej krawędzi strony odpowiadają za
+przejście do karty wydatków lub przychodów, dodanie konta dziecka, konta
 z pełnymi uprawnieniami oraz kategorii.
 
 \subsection{Profil dziecka}
@@ -330,8 +332,8 @@ z pełnymi uprawnieniami oraz kategorii.
     \caption{Zrzut ekranu głównego dziecka.}
 \end{figure}
 Ekran główny dziecka zawiera mniej opcji niż panel dorosłego. Profil może
-jedynie wykonać przelew wewnętrzny, wyświetlić kartę wydatków oraz przychodów,
-dodawać je oraz utworzyć niestandardową kategorię.
+jedynie wykonać przelew wewnętrzny, wygenerować raport, wyświetlić kartę
+wydatków oraz przychodów, dodawać je oraz utworzyć niestandardową kategorię.
 
 \subsection{Przychody}
 \begin{figure}[H]
@@ -392,10 +394,36 @@ profil docelowy.
 
 \section{Specyfikacja wewnętrzna}
 \subsection{Wykorzystane technologie}
+System został wykonany w oparciu o technologię ASP.NET Web API. Wykorzystuje
+Entity Framework do komunikacji z bazą danych SQL Server. Dokumentacja API
+realizowana jest za pomocą frameworka Swagger
 
 \subsection{Budowa systemu}
 
 \subsection{Warstwy systemu}
+\subsubsection{Warstwa bazy danych}
+Warstwa ta jest odpowiedzialna za dostęp i modyfikację danych w bazie danych.
+W niniejszej aplikacji użyto Entity Framework Core, który umożliwia korzystanie
+z modelu obiektów i ułatwia wykonywanie operacji na danych.
+
+\subsubsection{Warstwa logiki biznesowej}
+Warstwa ta zaimplementowana jest w serwisach aplikacji i odpowiada za
+przetwarzanie i filtrowanie danych zgodnie z założeniami biznesowymi aplikacji.
+W kodzie przykładu ta warstwa jest reprezentowana przez klasy serwisów
+\textbf{IAuthService}, \textbf{IAccountCreationService} i \textbf{IReportService}.
+
+\subsubsection{Warstwa wizualna}
+Warstwa ta odpowiada za prezentację danych w interfejsie użytkownika. 
+W aplikacji ta warstwa jest reprezentowana przez generowanie punktów końcowych 
+API zwracających kod HTML lub JSON i umożliwiających odwoływanie się do innych 
+punktów końcowych. Warstwa wizualna korzysta z serwisów implementujących logikę 
+biznesową.
+
+\subsubsection{Warstwa autoryzacji}
+Odpowiedzialna za zapewnienie mechanizmów uwierzytelniania i autoryzacji w 
+systemie. W kodzie przykładu ta warstwa jest reprezentowana przez autoryzację 
+ogólną JWT i autoryzację podziału dzielonych dla zasobów i tokenów 
+uwierzytelniania.
 
 \subsection{Moduły systemu}
 

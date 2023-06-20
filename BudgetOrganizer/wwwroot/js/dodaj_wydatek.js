@@ -71,7 +71,9 @@
                 return response.json()
             })
             .then((json) => {
-                console.log(json);
+                //console.log(json);
+                alert("Dodano wydatek");
+                form.reset();
             }).catch((error) => {
                 console.error(error);
             });

@@ -2,6 +2,7 @@
 using BudgetOrganizer.Models;
 using BudgetOrganizer.Models.CategoryModel;
 using BudgetOrganizer.Models.OperationModel;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Data.Common;
 
@@ -91,8 +92,9 @@ namespace BudgetOrganizer.Services
             var account = await _context.Accounts.Where(o => o.Id == accountId).Include(o => o.Operations).Include(o => o.Categories).FirstOrDefaultAsync();
             if (account == null)
                 throw new Exception("Account doesn't exist");
+            
 
-            //account operations grouped by category and sumed
+            //account operations from current month grouped by category and sumed
             var operations = account.Operations.Where(o => 
             {
                 if (positive)
@@ -100,7 +102,7 @@ namespace BudgetOrganizer.Services
                 else 
                     return o.Amount < 0;
 
-            }).GroupBy(p => p.CategoryId).
+            }).Where(o =>o.DateTime.Month == DateTime.UtcNow.Month).GroupBy(p => p.CategoryId).
                 Select(p => new { CategoryId = p.Key, Sum = p.Sum(x => x.Amount) });
 
             //get categories assigned to that account
@@ -130,5 +132,6 @@ namespace BudgetOrganizer.Services
 
             return result;
         }
+    
     }
 }

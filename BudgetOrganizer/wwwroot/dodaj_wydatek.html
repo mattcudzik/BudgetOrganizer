@@ -27,7 +27,7 @@
             <div class="form">
                 <div class="margin">
                     <label for="value">Kwota</label><br>
-                    <input type="number" step="0.01" id="value" name="value" placeholder="Kwota">
+                    <input type="number" step="0.01" id="value" name="value" placeholder="Kwota" min="0" required>
                 </div>
                 <div class="margin">
                     <label for="start-date">Data</label><br>
@@ -35,7 +35,8 @@
                 </div>
                 <div class="categories">
                     <p>Kategoria</p>
-                    <select id="category" name="category">
+                    <select id="category" name="category" required>
+                        <option value="" disabled selected hidden>Wybierz Kategorie</option>
                     </select>
                 </div>
             </p>

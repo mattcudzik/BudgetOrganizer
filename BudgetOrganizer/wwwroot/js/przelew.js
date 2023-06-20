@@ -67,6 +67,9 @@
                         throw new Error(error)
                     })
                 }
+                alert("Wykonano Przelew");
+                form.reset();
+
             })
             .catch((error) => {
                 console.error(error);

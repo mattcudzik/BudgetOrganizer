@@ -148,7 +148,7 @@ namespace BudgetOrganizer.Controllers
 
             await _context.SaveChangesAsync();
 
-            return Ok();
+            return Ok("Category added correctly");
         }
     }
 }

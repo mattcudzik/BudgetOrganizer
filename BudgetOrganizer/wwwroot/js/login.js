@@ -23,9 +23,8 @@ window.addEventListener("load", () => {
             .then((response) => {
                 if (!response.ok) {
 
-                    return response.text().then((text) => {
-                        const error = response.status + ' ' + text;
-                        throw new Error(error)
+                    return response.json().then((text) => {
+                        throw new Error(text)
                     })
                 }
                 return response.json()
@@ -36,6 +35,9 @@ window.addEventListener("load", () => {
                 console.log(json);
                 location.href = 'profil.html';
             }).catch((error) => {
+                let text = error.message;
+                let result = text.fontcolor("red")
+                errorP.innerHTML = result;
                 console.error(error);
             }
        );
@@ -47,7 +49,7 @@ window.addEventListener("load", () => {
 }
 
     const form = document.getElementById("login-form");
-
+    const errorP = document.getElementById("error");
     // Add 'submit' event handler
     form.addEventListener("submit", (event) => {
     event.preventDefault();
