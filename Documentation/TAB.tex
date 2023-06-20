@@ -8,6 +8,14 @@
 \usepackage{fancyhdr}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
 \setlist{nolistsep}
 \pagestyle{fancy}
 \selectlanguage{polish}
@@ -308,7 +316,7 @@ stosownym komunikatem.
 Poprawne logowanie skutkuje przeniesieniem użytkownika do ekranu głównego
 aplikacji. Zakładka \textbf{moje finanse} informuje korzystającego z systemu o
 aktualnym stanie konta. Wyświetlana po lewej stronie lista \textbf{przychodów}
-oraz \textbf{wydatków} wyświetla ostatnio dodane operacje. Lista ta zawiera
+oraz \textbf{wydatków} wyświetla ostatnio dodane operacje. Lista ta zawiera 
 cztery ostatnie dodane rekordy, wraz z nazwą kategorii, do jakiej operacja
 została przypisana, datą wykonania oraz kwotą. Co więcej, ów lista zawiera
 kolorową ramkę w kolorze przypisanym do danej kategorii, by pomóc korzystającemu
@@ -318,10 +326,8 @@ są wykresy kołowe operacji wykonanych w ostatnim miesiącu,
 które prezentują podział operacji na kategorie i ich udział w
 całkowitej sumie operacji. Poniżej podsumowania znajduje się przycisk
 \textbf{Przelew}, który pozwala na przetransferowanie kwoty wewnątrz konta
-pomiędzy profilami.Zostaną wtedy utworzone stosowne rekordy na profilu źródłowym
-oraz docelowym. Obok niego znajduje się przycisk \textbf{Generuj raport}
-pozwalający na wygenerowanie raportu z wykonanych operacji na koncie.
-Ikony znajdujące się przy lewej krawędzi strony odpowiadają za
+pomiędzy profilami. Zostaną wtedy utworzone stosowne rekordy na profilu źródłowym
+oraz docelowym. Ikony znajdujące się przy lewej krawędzi strony odpowiadają za
 przejście do karty wydatków lub przychodów, dodanie konta dziecka, konta
 z pełnymi uprawnieniami oraz kategorii.
 
@@ -344,8 +350,10 @@ wydatków oraz przychodów, dodawać je oraz utworzyć niestandardową kategori�
 Po otworzeniu panelu \textbf{Przychody} użytkownikowi prezentowane są wszystkie
 wykonane operacje, wraz z ich kwotą, datą wykonania oraz kategorią. Korzystający
 z aplikacji ma możliwość sortowania oraz filtrowania względem daty, kwoty lub
-kategorii. Aby przejść do ekranu dodawania operacji, należy nacisnąć przycisk
-\textbf{+}.
+kategorii za pomocą przycisku \textbf{Zastosuj}. Obok niego znajduje się 
+przycisk \textbf{Generuj raport} pozwalający na wygenerowanie raportu z 
+wykonanych operacji na koncie. Aby przejść do ekranu dodawania operacji, należy 
+nacisnąć przycisk \textbf{+}.
 
 \subsection{Wydatki}
 \begin{figure}[H]
@@ -396,9 +404,9 @@ profil docelowy.
 \subsection{Wykorzystane technologie}
 System został wykonany w oparciu o technologię ASP.NET Web API. Wykorzystuje
 Entity Framework do komunikacji z bazą danych SQL Server. Dokumentacja API
-realizowana jest za pomocą frameworka Swagger
+realizowana jest za pomocą frameworka Swagger.
 
-\subsection{Budowa systemu}
+% \subsection{Budowa systemu}
 
 \subsection{Warstwy systemu}
 \subsubsection{Warstwa bazy danych}
@@ -413,8 +421,8 @@ W kodzie przykładu ta warstwa jest reprezentowana przez klasy serwisów
 \textbf{IAuthService}, \textbf{IAccountCreationService} i \textbf{IReportService}.
 
 \subsubsection{Warstwa wizualna}
-Warstwa ta odpowiada za prezentację danych w interfejsie użytkownika. 
-W aplikacji ta warstwa jest reprezentowana przez generowanie punktów końcowych 
+Warstwa wizualna odpowiada za prezentację danych w interfejsie użytkownika. 
+W aplikacji jest reprezentowana przez generowanie punktów końcowych 
 API zwracających kod HTML lub JSON i umożliwiających odwoływanie się do innych 
 punktów końcowych. Warstwa wizualna korzysta z serwisów implementujących logikę 
 biznesową.
@@ -425,7 +433,7 @@ systemie. W kodzie przykładu ta warstwa jest reprezentowana przez autoryzację
 ogólną JWT i autoryzację podziału dzielonych dla zasobów i tokenów 
 uwierzytelniania.
 
-\subsection{Moduły systemu}
+% \subsection{Moduły systemu}
 
 \section{Weryfikacja osiągniętych efektów względem założeń}
 \subsection{Schemat zaimplementowanej bazy danych}
@@ -436,11 +444,40 @@ uwierzytelniania.
 \end{figure}
 
 \subsection{Analiza wymagań i ich zmian względem założeń}
+\subsubsection{Analiza wymagań funkcjonalnych}
+Końcowa wersja aplikacji nie zawiera funkcjonalności przechowywania skanów
+paragonów i faktur. Baza danych jest wyposażona w przechowywanie tych informacji,
+jednak brakuje logiki w systemie. Brakuje jej również przechowywania informacji 
+o dłużnikach. Funkcjonalność dodawania członków rodziny do konta jest rozwiązania 
+w inny sposób, niż pierwotnie planowano. Konta łączone są w grupy, jednak każde
+konto posiada osobne dane logowania. Początkowe założenie opierało się na jednym
+koncie i zawierających się w nim profilach. Użycie osobnego hasła dla każdego
+konta jest lepszym rozwiązaniem. Zaprezentowana przez nas aplikacja nie jest 
+wyposażona w zarządzanie operacjami na koncie bankowym. Systemowi brakuje
+dodanie cyklicznych/stałych operacji. W przypadku analizy MoSCoW i 
+funkcjonalności Won't zawarto w aplikacji powiadomienia o przekroczonym budżecie 
+dla konta dziecka, wynikające z jego typu i ograniczonego budżetu.
 
-%co się zmieniło i dlaczego się zmieniło.
+\subsubsection{Analiza wymagań niefunkcjonalnych}
+W przypadku wymagań niefunkcjonalnych nie zostało zaimplementowane tworzenie
+okresowych kopii zapasowych. System nie posiada również możliwości przypominania
+hasła użytkownika. Potwierdzenie rejestracji e-mailem zostało wyłączone.
 
 \section{Testowanie i uruchamianie}
+System testowano w miarę budowania aplikacji oraz dodawania nowych
+funkcjonalności. Ze względu na ograniczony czas realizacji projektu nie
+wykonano testów jednostkowych na systemie. Pomimo tego aplikacja pracuje
+poprawnie w ,,codziennym'' użytkowaniu. Nie zaobserwowano oczywistych problemów
+podczas typowego korzystania. W miarę prac implementacyjnych pojawiały się błędy
+typu semantycznego, które na bieżąco były rozwiązywane.
 
 \section{Uwagi i wnioski}
+Projekt realizowaliśmy w ciągu kilku miesięcy semestru akademickiego. W praktyce,
+posiadając wiele innych obowiązków, stwierdzamy, że czas możliwy na realizację
+projektu był zbyt krótki, by zapewnić pełną funkcjonalność aplikacji oraz wykonać
+odpowiednie testy systemu. Niewątpliwie realizacja projektu pomogła nam w 
+praktycznym zrozumieniu wykorzystanych przez nas technologii i stanowi cenne 
+źródło wiedzy, którą najprawdopodobniej wykorzystamy podczas pracy w projektach
+komercyjnych.
 
 \end{document}
