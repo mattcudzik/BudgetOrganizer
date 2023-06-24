@@ -1,0 +1,155 @@
+#dodaj{
+    display: inline-block;
+    padding: 0;
+    border: none;
+    background: none;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    background: #f2ebc9;
+    border: 1px solid #3c3a31;
+    border-radius: 15px;
+    margin-top: 70px;
+    margin-left: 50px;
+    font-size:20px;
+    
+}
+#przychod_center
+{
+    height: 500px;
+}
+
+h2{
+    margin-top: 5px;
+    margin-bottom:25px;
+}
+p{
+    margin-top: 5px;
+    font-size: 20px;
+}
+header{
+    display: grid;
+    grid-template-columns: 40fr 40fr;
+}
+#scroll{
+    width: 400px;
+    height: 500px;
+}
+#dodaj:hover{
+    display: inline-block;
+    padding: 0;
+    border: none;
+    background: none;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    background: #d6d0b0;
+    border: 1px solid #3c3a31;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+.log{
+    text-align: right;
+}
+.pow{
+    text-align: left;
+}
+#dodaj img{
+width: 66px;
+height: 66px;
+margin: 5px;
+
+}
+#middle1{
+    margin-left: 250px;
+}
+#powrot
+{
+    display: inline-block;
+    padding: 0;
+    border: none;
+    background: none;
+}
+#powrot img
+{
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+.przychod1 {
+    background-color: #88bfab;
+    text-align: center;
+    width: 350px;
+    border-radius: 15px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    display:grid;
+    grid-template-columns: 1fr 15fr;
+}
+.row{
+    flex: 1;
+    margin-bottom: 10px;
+}
+ select {
+    display: block;
+    box-sizing: border-box;
+    width: 400px;
+    outline: none;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 30px;
+    margin-bottom: 5px;
+  }
+  input[type="text"],
+input[type="date"] {
+    width: 150px;
+    color: #8a8b8e;
+    border: 1px solid #c2c0ca;
+    font-style: normal;
+    font-size: 16px;
+    position: relative;
+    display: inline-block;
+    background: #fff;
+    display: block;
+    box-sizing: border-box;
+    outline: none;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 30px;
+  }
+  
+
+#right1{
+    display:grid;
+    grid-template-rows: 30fr 60fr 15fr;
+}
+
+.sort{
+    margin-bottom: 15px;
+    font-size: 19px;
+}
+
+.filtr{
+    display: grid;
+    grid-template-columns: 5fr 5fr;
+}
+
+.sortfiltr
+{
+    background-color: #8fb6d9;
+    width: 200px;
+    height: 50px;
+    font-size: 16px;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-weight: bold;
+    margin-top: 30px;
+    margin-left: 95px;
+}
+
+.sortfiltr:hover
+{
+  cursor: pointer;
+  background: #d6d0b0;
+  border: 1px solid #3c3a31;
+}
+  

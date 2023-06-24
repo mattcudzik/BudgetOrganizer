@@ -1,0 +1,59 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="login.css" />
+    <link rel="stylesheet" href="dodaj_przychod.css" />
+    <link href="https://fonts.googleapis.com/css?family=Inter" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;400&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="./Pic/budget-management-svgrepo-com.svg">
+    <script src="js/register_dziecko.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="pow"><a href="./profil.html"><button class="logowanie1"><img src="./Pic/arrow-left-svgrepo-com.svg" alt="back" width="40px" height="40px"></button></a></div> 
+        <div class="log"><button class="logowanie1"><img src="./Pic/person-svgrepo-com.svg" alt="log" width="40px" height="40px"></button></div>
+    </header>
+    <div id="login-form-wrap">
+        <h2>REJESTRACJA DZIECKA</h2>
+        <form id="login-form">
+            <p>
+                <input type="text" id="username" name="username" placeholder="Username" required><i
+                    class="validation"><span></span></i>
+            </p>
+            <p>
+                <input type="email" id="email" name="email" placeholder="E-mail" required><i
+                    class="validation"><span></span></i>
+            </p>
+            <p>
+                <input type="password" id="password" name="password" placeholder="Password" required><i
+                    class="validation"><span></span></i>
+            </p>
+            <div id="row">
+                <div id="row_l">
+            <p>
+                <input type="number" id="quantity" name="quantity" placeholder="Kwota startowa" required><i
+                    class="validation"><span></span></i>
+            </p>
+        </div>
+        <div id="row_r">
+            <p>
+                <input type="number" id="limit" name="limit" placeholder="Limit wydatkow" required><i
+                   class="validation"><span></span></i>
+            </p>
+        </div>
+        </div>
+        </p>
+        <p id="error"></p>
+        <p>
+            <p>
+                <input type="submit" id="login" value="DODAJ">
+            </p>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>

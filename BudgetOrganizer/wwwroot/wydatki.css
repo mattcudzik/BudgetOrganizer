@@ -1,0 +1,16 @@
+.wydatek1 {
+    background-color: #f27457;
+    text-align: center;
+    width: 350px;
+    border-radius: 15px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    display:grid;
+    grid-template-columns: 1fr 15fr;
+} 
+
+#wydatki_center{
+    height: 500px;
+}
+
+  

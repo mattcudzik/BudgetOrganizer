@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BudgetOrganizer</title>
+    <link rel="stylesheet" href="przychod.css">
+    <link rel="stylesheet" href="profil.css">
+    <link rel="shortcut icon" href="./Pic/budget-management-svgrepo-com.svg">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;400&display=swap" rel="stylesheet">
+    <script src="js/przychod.js"></script>
+    <script src="js/checkLogged.js"></script>
+</head>
+<body>
+    <header>
+        <div class="pow"><a href="./profil.html"><button id="powrot"><img src="./Pic/arrow-left-svgrepo-com.svg" alt="back" width="40px" height="40px"></button></a></div>
+
+        <div class="log"><button id="logowanie"><img src="./Pic/person-svgrepo-com.svg" alt="log" width="40px" height="40px"></button></div>
+    </header>
+    <main>
+        <div class="wrapper">
+            <div id="left">
+                <a href="dodaj_przychod.html"><button id="dodaj"><img src="./Pic/plus-1512-svgrepo-com.svg" alt="plus"></button></a>
+            </div>
+            <div id="middle1">
+                <div id="przychody">
+                    <div id="przychody_center">
+                        <h2>Przychody</h2>
+                        <div id="scroll" style="overflow-y: scroll;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form id="right1">
+                <div class="up">
+                    <h2>Sortowanie</h2>
+                    <div class="sort">
+                        <p>Data:</p>
+                        <input type="radio" id="sort" name="sort" value="date_desc">
+                        <label for="data">Malejąco</label>
+                        <input type="radio" id="sort" name="sort" value="date_asc">
+                        <label for="data">Rosnąco</label>
+                    </div>
+                    <div class="sort">
+                        <p>Kwota:</p>
+                        <input type="radio" id="sort" name="sort" value="amount_desc">
+                        <label for="kwota">Malejąco</label>
+                        <input type="radio" id="sort" name="sort" value="amount_asc">
+                        <label for="kwota">Rosnąco</label>
+                    </div>
+                </div>
+                <div class="down">
+                    <h2>Filtrowanie:</h2>
+                    <p>Data:</p>
+                    <div class="filtr">
+                        <p><input type="date" id="data_od" name="data_od" placeholder=" Data od"></p>
+                        <p><input type="date" id="data_do" name="data_do" placeholder=" Data do"></p>
+                    </div>
+                    <p>Kwota:</p>
+                    <div class="filtr">
+                        <p><input type="text" id="kwota_od" name="kwota_od" placeholder=" Kwota od"></p>
+                        <p><input type="text" id="kwota_do" name="kwota_do" placeholder=" Kwota do"></p>
+                    </div>
+                    <p>Kategoria:</p>
+                    <select id="category" name="category">
+                        <option value="null">Wszystkie</option>
+                    </select>
+                </div>
+                <input id="apply" class="sortfiltr" type="submit" value="Zastosuj">
+                <input id="generate" class="sortfiltr" type="submit" value="Generuj">
+            </form>
+        </div>
+    </main>
+
+</body>
+</html>

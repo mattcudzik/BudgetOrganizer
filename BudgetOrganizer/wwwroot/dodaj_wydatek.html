@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dodaj wydatek</title>
+    <link rel="stylesheet" href="dodaj_przychod.css">
+    <link rel="shortcut icon" href="./Pic/budget-management-svgrepo-com.svg">
+    <link href="https://fonts.googleapis.com/css?family=Inter" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;400&display=swap" rel="stylesheet">
+    <script src="js/dodaj_wydatek.js"></script>
+    <script src="js/checkLogged.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="pow"><a href="./profil.html"><button class="logowanie1"><img src="./Pic/arrow-left-svgrepo-com.svg" alt="back" width="40px" height="40px"></button></a></div>
+        
+        <div class="log"><button class="logowanie1"><img src="./Pic/person-svgrepo-com.svg" alt="log" width="40px" height="40px"></button></div>
+    </header>
+
+    <main id="container">
+        <div id="login-form-wrap">
+        <h2>Dodaj wydatek</h2>
+        <form id="login-form">
+            <div class="form">
+                <div class="margin">
+                    <label for="value">Kwota</label><br>
+                    <input type="number" step="0.01" id="value" name="value" placeholder="Kwota" min="0" required>
+                </div>
+                <div class="margin">
+                    <label for="start-date">Data</label><br>
+                    <input type="date" id="start-date" name="start-date">
+                </div>
+                <div class="categories">
+                    <p>Kategoria</p>
+                    <select id="category" name="category" required>
+                        <option value="" disabled selected hidden>Wybierz Kategorie</option>
+                    </select>
+                </div>
+            </p>
+            <!--<p>tutaj wyświetlić jak coś komunikat</p>-->
+            <p>
+                <div id="creatb"><input class="create-button" type="submit" value="Dodaj wydatek"></div>
+            </div>            
+        </form>
+    </main>
+</body>
+
+</html>

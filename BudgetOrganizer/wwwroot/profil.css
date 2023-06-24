@@ -1,0 +1,288 @@
+body {
+    background-color: #f2ebc9;
+    margin: 0;
+    font-family: "Inter";
+}
+header{
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.185);
+    height: 50px;
+    text-align: right;
+    border:solid #3c3a31;
+    border-width:0px 0px 1px 0px;
+    margin-bottom: 45px;
+    
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: 15fr 60fr 25fr;
+}
+.pic{
+    display: inline-block;
+    padding: 0;
+    border: none;
+    background: none;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    background: #f2ebc9;
+    border: 1px solid #3c3a31;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    font-size:20px;
+    /*display: flex;
+    flex-direction: row-re;
+    justify-content: center;
+    align-items: center;*/
+    
+}
+
+.pic:hover{
+    display: inline-block;
+    padding: 0;
+    border: none;
+    background: none;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    background: #d6d0b0;
+    border: 1px solid #3c3a31;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+#right
+{
+    margin-right: 20px;
+}
+.pic img
+{
+    width: 66px;
+    height: 66px;
+    
+}
+.pic_cat img
+{
+    width:50px;
+    height:50px;
+    padding:8px;
+    
+}
+
+#logowanie
+{
+    display: inline-block;
+    padding: 0;
+    border: none;
+    background: none;
+    margin-right: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#left {
+margin-top: 150px;
+margin-left: 30px;
+}
+
+.row{
+    flex: 1;
+}
+.button
+{
+    background-color: #8fb6d9;
+    width: 50%;
+    height: 50px;
+    font-size: 16px;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-weight: bold;
+}
+.button:hover
+{
+  cursor: pointer;
+  background: #d6d0b0;
+  border: 1px solid #3c3a31;
+}
+
+#middle {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+#stat{
+    height: 300px;
+}
+
+#finanse {
+    background-color: #8fb6d9;
+    padding: 5px 5px 5px 15px;
+    border-radius: 15px 15px 15px 15px;
+    margin-left: 0%;
+    margin-right: 15%;
+}
+
+#podsumowanie {
+    display: grid;
+    grid-template-columns: 10fr 10fr;
+
+}
+
+#podsumowanie_p {
+    background-color: #88bfab;
+    padding: 5px;
+    border-radius: 15px;
+    margin: 5px;
+}
+
+#podsumowanie_w {
+    background-color: #f27457;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 15px;
+}
+
+#przychody {
+    text-align: center;
+    display: inline-block;
+}
+
+#przychody_center {
+    text-align: center;
+    display: inline-block;
+}
+
+.przychod {
+    background-color: #88bfab;
+    text-align: center;
+    width: 250px;
+    border-radius: 15px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    margin-bottom: 20px;
+}
+
+#wydatki {
+    text-align: center;
+    display: inline-block;
+}
+
+#wydatki_center {
+    text-align: center;
+    display: inline-block;
+}
+
+.wydatek {
+    background-color: #f27457;
+    text-align: center;
+    width: 250px;
+    border-radius: 15px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    margin-bottom: 20px;
+}
+
+#button_gen_przelew {
+text-align: center;
+
+}
+
+
+/* PIE CHART */
+.pieContainer {
+    height: 150px;
+    position: relative;
+  }
+  
+  .pieBackground {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    box-shadow: 0px 0px 8px rgba(0,0,0,0.5);
+  } 
+  
+  .pie {
+    transition: all 1s;
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    clip: rect(0px, 75px, 150px, 0px);
+  }
+  
+  .hold {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    clip: rect(0px, 150px, 150px, 75px);
+  }
+  
+  #pieSlice1 .pie {
+    background-color: #1b458b;
+    transform:rotate(30deg);
+  }
+  
+  #pieSlice2 {
+    transform: rotate(30deg);
+  }
+  
+  #pieSlice2 .pie {
+    background-color: #0a0;
+    transform: rotate(60deg);
+  }
+  
+  #pieSlice3 {
+    transform: rotate(90deg);
+  }
+  
+  #pieSlice3 .pie {
+    background-color: #f80;
+    transform: rotate(120deg);
+  }
+  
+  #pieSlice4 {
+    transform: rotate(210deg);
+  }
+  
+  #pieSlice4 .pie {
+    background-color: #08f;
+    transform: rotate(10deg);
+  }
+  
+  #pieSlice5 {
+    transform: rotate(220deg);
+  }
+  
+  #pieSlice5 .pie {
+    background-color: #a04;
+    transform: rotate(70deg);
+  }
+  
+  #pieSlice6 {
+    transform: rotate(290deg);
+  }
+  
+  #pieSlice6 .pie {
+    background-color: #ffd700;
+    transform: rotate(70deg);
+  }
+  
+  .innerCircle {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background-color: #444;
+    border-radius: 100%;
+    top: 15px;
+    left: 15px; 
+    box-shadow: 0px 0px 8px rgba(0,0,0,0.5) inset;
+    color: white;
+  }
+  .innerCircle .content {
+    position: absolute;
+    display: block;
+    width: 120px;
+    top: 30px;
+    left: 0;
+    text-align: center;
+    font-size: 14px;
+  }
